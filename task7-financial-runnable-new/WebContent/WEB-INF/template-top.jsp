@@ -169,7 +169,7 @@
 							<a  href="#">Transaction History</a>						
 						</div>
 						<div class="panel-body">
-							<a  href="#">Research Fund</a>						
+							<a  href="research.do">Research Fund</a>						
 						</div>
 					</div>
 				</div>
