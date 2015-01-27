@@ -13,7 +13,7 @@
 		<tr>
 			<th>Product</th>
 			<th>Current Price</th>
-			<th>Avilable Share</th>
+			<th>Available Share</th>
 			<th>Amount</th>
 			<th>Operation</th>
 		</tr>
