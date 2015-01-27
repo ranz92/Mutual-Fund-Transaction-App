@@ -5,15 +5,15 @@
 
 <h2>Sell Fund</h2>
 <h4 class="text-primary">Total Balance: $<fmt:formatNumber value="${customer.cash }" type="currency" pattern="#,##0.00" /> </h4>
-<h4 class="text-primary">Pending Balance: $${pendingAmount }</h4>
-<h4 class="text-primary">Available Balance: $${availableAmount }</h4>
+<!-- <h4 class="text-primary">Pending Balance: $${pendingAmount }</h4>
+<h4 class="text-primary">Available Balance: $${availableAmount }</h4> -->
 
 <table class="table table-striped">
 	<thead>
 		<tr>
 			<th>Product</th>
 			<th>Current Price</th>
-			<th>Share</th>
+			<th>Avilable Share</th>
 			<th>Amount</th>
 			<th>Operation</th>
 		</tr>
