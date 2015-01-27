@@ -14,7 +14,7 @@
 			<th>Product</th>
 			<th>Current Price</th>
 			<th>Available Share</th>
-			<th>Amount</th>
+			<th>Share To Sell</th>
 			<th>Operation</th>
 		</tr>
 	</thead>
