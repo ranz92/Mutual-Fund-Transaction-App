@@ -1,19 +1,31 @@
 package controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import model.CustomerDAO;
+import org.genericdao.RollbackException;
+
+import databeans.CustomerBean;
+import databeans.PositionBean;
+import databeans.TransactionBean;
 import model.Model;
+import model.PositionDAO;
+import model.PriceDAO;
+import model.TransactionDAO;
 
 public class ViewByCustomerAction extends Action {
-	private CustomerDAO customerDAO;
+	private TransactionDAO transacDAO;
+	private PositionDAO posDAO;
+	private PriceDAO priceDAO;
+
 	
 	public ViewByCustomerAction(Model model) {
-		customerDAO = model.getCustomerDAO();
+		transacDAO = model.getTransactionDAO();
+		posDAO = model.getPositionDAO();
+        priceDAO = model.getPriceDAO();
 	}
 	
 	public String getName() {
@@ -21,18 +33,45 @@ public class ViewByCustomerAction extends Action {
 	}
 	
 	public String perform(HttpServletRequest request) {
-		HttpSession session = request.getSession();
+		CustomerBean customer = (CustomerBean)request.getSession(false).getAttribute("customer");
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		
 		try {
-			if(session.getAttribute("customer") != null) {
-				return "viewAccountByCus.jsp";
-			}
-			return "login.do";
-		} catch (Exception e) {
+			if(customer == null) {
+				return "login.do";
+			} else {
+				DecimalFormat df = new DecimalFormat("#,###.00");
+
+				int cusId = customer.getCustomerId();
+				TransactionBean[] transactions = transacDAO.getTransactions(cusId);
+				
+				request.setAttribute("customer", customer);
+				request.setAttribute("transaction", transactions[transactions.length-1]); //Return the last trading day.
+				String cash = df.format(customer.getCash());
+				request.setAttribute("cash",cash);
+				System.out.println(cash);
+				System.out.println(customer.getZip());
+
+
+				//Return the fund information.
+				PositionBean[] positions = posDAO.getPositions(cusId);
+				List<String> priceList = new ArrayList<String>();
+				for (int i = 0; i<positions.length; i++) {
+					int fund_id = positions[i].getFund_id();
+					long price = priceDAO.getLatestPrice(fund_id);
+					double totalPrice = price * positions[i].getShares();
+					
+					priceList.add(df.format(totalPrice));
+				}
+				request.setAttribute("positions", positions);
+				request.setAttribute("priceList", priceList);
+	            return "viewAccountByCus.jsp";	
+	            
+	            } 
+		} catch (RollbackException e) {
 			errors.add(e.getMessage());
-			return "viewAccountByCus.jsp";
+			return "error.jsp";
 		}
 	}
 

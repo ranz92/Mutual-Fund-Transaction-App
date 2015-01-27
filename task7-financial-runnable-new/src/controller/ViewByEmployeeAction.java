@@ -66,13 +66,21 @@ public class ViewByEmployeeAction extends Action{
 					errors.add("A customer should be specified!");
 					return "error.jsp";
 				} else {
+					DecimalFormat df = new DecimalFormat("#,###.00");
 					CustomerBean user = cusDAO.read(username);
 					int cusId = user.getCustomerId();
 					TransactionBean[] transactions = transacDAO.getTransactions(cusId);
 					
 					request.setAttribute("user", user);
-					request.setAttribute("transaction", transactions[transactions.length-1]); //Return the last trading day.
-
+					String cash = df.format(user.getCash());
+					request.setAttribute("cash",cash);
+					
+					if(transactions.length!=0){
+						
+						request.setAttribute("transaction", transactions[transactions.length-1]); //Return the last trading day.
+	
+					}
+					
 					//Return the fund information.
 					PositionBean[] positions = posDAO.getPositions(cusId);
 					List<String> priceList = new ArrayList<String>();
@@ -81,7 +89,6 @@ public class ViewByEmployeeAction extends Action{
 						long price = priceDAO.getLatestPrice(fund_id);
 						double totalPrice = price * positions[i].getShares();
 						
-						DecimalFormat df = new DecimalFormat("#,###.00");
 						priceList.add(df.format(totalPrice));
 					}
 					//System.out.println();

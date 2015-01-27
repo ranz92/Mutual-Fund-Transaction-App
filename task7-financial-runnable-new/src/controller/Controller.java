@@ -60,7 +60,7 @@ public class Controller extends HttpServlet {
 		Action.add(new ViewByEmployeeAction(model));
 		Action.add(new ViewByCustomerAction(model));
 		Action.add(new TransitionAction(model));
-		
+		Action.add(new ResetPwdAction(model));
 		
 		CustomerDAO customerDAO = model.getCustomerDAO();
 		EmployeeDAO employeeDAO = model.getEmployeeDAO();
