@@ -66,7 +66,7 @@ public class LoginAction extends Action {
 				}
 				
 				session.setAttribute("employee",employee);
-				return "viewAccountByEmp.jsp";
+				return "viewByEmployee.do";
 			} else {
 				CustomerBean customer = customerDAO.read(form.getUserName());
 				
@@ -81,7 +81,7 @@ public class LoginAction extends Action {
 				}
 				
 				session.setAttribute("customer",customer);
-				return "viewAccountByCus.jsp";
+				return "viewCustomer.do";
 			}
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());

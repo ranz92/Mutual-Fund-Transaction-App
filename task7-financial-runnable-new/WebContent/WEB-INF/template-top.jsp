@@ -202,7 +202,7 @@
 							<a  href="cusRegister.do">Create Customer Account </a>						
 						</div>
 						<div class="panel-body">
-							<a  href="#">Reset Customer Password </a>						
+							<a  href="resetPwd.do">Reset Customer Password </a>						
 						</div>
 						<div class="panel-body">
 							<a  href="viewByEmployee.do">View Customer Account </a>						

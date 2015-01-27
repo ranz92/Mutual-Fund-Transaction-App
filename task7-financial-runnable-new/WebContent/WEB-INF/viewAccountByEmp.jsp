@@ -28,6 +28,8 @@
 <!-- End of choosing -->
 			   
     <c:set var="customer" value="${user}" />
+        <c:set var="cash" value="${cash}" />
+    
 			<c:choose>
                     <c:when test="${customer == null}">
                         <br/>
@@ -77,7 +79,7 @@
 							Cash Balance ($)
 						</td>
 						<td>
-							${customer.cash}
+							${cash}
 						</td>
 					</tr>
 					

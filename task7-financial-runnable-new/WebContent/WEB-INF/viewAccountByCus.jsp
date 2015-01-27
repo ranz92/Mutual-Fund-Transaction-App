@@ -77,97 +77,48 @@
 				</tbody>
 			</table>
 
-
-			<table class="table table-hover">
+          <div class="tab-pane" id="panel-305422">
+			<table class="table">
 				<thead>
 					<tr>
 						<th>
-							FUND
+							#
 						</th>
 						<th>
-							LAST TRADING DATE
+							Fund ID
 						</th>
 						<th>
-							NUMBER OF SHARE
+							Number of shares
 						</th>
 						<th>
-							FUND VALUE
+							Position Value ($)
 						</th>
 					</tr>
 				</thead>
 				<tbody>
+				<c:set var="count" value="0" />
+				<c:forEach var="position" items="${positions}" >
+				<c:set var="price" value="${ priceList }" />
+				
+				<c:set var="count" value="${count+1 }" />
 					<tr>
 						<td>
-							Fund A
+							${count}
 						</td>
 						<td>
-							
+							${position.fund_id }
 						</td>
-						<td>
-							
-						</td>
-						<td>
-							
+						<td align="right">
+							${position.shares }
+						</td >
+						<td align="right">
+							${price[count-1]}
 						</td>
 					</tr>
-					<tr class="active">
-						<td>
-							Fund B
-						</td>
-						<td>
-							
-						</td>
-						<td>
-							
-						</td>
-						<td>
-							
-						</td>
-					</tr>
-					<tr class="success">
-						<td>
-							Fund C
-						</td>
-						<td>
-							
-						</td>
-						<td>
-							
-						</td>
-						<td>
-							
-						</td>
-					</tr>
-					<tr class="warning">
-						<td>
-							Fund D
-						</td>
-						<td>
-							
-						</td>
-						<td>
-							
-						</td>
-						<td>
-						
-						</td>
-					</tr>
-					<tr class="danger">
-						<td>
-							Fund E
-						</td>
-						<td>
-							
-						</td>
-						<td>
-							
-						</td>
-						<td>
-							
-						</td>
-					</tr>
+				</c:forEach>			
 				</tbody>
 			</table>
+			</div>
 	
 
 <jsp:include page="template-bottom.jsp" />
