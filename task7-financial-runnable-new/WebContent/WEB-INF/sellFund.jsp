@@ -25,8 +25,14 @@
          
         <tr>
 			<td>${ item.name }</td>
-			<td>${ item.price }</td>
-			<td>${ item.shares }</td>
+			<td>
+			<%-- ${ item.price } --%>
+			$<fmt:formatNumber value="${item.price }" type="currency" pattern="#,##0.00" />
+			</td>
+			<td>
+			<%-- ${ item.shares } --%>
+			$<fmt:formatNumber value="${item.shares }" type="currency" pattern="#,##0.00" />
+			</td>
 			<td><input type="text" name="amount" /></td>
 			<td><input type="submit" class="btn btn-success" value="Sell" /></td>
 		</tr>
