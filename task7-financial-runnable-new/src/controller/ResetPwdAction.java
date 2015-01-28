@@ -110,7 +110,7 @@ public class ResetPwdAction extends Action{
 			    errors.add(e.getMessage());
 		    	return "error.jsp";
 		    }
-			return "resetPwd.jsp";
+	
 		}
 	}	
 }

@@ -41,18 +41,27 @@ public class ConfirmBuyAction extends Action {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		
+		List<String> success = new ArrayList<String>();
+		request.setAttribute("success",success);
+		
 		DecimalFormat df = new DecimalFormat("#,##0.00");
 		
 		try {
 			CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
 			BuyForm form  = formBeanFactory.create(request);
 			request.setAttribute("form", form);
+			errors.addAll(form.getValidationErrors());
+			
 //			HttpSession session = request.getSession();
 //			session.setAttribute("fundList", fundDAO.getFundList());
 			TransactionBean transaction = new TransactionBean();
 			transaction.setCustomer_id(customer.getCustomerId());
-			transaction.setFund_id(form.getIdAsInt()); //should obtain from fund table, which is not established so far. So recorded as 0 temporarily here.
-			transaction.setAmount(form.getAmountAsLong());
+			transaction.setFund_id(form.getFundId());
+			transaction.setAmount(form.getAmount());
+//			transaction.setFund_id(form.getIdAsInt()); //should obtain from fund table, which is not established so far. So recorded as 0 temporarily here.
+//			transaction.setAmount(form.getAmountAsLong());
+			
+			
 //			//加一个判断语句：amount<cash
 			if (transactionDAO.checkEnoughCash(customer.getCustomerId(), customer.getCash(), transaction.getAmount()))
 			transactionDAO.createBuyTransaction(transaction);
@@ -95,6 +104,8 @@ public class ConfirmBuyAction extends Action {
 			
 //			session.setAttribute("pendingAmount", pendingAmount);
 //			session.setAttribute("availableAmount", customer.getCash()-pendingAmount);
+			success.add("You have bought fund successfully.");
+			
 			return "buyFund.jsp";
 		} catch(FormBeanException e) {
 			errors.add(e.getMessage());
