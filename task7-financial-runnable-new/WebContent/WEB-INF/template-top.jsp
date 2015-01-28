@@ -163,10 +163,10 @@
 							<a  href="sellfund.do">Sell Fund</a>						
 						</div>
 						<div class="panel-body">
-							<a  href="#">Request Check</a>						
+							<a  href="requestCheck.do">Request Check</a>						
 						</div>
 						<div class="panel-body">
-							<a  href="#">Transaction History</a>						
+							<a  href="transactionHistory.do">Transaction History</a>						
 						</div>
 						<div class="panel-body">
 							<a  href="research.do">Research Fund</a>						
@@ -182,13 +182,16 @@
 					</div>
 					<div id="panel-element-236921" class="panel-collapse">
 						<div class="panel-body">
-							<a  href="#">Deposit Check  </a>						
+							<a  href="depositCheck.do">Deposit Check  </a>						
 						</div>
 						<div class="panel-body">
 							<a  href="createFund.do">Create Fund </a>						
 						</div>
 						<div class="panel-body">
 							<a  href="transition.do">Transition Day </a>						
+						</div>
+						<div class="panel-body">
+							<a  href="transactionHistory.do">Transaction History</a>						
 						</div>
 					</div>
 					<div class="panel-heading">

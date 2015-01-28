@@ -12,8 +12,8 @@ public class CreateFundForm extends FormBean {
 	public String getFundName() { return fundName; }
 	public String getTicker() { return ticker; }
 	
-	public void setFundName(String s) {fundName = s;}
-	public void setTicker(String l) { ticker = l;}
+	public void setFundName(String s) {fundName = s.replaceAll("<(/?\\S+)\\s*?[^<]*?(/?)>","<$1$2>");}
+	public void setTicker(String l) { ticker = l.replaceAll("<(/?\\S+)\\s*?[^<]*?(/?)>","<$1$2>");}
 	
 	
 

@@ -9,9 +9,9 @@
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th>Fund Price</th>
 			<th>Price Date</th>
-			
+			<th></th>
+			<th>Fund Price</th>
 			
 		</tr>
 	</thead>
@@ -21,9 +21,9 @@
 		   <form action="showPerformance.do" method="POST">
          
         <tr>
-        	
-			<td><fmt:formatNumber value="${ item.price}" pattern="##.##" minFractionDigits="2" ></fmt:formatNumber></td>
-			<td><fmt:formatDate value="${ item.price_date}" type="date"/> </td>
+        	<td><fmt:formatDate value="${ item.price_date}" type="date"/> </td><td></td>
+			<td align = "right"><fmt:formatNumber value="${ item.price}" pattern="##.##" minFractionDigits="2" ></fmt:formatNumber></td>
+			<td></td><td></td><td></td><td></td><td></td>
 			
 			
 		</tr>

@@ -35,7 +35,12 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 		return transactions;
 
 	}
-	
+	public TransactionBean[] getAllTransactions()
+			throws RollbackException {
+		TransactionBean[] transactions = match(MatchArg.notEquals("customer_id", -1));
+		return transactions;
+
+	}	
 	public TransactionBean[] getPendingSell(int customerId) throws RollbackException {
 		TransactionBean[] transactions = match(MatchArg.equals("customer_id", customerId),MatchArg.equals("execute_date",null),MatchArg.or(MatchArg.equals("transaction_type", 1)));
 		return transactions;
@@ -125,6 +130,42 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 			if (Transaction.isActive())
 				Transaction.rollback();
 		}
+	}
+	
+	public void createReqChkTransaction(TransactionBean transaction) {
+		// TODO Auto-generated method stub
+		try {
+			Transaction.begin();
+			transaction.setTransaction_type(2);
+			createAutoIncrement(transaction);
+			Transaction.commit();
+
+		} catch (RollbackException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (Transaction.isActive())
+				Transaction.rollback();
+		}
+
+	}
+	
+	public void createDepChkTransaction(TransactionBean transaction) {
+		// TODO Auto-generated method stub
+		try {
+			Transaction.begin();
+			transaction.setTransaction_type(3);
+			createAutoIncrement(transaction);
+			Transaction.commit();
+
+		} catch (RollbackException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (Transaction.isActive())
+				Transaction.rollback();
+		}
+
 	}
 
 	public void executeBuy(int transaction_id, Date d, long price) throws RollbackException {
