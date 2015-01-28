@@ -63,7 +63,7 @@ public class ViewByCustomerAction extends Action {
 				//String cash = df.format(customer.getCash());
 				//request.setAttribute("cash",cash);
 				//System.out.println(cash);
-				System.out.println(customer.getZip());
+			//	System.out.println(customer.getZip());
 
 
 				//Return the fund information.
