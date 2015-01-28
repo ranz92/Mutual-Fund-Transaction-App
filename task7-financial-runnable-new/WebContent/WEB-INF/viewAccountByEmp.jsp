@@ -98,17 +98,17 @@
 					<div class="tab-pane" id="panel-305422">
 						<table class="table">
 				<thead>
-					<tr align="right">
+					<tr >
 						<th>
 							#
 						</th>
 						<th>
 							Fund ID
 						</th>
-						<th >
+						<th style="text-align:right;">
 							Number of shares
 						</th>
-						<th >
+						<th style="text-align:right;">
 							Position Value ($)
 						</th>
 					</tr>
