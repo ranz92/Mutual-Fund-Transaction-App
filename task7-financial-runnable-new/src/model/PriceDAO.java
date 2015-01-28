@@ -22,13 +22,16 @@ public class PriceDAO extends GenericDAO<PriceBean> {
 				MatchArg.equals("fund_id", price.getFund_id()),
 				MatchArg.equals("price_date", price.getPrice_date())));
 		if (prices.length > 0) {
-			return;
+			throw new RollbackException("Price for transition day "+
+					price.getPrice_date()+" already exists");
+		}
+		if (price.getPrice_date().after(getLastTransactionDay())){
+			throw new RollbackException("Please enter date after "+
+					price.getPrice_date()+" for transition day");
 		}
 		try {
 			Transaction.begin();
-
 			create(price);
-
 			Transaction.commit();
 		} finally {
 			if (Transaction.isActive())

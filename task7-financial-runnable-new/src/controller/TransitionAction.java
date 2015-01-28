@@ -178,7 +178,7 @@ public class TransitionAction extends Action {
 			try {
 				price = Long.parseLong(rpb.getPrice());
 				if (price < 0.01 || price > 1000) {
-					errors.add("Please enter a valid price for fund with id  " + rpb.getFund_id() + "between 0.01 and 1000");
+					errors.add("Please enter a valid price for fund with id " + rpb.getFund_id() + " between 0.01 and 1000");
 				}
 			} catch (NumberFormatException e) {
 				errors.add("Please enter a valid price for fund with id " + rpb.getFund_id());
@@ -202,7 +202,7 @@ public class TransitionAction extends Action {
 		RawPriceBean[] result = new RawPriceBean[count];
 		for (int i = 0; i < count; i++) {
 			result[i] = new RawPriceBean(i + 1,
-					(String) request.getParameter("price" + (i + 1)));
+					((String) request.getParameter("price" + (i + 1))).trim());
 			}
 		return result;
 	}
