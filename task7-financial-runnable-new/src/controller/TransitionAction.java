@@ -88,7 +88,7 @@ public class TransitionAction extends Action {
 				return "transition.jsp";
 			}
 			RawPriceBean[] rawPrices = getPrices(request);
-			setPriceAttributes(rawPrices, request);
+			//setPriceAttributes(rawPrices, request);
 
 			errors.addAll(getValidationErrors(request));
 			if (errors.size() != 0) {
@@ -167,24 +167,34 @@ public class TransitionAction extends Action {
 		if (request.getParameter("date") == null || request.getParameter("date").length() == 0) {
 			errors.add("Please choose a transition day!");
 		}
+		long price;
 		RawPriceBean[] rawPrices = getPrices(request);
 		for (RawPriceBean rpb : rawPrices) {
 			if (rpb == null || rpb.getPrice() == null || rpb.getPrice().trim().length() == 0) {
 				errors.add("Please enter the price for fund with id "
 						+ rpb.getFund_id());
+				continue;
+			}
+			try {
+				price = Long.parseLong(rpb.getPrice());
+				if (price < 0.01 || price > 1000) {
+					errors.add("Please enter a valid price for fund with id  " + rpb.getFund_id() + "between 0.01 and 1000");
+				}
+			} catch (NumberFormatException e) {
+				errors.add("Please enter a valid price for fund with id " + rpb.getFund_id());
 			}
 		}
 		return errors;
 	}
 
-	private void setPriceAttributes(RawPriceBean[] rawPrices,
-			HttpServletRequest request) {
-		int count = Integer.parseInt((String) request.getParameter("count"));
-		for (int i = 0; i < count; i++) {
-			request.setAttribute("price" + (i+1), rawPrices[i].getPrice());
-		}
-
-	}
+//	private void setPriceAttributes(RawPriceBean[] rawPrices,
+//			HttpServletRequest request) {
+//		int count = Integer.parseInt((String) request.getParameter("count"));
+//		for (int i = 0; i < count; i++) {
+//			request.setAttribute("price" + (i+1), rawPrices[i].getPrice());
+//		}
+//
+//	}
 
 	private RawPriceBean[] getPrices(HttpServletRequest request) {
 		// TODO Auto-generated method stub
