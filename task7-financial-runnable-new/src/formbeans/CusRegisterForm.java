@@ -48,7 +48,7 @@ public class CusRegisterForm extends FormBean {
 	public void setAddrL2(String s)     { addrL2   = s.trim();               }
 	public void setCity(String s)      { city   = s.trim();                     }
 	public void setState(String s)     { state   = s.trim();                    }
-	public void setZip(String s)       { zip   = Integer.parseInt(s.trim());    }
+	public void setZip(String s)       { zip   = Integer.parseInt(s);    }
 	public void setCash(String s)      { confirm   = s.trim();                  }
 
 	

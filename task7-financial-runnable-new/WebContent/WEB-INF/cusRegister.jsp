@@ -58,11 +58,11 @@
 			</div>
 	</div>
 	
-	<div class="form-group">
-		<label for="inputEmail3" class="col-sm-2control-label">State</label>
-		    <div >
-			    <select name="state" id="state" class="form-control" style="width:12em">   
-    					    <option value="">Select a State
+	 <div class="form-group">	
+		<label for="inputEmail3" class="col-sm-2 control-label">State</label>
+		    <div class="col-sm-10">
+		     <select name="state" id="state" class="form-control" style="width:12em">   
+    					    <option value="">Select a State </option>
 							<option value="AA">AA - Armed Forces Americas
                             <option value="AE">AE - Armed Forces Canada
                             <option value="AE">AE - Armed Forces Europe
@@ -125,15 +125,17 @@
                             <option value="WV">WV - West Virginia
                             <option value="WY">WY - Wyoming
   					    </select>
-  					</div>
-  			</div>
+			    
+			</div>
+    </div>
   			
   	 <div class="form-group">	
 		<label for="inputEmail3" class="col-sm-2 control-label">Zip</label>
 		    <div class="col-sm-10">
-			    <input type="text" class="form-control" id="inputEmail3" name="zip" value="${form.zip }" style="width:12em">
+			    <input type="text" class="form-control" id="inputEmail3" name="zip" value="" style="width:12em">
 			</div>
     </div>
+    
     
 	<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
