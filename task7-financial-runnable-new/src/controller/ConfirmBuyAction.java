@@ -41,8 +41,8 @@ public class ConfirmBuyAction extends Action {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		
-		List<String> success = new ArrayList<String>();
-		request.setAttribute("success",success);
+//		List<String> success = new ArrayList<String>();
+//		request.setAttribute("success",success);
 		
 		DecimalFormat df = new DecimalFormat("#,##0.00");
 		
@@ -57,7 +57,11 @@ public class ConfirmBuyAction extends Action {
 			TransactionBean transaction = new TransactionBean();
 			transaction.setCustomer_id(customer.getCustomerId());
 			transaction.setFund_id(Integer.parseInt(form.getFundId()));
-			transaction.setAmount(Long.parseLong(form.getAmount()));
+			try {
+				transaction.setAmount(Long.parseLong(form.getAmount()));
+			} catch(NumberFormatException e) {
+				errors.add("Please enter numbers.");
+			}
 //			transaction.setFund_id(form.getIdAsInt()); //should obtain from fund table, which is not established so far. So recorded as 0 temporarily here.
 //			transaction.setAmount(form.getAmountAsLong());
 			
@@ -104,7 +108,7 @@ public class ConfirmBuyAction extends Action {
 			
 //			session.setAttribute("pendingAmount", pendingAmount);
 //			session.setAttribute("availableAmount", customer.getCash()-pendingAmount);
-			success.add("You have bought fund successfully.");
+//			success.add("You have bought fund successfully.");
 			
 			return "buyFund.jsp";
 		} catch(FormBeanException e) {
