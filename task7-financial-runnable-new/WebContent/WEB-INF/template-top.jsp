@@ -228,12 +228,12 @@
 				<c:otherwise>
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<a id="modal-353912" href="#modal-container-353912" role="button" class="btn" data-toggle="modal">Sign In</a>
+						<a  class="panel-title" href="login.do">Sign In</a>	
 				</div>
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<a id="modal-353912" href="#modal-container-353912" role="button" class="btn" data-toggle="modal">Research Fund</a>
+						<a  class="panel-title" href="research.do">Research Fund</a>	
 				
 				</div>
 				</div>

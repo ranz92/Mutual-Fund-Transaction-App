@@ -170,14 +170,14 @@ public class Controller extends HttpServlet {
 		// System.out.println("servletPath="+servletPath+" requestURI="+request.getRequestURI()+"  user="+user);
 
 	//	if (action.equals("cuslogin.do") || action.equals("emplogin.do")) {
-		if(action.equals("login.do")) {	
+		if(action.equals("login.do") || action.equals("research.do") || action.equals("showPerformance.do")) {	
 			// Allow these actions without logging in
 			return Action.perform(action, request);
 		}
 
 		if (customer == null && employee == null) {
 			// If the user hasn't logged in, direct him to the login page
-			return Action.perform("cuslogin.do", request);
+			return Action.perform("login.do", request);
 		}
 
 		// Let the logged in user run his chosen action
