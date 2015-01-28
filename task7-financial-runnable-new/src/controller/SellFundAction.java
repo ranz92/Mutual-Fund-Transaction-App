@@ -83,6 +83,7 @@ public class SellFundAction extends Action {
 
 			
 			session.setAttribute("mSellList", pous);
+			session.setAttribute("pendingShare", pendingShare);
 
 			return "sellFund.jsp";
 		} catch (RollbackException e) {

@@ -109,6 +109,7 @@ public class ConfirmSellAction extends Action {
 			
 
 			session.setAttribute("mSellList", pous);
+			session.setAttribute("pendingShare",pendingShare);
 
 			if(errors.size() > 0) {
 				return "sellFund.jsp";
