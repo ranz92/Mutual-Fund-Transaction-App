@@ -80,10 +80,10 @@ public class CusRegisterAction extends Action{
 					session.setAttribute("customer", customer);
 					session.setAttribute("message", success);
                */
-//	        		request.setAttribute("message", success);
-//					return "success.jsp";  //return to the research page?!!
-	                success.add("New customer has been created");
-	                return "cusRegister.jsp";
+	        		request.setAttribute("message", success);
+					return "success.jsp";  //return to the research page?!!
+//	                success.add("New customer has been created");
+//	                return "cusRegister.jsp";
 	               
 				}
 

@@ -41,8 +41,8 @@ public class ConfirmBuyAction extends Action {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		
-//		List<String> success = new ArrayList<String>();
-//		request.setAttribute("success",success);
+		List<String> success = new ArrayList<String>();
+		request.setAttribute("success",success);
 		
 		DecimalFormat df = new DecimalFormat("#,##0.00");
 		
@@ -108,7 +108,7 @@ public class ConfirmBuyAction extends Action {
 			
 //			session.setAttribute("pendingAmount", pendingAmount);
 //			session.setAttribute("availableAmount", customer.getCash()-pendingAmount);
-//			success.add("You have bought fund successfully.");
+			success.add("You have bought fund successfully.");
 			
 			return "buyFund.jsp";
 		} catch(FormBeanException e) {

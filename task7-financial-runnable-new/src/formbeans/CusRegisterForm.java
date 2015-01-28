@@ -79,6 +79,23 @@ public class CusRegisterForm extends FormBean {
 			return errors;
 		}
 		
+		if (username.matches(".*[<>\"].*"))
+			errors.add("User Name may not contain angle brackets or quotes");
+		if (firstName.matches(".*[<>\"].*"))
+			errors.add("First Name may not contain angle brackets or quotes");
+		if (lastName.matches(".*[<>\"].*"))
+			errors.add("Last Name may not contain angle brackets or quotes");
+		if (password.matches(".*[<>\"].*"))
+			errors.add("Password may not contain angle brackets or quotes");
+		if ((addrL1 != null && addrL1.matches(".*[<>\"].*")) || (addrL2 != null && addrL2.matches(".*[<>\"].*"))  )
+			errors.add("Address may not contain angle brackets or quotes");
+		if (city != null && city.matches(".*[<>\"].*"))
+			errors.add("City may not contain angle brackets or quotes");
+		if (state != null && state.matches(".*[<>\"].*"))
+			errors.add("State may not contain angle brackets or quotes");
+//		if (zip != 0 && zip.matches(".*[<>\"].*"))
+//			errors.add("Zip Code may not contain angle brackets or quotes");
+		
 		if (!password.equals(confirm)) {
 			errors.add("Passwords are not the same");
 		}
