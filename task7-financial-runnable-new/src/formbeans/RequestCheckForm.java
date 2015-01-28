@@ -2,46 +2,76 @@ package formbeans;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.mybeans.form.FormBean;
 
 public class RequestCheckForm extends FormBean {
-	
-	private String userName;
-	private String fullName;
+	private String fundId;
 	private String amount;
-	private String notes;
 	
-	public String getUserName()	{ return userName; }
-	public String getFullName()  	{ return fullName;  }
-	public String getAmount()  		{ return amount;     }
-	public String getNotes()  	{ return notes;  }
+	public String getFundId() { return fundId; }
+	public String getAmount() { return amount; }
 	
-	public void setUserName(String s) { userName = trimAndConvert(s,"<>\"");  }
-	public void setFullName(String s)  { fullName  = trimAndConvert(s,"<>\"");  }
-	public void setAmount(String s)     { amount  = trimAndConvert(s,"<>\"");     }
-	public void setNotes(String s)  { notes  = trimAndConvert(s,"<>\"");   }
-
+	public void setFundId(String s) {fundId = s;}
+	public void setAmount(String l) { amount = l;}
+	public int getIdAsInt() {
+		try {
+			return Integer.parseInt(fundId);
+		} catch (NumberFormatException e) {
+			// call getValidationErrors() to detect this
+			return -1;
+		}
+	}
+	public long getAmountAsLong() {
+		try {
+			return Long.parseLong(fixBadChars(amount));
+		} catch (NumberFormatException e) {
+			// call getValidationErrors() to detect this
+			return -1;
+		}
+	}
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
-
-		if (userName == null || userName.length() == 0) {
-			errors.add("User name is required");
-		}
-
-		if (fullName == null || fullName.length() == 0) {
-			errors.add("User's Full name is required");
-		}
-
-		if (amount == null || amount.length() == 0) {
+		
+		
+		if(amount == null) {
 			errors.add("Amount is required");
 		}
 		
-		if (errors.size() > 0) {
-			return errors;
+		try {
+			Long.parseLong(amount);
+		} catch (NumberFormatException e) {
+			errors.add("Amount cannot be parsed");
 		}
-
+		
 		return errors;
 	}
-}
 
+	private String fixBadChars(String s) {
+		if (s == null || s.length() == 0) return s;
+		
+		Pattern p = Pattern.compile("[<>\"&]");
+        Matcher m = p.matcher(s);
+        StringBuffer b = null;
+        while (m.find()) {
+            if (b == null) b = new StringBuffer();
+            switch (s.charAt(m.start())) {
+                case '<':  m.appendReplacement(b,"&lt;");
+                           break;
+                case '>':  m.appendReplacement(b,"&gt;");
+                           break;
+                case '&':  m.appendReplacement(b,"&amp;");
+                		   break;
+                case '"':  m.appendReplacement(b,"&quot;");
+                           break;
+                default:   m.appendReplacement(b,"&#"+((int)s.charAt(m.start()))+';');
+            }
+        }
+        
+        if (b == null) return s;
+        m.appendTail(b);
+        return b.toString();
+    }
+}

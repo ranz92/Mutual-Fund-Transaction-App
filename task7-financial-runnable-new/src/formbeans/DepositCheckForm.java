@@ -11,27 +11,36 @@ public class DepositCheckForm extends FormBean {
 	private String fullName;
 	private String amount;
 	private String notes;
-	private String executedBy;
-	private String executedOn;
-	private String remarks;
+	private String fundId;
 	
 	public String getUserName()		{ return userName;  	}
 	public String getFullName()  	{ return fullName;  	}
 	public String getAmount()  		{ return amount;    	}
 	public String getNotes()  		{ return notes;  		}
-	public String getExecutedBy() 	{ return executedBy;	}
-	public String getExecutedOn() 	{ return executedOn;	}
-	public String getRemarks() 		{ return remarks;		}
-
+	public String getFundId() 		{ return fundId; }
 	
 	public void setUserName(String s) 	{ userName = trimAndConvert(s,"<>\"");  	}
 	public void setFullName(String s) 	{ fullName  = trimAndConvert(s,"<>\""); 	}
 	public void setAmount(String s)     { amount  = trimAndConvert(s,"<>\"");   	}
 	public void setNotes(String s)  	{ notes  = trimAndConvert(s,"<>\"");   		}
-	public void setExecutedBy(String s)	{ executedBy = trimAndConvert(s,"<>\"");	}
-	public void setExecutedOn(String s)	{ executedOn = trimAndConvert(s,"<>\"");	}
-	public void setRemarks(String s)	{ remarks = trimAndConvert(s,"<>\"");	}
-	
+	public void setFundId(String s) 	{ fundId = s;}
+
+	public int getIdAsInt() {
+		try {
+			return Integer.parseInt(fundId);
+		} catch (NumberFormatException e) {
+			// call getValidationErrors() to detect this
+			return -1;
+		}
+	}
+	public long getAmountAsLong() {
+		try {
+			return Long.parseLong(amount);
+		} catch (NumberFormatException e) {
+			// call getValidationErrors() to detect this
+			return -1;
+		}
+	}
 
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
@@ -46,14 +55,6 @@ public class DepositCheckForm extends FormBean {
 
 		if (amount == null || amount.length() == 0) {
 			errors.add("Amount is required");
-		}
-		
-		if (executedBy == null || executedBy.length() == 0) {
-			errors.add("Employee name is required");
-		}
-
-		if (executedOn == null || executedOn.length() == 0) {
-			errors.add("Date executed is required");
 		}
 		
 		if (errors.size() > 0) {

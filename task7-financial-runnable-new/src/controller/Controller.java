@@ -61,6 +61,11 @@ public class Controller extends HttpServlet {
 		Action.add(new ViewByCustomerAction(model));
 		Action.add(new TransitionAction(model));
 		Action.add(new ResetPwdAction(model));
+		Action.add(new ReqChkAction(model));
+		Action.add(new DepChkAction(model));
+		Action.add(new ConfirmRequestCheckAction(model));
+		Action.add(new ConfirmDepositCheckAction(model));
+		Action.add(new TransactionHistoryAction(model));
 		
 		CustomerDAO customerDAO = model.getCustomerDAO();
 		EmployeeDAO employeeDAO = model.getEmployeeDAO();

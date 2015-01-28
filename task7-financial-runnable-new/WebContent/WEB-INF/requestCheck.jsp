@@ -5,42 +5,53 @@
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
-			<h3>Deposit a Check</h3>
+			<h2>Request a Check</h2>
 			<jsp:include page="error-list.jsp" />
-			<form method="post">
+			<form action="confirmRequestCheck.do" method="POST">
 				<input type="hidden" name="redirect" value="${redirect}" />
 				<table class="table table-striped table-condensed">
 					<thead>
 						<tr>
 							<td>User Name:</td>
-							<td>${username}</td>
+							<td>${customer.username}</td>
 						</tr>
 						<tr>
 							<td>Full Name:</td>
-							<td>${firstName}${lastName}</td>
+							<td>${customer.firstname} ${customer.lastname}</td>
 						</tr>
 						<tr>
-							<td>Current Cash Balance:</td>
-							<td>${cash}</td>
+							<td>Available Balance:</td>
+							<td>${availableAmount}</td>
 						</tr>
 						<tr>
 							<td>Amount:</td>
 							<td><input type="text" name="amount"></td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"></td>
-							<td>I have read and agreed with the<a
-								href="https://www.google.com/"></a> Terms of Service of CFS
-							</td>
-						</tr>
-						<tr>
 							<td colspan="2" align="center"><input type="submit"
-								name="button" value="Deposit Check" /></td>
+								name="button" value="Request Check" /></td>
 						</tr>
 				</table>
 			</form>
 		</div>
 	</div>
 </div>
-
+<h2>Pending Buy</h2>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Fund</th>
+			<th>Description</th>
+			<th>Amount</th>
+			</tr>
+	</thead>
+	   <c:forEach var="item" items="${mFundList}">
+		  
+        <tr>
+			<td>${ item.name }</td>
+			<td>${ item.symbol }</td>
+			<td>${ item.amount }</td>
+			</tr>
+	</c:forEach>
+</table>
 <jsp:include page="template-bottom.jsp" />
