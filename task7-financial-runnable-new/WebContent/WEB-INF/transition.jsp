@@ -1,6 +1,7 @@
 <jsp:include page="template-top.jsp" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <h2>Transition Day</h2>
 <jsp:include page="error-list.jsp" />
@@ -29,8 +30,8 @@
 				<th>Id</th>
 				<th>Product</th>
 				<th>Description</th>
-				<th>Last Price</th>
-				<th>Set Price</th>
+				<th style="text-align:right;">Last Price</th>
+				<th style="text-align:right;">Set Price</th>
 			</tr>
 		</thead>
 
@@ -39,8 +40,8 @@
 				<td>${ item.id }</td>
 				<td>${ item.name }</td>
 				<td>${ item.symbol }</td>
-				<td>${ item.lastPrice }</td>
-				<td><input type="text" name="price${item.id}" /></td>
+				<td align="right">$<fmt:formatNumber value="${ item.lastPrice }" type="currency" pattern="#,##0.00" /></td>
+				<td align="right"><input style="text-align:right;" type="text" name="price${item.id}" /></td>
 			</tr>
 		</c:forEach>
 		

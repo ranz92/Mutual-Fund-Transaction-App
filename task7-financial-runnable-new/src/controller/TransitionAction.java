@@ -73,23 +73,24 @@ public class TransitionAction extends Action {
 				cfbs[i] = cfb;
 			}
 			session.setAttribute("fundList", cfbs);
-			DateFormat format = new SimpleDateFormat("mm/dd/yyyy", Locale.ENGLISH);
+			DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
 			Date d = priceDAO.getLastTransactionDay();
 			Calendar c = new GregorianCalendar();
 			c.setTime(d);
 			c.set(Calendar.HOUR_OF_DAY, 0); //anything 0 - 23
 		    c.set(Calendar.MINUTE, 0);
 		    c.set(Calendar.SECOND, 0);
-		    session.setAttribute("lastTranDay", format.format(d));
+		    c.add(Calendar.DATE, 1);
+		    session.setAttribute("count", cfbs.length);
+			session.setAttribute("lastTranDay", format.format(d));
 			session.setAttribute("nextTranDay", format.format(c.getTime()));
-			if (request.getParameter("count") == null) {
-				session.setAttribute("count", cfbs.length);
+		    if (request.getParameter("count") == null) {
 				return "transition.jsp";
 			}
 			RawPriceBean[] rawPrices = getPrices(request);
 			setPriceAttributes(rawPrices, request);
 
-			errors.addAll(getValidationErrors(rawPrices));
+			errors.addAll(getValidationErrors(request));
 			if (errors.size() != 0) {
 				return "transition.jsp";
 			}
@@ -116,16 +117,14 @@ public class TransitionAction extends Action {
 			}
 			session.setAttribute("fundList", cfbs);
 			d = priceDAO.getLastTransactionDay();
-			c = new GregorianCalendar();
-			c.set(Calendar.YEAR, d.getYear());
-			c.set(Calendar.MONTH, d.getMonth());
-			c.set(Calendar.DATE, d.getDay());
-		    c.set(Calendar.HOUR_OF_DAY, 0); //anything 0 - 23
+			c.setTime(d);
+			c.set(Calendar.HOUR_OF_DAY, 0); //anything 0 - 23
 		    c.set(Calendar.MINUTE, 0);
 		    c.set(Calendar.SECOND, 0);
-		    c.add(Calendar.DAY_OF_MONTH, 1);
+		    c.add(Calendar.DATE, 1);
+		    session.setAttribute("count", cfbs.length);
 			session.setAttribute("lastTranDay", format.format(d));
-			session.setAttribute("nextTranDay", c.getTime());
+			session.setAttribute("nextTranDay", format.format(c.getTime()));
 			return "transition.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
@@ -162,10 +161,13 @@ public class TransitionAction extends Action {
 		}
 	}
 
-	private List<String> getValidationErrors(RawPriceBean[] rawPrices) {
+	private List<String> getValidationErrors(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		List<String> errors = new ArrayList<String>();
-
+		if (request.getParameter("date") == null || request.getParameter("date").length() == 0) {
+			errors.add("Please choose a transition day!");
+		}
+		RawPriceBean[] rawPrices = getPrices(request);
 		for (RawPriceBean rpb : rawPrices) {
 			if (rpb == null || rpb.getPrice() == null || rpb.getPrice().trim().length() == 0) {
 				errors.add("Please enter the price for fund with id "
