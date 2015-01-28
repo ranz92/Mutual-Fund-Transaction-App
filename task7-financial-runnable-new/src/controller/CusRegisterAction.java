@@ -37,7 +37,7 @@ public class CusRegisterAction extends Action{
 		request.setAttribute("success",success);
 		
 		if(request.getSession().getAttribute("employee") == null) {
-			errors.add("Please log in as an employee.");
+			errors.add("Please log in as an customer.");
 			return "login.jsp";
 		}
 		

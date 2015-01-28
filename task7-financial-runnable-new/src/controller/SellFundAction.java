@@ -49,7 +49,7 @@ public class SellFundAction extends Action {
 		
 		try {
 			if(request.getSession().getAttribute("customer") == null) {
-				errors.add("Please log in as a customer.");
+				errors.add("Please log in as a employee.");
 				return "login.jsp";
 			}
 			
