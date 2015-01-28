@@ -64,6 +64,11 @@ public class TransactionHistoryAction extends Action {
 	}
 
 	public String perform(HttpServletRequest request) {
+//		if(request.getSession().getAttribute("customer") == null) {
+//			errors.add("Please log in as a customer.");
+//			return "login.jsp";
+//		}
+		
 		EmployeeBean admin = (EmployeeBean) request.getSession(false).getAttribute("employee");
 		CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
 		DecimalFormat dfAmount = new DecimalFormat("###,###,###.00");

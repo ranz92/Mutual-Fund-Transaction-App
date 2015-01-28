@@ -49,6 +49,12 @@ public class ConfirmDepositCheckAction extends Action {
 		request.setAttribute("errors", errors);
 		
 		try {
+			
+			if(request.getSession().getAttribute("employee") == null) {
+				errors.add("Please log in as an employee.");
+				return "login.jsp";
+			}
+			
 			DepositCheckForm form  = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 			TransactionBean transaction = new TransactionBean();

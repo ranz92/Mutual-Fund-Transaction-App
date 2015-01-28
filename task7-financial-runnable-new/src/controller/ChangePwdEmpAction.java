@@ -35,6 +35,12 @@ public class ChangePwdEmpAction extends Action {
 		request.setAttribute("success", success);
 		
 		try {
+			
+			if(request.getSession().getAttribute("employee") == null) {
+				errors.add("Please log in as an employee.");
+				return "login.jsp";
+			}
+			
 			EmployeeBean employee = (EmployeeBean) request.getSession().getAttribute("employee");
 			ChangePwdForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);

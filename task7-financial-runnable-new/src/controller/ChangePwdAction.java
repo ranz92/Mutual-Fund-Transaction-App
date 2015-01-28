@@ -35,6 +35,11 @@ public class ChangePwdAction extends Action {
 		request.setAttribute("success", success);
 		
 		try {
+			if(request.getSession().getAttribute("customer") == null) {
+				errors.add("Please log in as a customer.");
+				return "login.jsp";
+			}
+			
 			CustomerBean customer = (CustomerBean) request.getSession().getAttribute("customer");
 			ChangePwdForm form = formBeanFactory.create(request);
 			request.setAttribute("form", form);

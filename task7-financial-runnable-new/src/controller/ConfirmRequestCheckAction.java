@@ -46,6 +46,11 @@ public class ConfirmRequestCheckAction extends Action {
 		DecimalFormat df = new DecimalFormat("###,###,###.00");
 		
 		try {
+			if(request.getSession().getAttribute("customer") == null) {
+				errors.add("Please log in as a customer.");
+				return "login.jsp";
+			}
+			
 			CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
 			RequestCheckForm form  = formBeanFactory.create(request);
 			request.setAttribute("form", form);

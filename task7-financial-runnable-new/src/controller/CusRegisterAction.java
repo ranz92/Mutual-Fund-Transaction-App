@@ -36,6 +36,11 @@ public class CusRegisterAction extends Action{
 		List<String> success = new ArrayList<String>();
 		request.setAttribute("success",success);
 		
+		if(request.getSession().getAttribute("employee") == null) {
+			errors.add("Please log in as an employee.");
+			return "login.jsp";
+		}
+		
 		if (right == null) {
 			errors.add("You don't have the employee right to create the account!");
 			return "error.jsp";

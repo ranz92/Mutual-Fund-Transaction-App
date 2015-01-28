@@ -48,6 +48,11 @@ public class SellFundAction extends Action {
 		DecimalFormat df = new DecimalFormat("#,##0.00");
 		
 		try {
+			if(request.getSession().getAttribute("customer") == null) {
+				errors.add("Please log in as a customer.");
+				return "login.jsp";
+			}
+			
 			CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
 			
 			HttpSession session = request.getSession();

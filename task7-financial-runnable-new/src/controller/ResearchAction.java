@@ -45,6 +45,12 @@ public class ResearchAction extends Action {
 		request.setAttribute("errors", errors);
 		
 		try {
+			
+			if(request.getSession().getAttribute("customer") == null) {
+				errors.add("Please log in as a customer.");
+				return "login.jsp";
+			}
+			
 			//CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
 			ResearchForm form  = formBeanFactory.create(request);
 			request.setAttribute("form", form);

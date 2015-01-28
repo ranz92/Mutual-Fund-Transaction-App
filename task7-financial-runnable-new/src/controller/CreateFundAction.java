@@ -43,6 +43,11 @@ public class CreateFundAction extends Action {
         request.setAttribute("success",success);
 
         try {
+        	if(request.getSession().getAttribute("employee") == null) {
+				errors.add("Please log in as an employee.");
+				return "login.jsp";
+			}
+        	
         	HttpSession session = request.getSession(false);
         	session.setAttribute("fundList", fundDAO.getFundList());
 	        

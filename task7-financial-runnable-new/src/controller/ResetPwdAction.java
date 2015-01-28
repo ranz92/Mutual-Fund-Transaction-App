@@ -59,6 +59,11 @@ public class ResetPwdAction extends Action{
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		
+		if(request.getSession().getAttribute("employee") == null) {
+			errors.add("Please log in as an employee.");
+			return "login.jsp";
+		}
+		
 		if (employee == null) {
 			errors.add("You don't have the employee right to view the account!");
 			return "error.jsp";

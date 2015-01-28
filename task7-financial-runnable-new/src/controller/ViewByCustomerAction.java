@@ -33,11 +33,19 @@ public class ViewByCustomerAction extends Action {
 	}
 	
 	public String perform(HttpServletRequest request) {
+		
+		
 		CustomerBean customer = (CustomerBean)request.getSession(false).getAttribute("customer");
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		
 		try {
+			
+			if(request.getSession().getAttribute("customer") == null) {
+				errors.add("Please log in as a customer.");
+				return "login.jsp";
+			}
+			
 			if(customer == null) {
 				return "login.do";
 			} else {
