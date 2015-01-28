@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%--  <jsp:include page="error-list.jsp" /> --%> 
+  <jsp:include page="error-list.jsp" /> 
 <h2>Buy Fund</h2>
 <h4 class="text-primary">Total Balance : $<fmt:formatNumber value="${customer.cash }" type="currency" pattern="#,##0.00" /> </h4>
 <h4 class="text-primary">Pending Balance : $${pendingAmount}</h4>
