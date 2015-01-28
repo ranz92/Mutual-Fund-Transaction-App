@@ -1,5 +1,6 @@
 package controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,45 +47,59 @@ public class ConfirmSellAction extends Action {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		
+		DecimalFormat df = new DecimalFormat("#,##0.00");
+		
+		
 		try {
 			CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
 			SellForm form  = formBeanFactory.create(request);
 			request.setAttribute("form", form);
-//			HttpSession session = request.getSession();
-//			session.setAttribute("fundList", fundDAO.getFundList());
+			
 			TransactionBean transaction = new TransactionBean();
 			transaction.setCustomer_id(customer.getCustomerId());
 			transaction.setFund_id(form.getIdAsInt());; //should obtain from fund table, which is not established so far. So recorded as 0 temporarily here.
-			transaction.setShares(form.getAmountAsLong());
-			//加一个判断语句：amount<cash
-			if (transactionDAO.checkEnoughShare(customer.getCustomerId(), transaction.getFund_id(),positionDAO.read(customer.getCustomerId(),transaction.getFund_id()).getShares(), transaction.getShares()))
-			transactionDAO.createSellTransaction(transaction);
-//			
-			//customerDAO.updateCash(customer.getCustomerId(), 0-form.getAmountAsLong());
-//			PositionBean newPosition = new PositionBean();
-//			newPosition.setFund_id(form.getIdAsInt());
-//			newPosition.setCustomer_id(customer.getCustomerId());
-//			newPosition.setShares(0-form.getAmountAsLong());
-//			System.out.print(0-form.getSharesAsLong());
-//			positionDAO.updatePosition(newPosition);
+			transaction.setShares(form.getSharesAsLong());
+			
+
+			if (transactionDAO.checkEnoughShare(customer.getCustomerId(), transaction.getFund_id(),positionDAO.read(customer.getCustomerId(),transaction.getFund_id()).getShares(), transaction.getShares())) {
+				transactionDAO.createSellTransaction(transaction);
+			}
+			else errors.add("No enough share");
 			
 			HttpSession session = request.getSession();
+			customer = customerDAO.read(customer.getCustomerId());
+			session.setAttribute("customer",customer);
+			
+			TransactionBean[] trans = transactionDAO.getPendingSell(customer.getCustomerId());
+			TransactionBean tran = new TransactionBean();
+			
 			PositionBean[] positions = positionDAO.getPositions();
-			PositionOfUser[] pous = new PositionOfUser[positions.length];
+			PositionOfUser[] pous = new PositionOfUser[trans.length];
 			PositionBean position = new PositionBean();
+			
 			int id = 0;
+			long pendingShare = 0;
 			for (int i = 0; i<pous.length; i++){
 				PositionOfUser pou = new PositionOfUser();
 				position = positions[i];
-				id = position.getFund_id();
+				
+				tran = trans[i];
+				id = tran.getFund_id();
+				
 				pou.setId(id);
 				pou.setName(fundDAO.read(id).getName());
-				pou.setShares(position.getShares());
+				pou.setShares(tran.getShares());
 				pou.setPrice(priceDAO.getLatestPrice(id));
+				
 				pous[i] = pou;
+				pendingShare = tran.getShares();
 			}
 			
-			session.setAttribute("posList", pous);
+
+			session.setAttribute("mSellList", pous);
+
+			
+			
 			return "sellFund.jsp";
 		} catch(FormBeanException e) {
 			errors.add(e.getMessage());

@@ -2,17 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@page import="databeans.TransactionBean" %>
 
 <h2>Sell Fund</h2>
-<h4 class="text-primary">Total Balance: $<fmt:formatNumber value="${customer.cash }" type="currency" pattern="#,##0.00" /> </h4>
-<!-- <h4 class="text-primary">Pending Balance: $${pendingAmount }</h4>
-<h4 class="text-primary">Available Balance: $${availableAmount }</h4> -->
 
 <table class="table table-striped">
 	<thead>
 		<tr>
 			<th>Product</th>
-			<th>Current Price</th>
+			<th>Total Share</th>
+			<th>Pending Share</th>
 			<th>Available Share</th>
 			<th>Share To Sell</th>
 			<th>Operation</th>
@@ -20,24 +19,20 @@
 	</thead>
 	
 		   
-        <c:forEach var="item" items="${posList}">
+        <c:forEach var="item" items="${ownList }"> 
 		   <form action="confirmsell.do" method="POST">
          
         <tr>
-			<td>${ item.name }</td>
-			<td>
-			<%-- ${ item.price } --%>
-			$<fmt:formatNumber value="${item.price }" type="currency" pattern="#,##0.00" />
-			</td>
-			<td>
-			<%-- ${ item.shares } --%>
-			$<fmt:formatNumber value="${item.shares }" type="currency" pattern="#,##0.00" />
-			</td>
-			<td><input type="text" name="amount" /></td>
+			
+			 <td> ${item.fund_id } </td>  
+			<td> ${item.shares } </td>
+			  <td> ${pendingShare } </td>  
+			<td> ${(item.shares-pendingShare) } </td>
+			<td><input type="text" name="shares" /></td>
 			<td><input type="submit" class="btn btn-success" value="Sell" /></td>
 		</tr>
 		
-		<input type="hidden" name="fundId" value="${ item.id }" />
+		<input type="hidden" name="fundId" value="${ item.fund_id }" />
         
 		
 		        			
@@ -45,5 +40,30 @@
 		
 	</c:forEach>
 	
+</table>
+
+
+<h2> Pending Sell </h2>
+<table class="table table-striped">
+<thead>
+<tr>
+<th> Product </th>
+			<th>Available Share</th> 
+			 <th>Share To Sell</th> 
+			</tr>
+			</thead>
+			
+			
+			<c:forEach var="item" items="${mSellList }">
+			<tr>
+			<td>${item.name }</td>
+			<td> ${(item.shares-pendingShare) } </td> 
+			 <td> ${item.shares } </td> 
+			<td> </td>
+			</tr>
+			</c:forEach>
+	
+			
+
 </table>
 <jsp:include page="template-bottom.jsp" /> 
