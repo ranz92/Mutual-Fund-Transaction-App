@@ -56,8 +56,8 @@ public class ConfirmBuyAction extends Action {
 //			session.setAttribute("fundList", fundDAO.getFundList());
 			TransactionBean transaction = new TransactionBean();
 			transaction.setCustomer_id(customer.getCustomerId());
-			transaction.setFund_id(form.getFundId());
-			transaction.setAmount(form.getAmount());
+			transaction.setFund_id(Integer.parseInt(form.getFundId()));
+			transaction.setAmount(Long.parseLong(form.getAmount()));
 //			transaction.setFund_id(form.getIdAsInt()); //should obtain from fund table, which is not established so far. So recorded as 0 temporarily here.
 //			transaction.setAmount(form.getAmountAsLong());
 			
@@ -109,7 +109,7 @@ public class ConfirmBuyAction extends Action {
 			return "buyFund.jsp";
 		} catch(FormBeanException e) {
 			errors.add(e.getMessage());
-			return "sellFund.jsp";
+			return "buyFund.jsp";
 		} catch (RollbackException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@page import="databeans.TransactionBean" %>
+<jsp:include page="error-list.jsp" />
 
 <h2>Sell Fund</h2>
 

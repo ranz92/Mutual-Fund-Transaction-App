@@ -66,7 +66,7 @@ public class SellFundAction extends Action {
 			
 			for (int i = 0; i<pous.length; i++){
 				PositionOfUser pou = new PositionOfUser();
-				position = positions[i];
+		//		position = positions[i];
 				
 				tran = trans[i];
 				id = tran.getFund_id();

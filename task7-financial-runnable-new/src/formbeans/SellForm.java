@@ -17,43 +17,61 @@ public class SellForm extends FormBean {
 	public void setFundId(String s) {fundId = s;}
 	public void setAmount(String l) { amount = l;}
 	public void setShares(String l) { shares = l;}
-	public int getIdAsInt() {
-		try {
-			return Integer.parseInt(fundId);
-		} catch (NumberFormatException e) {
-			// call getValidationErrors() to detect this
-			return -1;
-		}
-	}
-	public long getAmountAsLong() {
-		try {
-			return Long.parseLong(amount);
-		} catch (NumberFormatException e) {
-			// call getValidationErrors() to detect this
-			return -1;
-		}
-	}
-	public long getSharesAsLong() {
-		try {
-			return Long.parseLong(shares);
-		} catch (NumberFormatException e) {
-			// call getValidationErrors() to detect this
-			return -1;
-		}
-	}
+//	public int getIdAsInt() {
+//		try {
+//			return Integer.parseInt(fundId);
+//		} catch (NumberFormatException e) {
+//			// call getValidationErrors() to detect this
+//			return -1;
+//		}
+//	}
+//	public long getAmountAsLong() {
+//		try {
+//			return Long.parseLong(amount);
+//		} catch (NumberFormatException e) {
+//			// call getValidationErrors() to detect this
+//			return -1;
+//		}
+//	}
+//	public long getSharesAsLong() {
+//		try {
+//			return Long.parseLong(shares);
+//		} catch (NumberFormatException e) {
+//			// call getValidationErrors() to detect this
+//			return -1;
+//		}
+//	}
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 		
 		
-		if(shares == null) {
-			errors.add("Share is required");
-		}
-		
+//		if(shares == null) {
+//			errors.add("Share is required");
+//		}
+//		
 		try {
 			Long.parseLong(shares);
 		} catch (NumberFormatException e) {
 			errors.add("Share cannot be parsed");
 		}
+		
+		
+		if(shares == null || shares.length() == 0) {
+			errors.add("Please enter shares to sell.");
+		}
+		
+		try {
+        	double d = Double.parseDouble(shares);
+        	if (d <= 0) {
+        		throw new Exception();
+        	}
+        } catch (Exception e) {
+        	 errors.add("Shares should be a non-negative number");
+        }
+		
+		if (shares != null && shares.matches(".*[<>\"].*"))
+			errors.add("Please enter numbers for shares.");
+		
 		
 		return errors;
 	}

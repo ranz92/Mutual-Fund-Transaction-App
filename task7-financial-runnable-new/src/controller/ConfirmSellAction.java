@@ -47,6 +47,9 @@ public class ConfirmSellAction extends Action {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		
+		List<String> success = new ArrayList<String>();
+		request.setAttribute("success",success);
+		
 		DecimalFormat df = new DecimalFormat("#,##0.00");
 		
 		
@@ -55,10 +58,19 @@ public class ConfirmSellAction extends Action {
 			SellForm form  = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 			
+			errors.addAll(form.getValidationErrors());
+			
 			TransactionBean transaction = new TransactionBean();
 			transaction.setCustomer_id(customer.getCustomerId());
-			transaction.setFund_id(form.getIdAsInt());; //should obtain from fund table, which is not established so far. So recorded as 0 temporarily here.
-			transaction.setShares(form.getSharesAsLong());
+			transaction.setFund_id(Integer.parseInt(form.getFundId()));
+			
+			try {
+				transaction.setShares(Long.parseLong(form.getShares()));
+			} catch(NumberFormatException e) {
+				errors.add("Please enter numbers");
+			}
+//			transaction.setFund_id(form.getIdAsInt());; //should obtain from fund table, which is not established so far. So recorded as 0 temporarily here.
+//			transaction.setShares(form.getSharesAsLong());
 			
 
 			if (transactionDAO.checkEnoughShare(customer.getCustomerId(), transaction.getFund_id(),positionDAO.read(customer.getCustomerId(),transaction.getFund_id()).getShares(), transaction.getShares())) {
@@ -81,7 +93,7 @@ public class ConfirmSellAction extends Action {
 			long pendingShare = 0;
 			for (int i = 0; i<pous.length; i++){
 				PositionOfUser pou = new PositionOfUser();
-				position = positions[i];
+			//	position = positions[i];
 				
 				tran = trans[i];
 				id = tran.getFund_id();
@@ -98,7 +110,11 @@ public class ConfirmSellAction extends Action {
 
 			session.setAttribute("mSellList", pous);
 
+			if(errors.size() > 0) {
+				return "sellFund.jsp";
+			}
 			
+			success.add("You have sold fund successfully."); 
 			
 			return "sellFund.jsp";
 		} catch(FormBeanException e) {

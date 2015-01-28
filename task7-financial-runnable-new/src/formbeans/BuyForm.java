@@ -9,8 +9,8 @@ public class BuyForm extends FormBean {
 	private String fundId;
 	private String amount;
 	
-	public int getFundId() { return Integer.parseInt(fundId); }
-	public long getAmount() { return Long.parseLong(amount); }
+	public String getFundId() { return fundId; }
+	public String getAmount() { return amount; }
 	
 	public void setFundId(String s) {fundId = s;}
 	public void setAmount(String l) { amount = l;}
