@@ -53,7 +53,7 @@
 <thead>
 <tr>
 <th> Product </th>
-			<th>Available Share</th> 
+			<!-- <th>Pending Share</th>  -->
 			 <th>Share To Sell</th> 
 			</tr>
 			</thead>
@@ -63,7 +63,7 @@
 			<tr>
 			<td>${item.name }</td>
 			<%-- <td> ${(item.shares-pendingShare) } </td>  --%>
-			<td>  <fmt:formatNumber value="${(item.shares-pendingShare) }" type="currency" pattern="#,##0.000" /></td>
+			<%-- <td>  <fmt:formatNumber value="${item.shares }" type="currency" pattern="#,##0.000" /></td> --%>
 			<%--  <td> ${item.shares } </td>  --%>
 			 <td>  <fmt:formatNumber value="${item.shares}" type="currency" pattern="#,##0.000" /></td>
 			<td> </td>
