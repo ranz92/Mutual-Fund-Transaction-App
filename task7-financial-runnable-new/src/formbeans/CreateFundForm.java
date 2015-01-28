@@ -12,8 +12,13 @@ public class CreateFundForm extends FormBean {
 	public String getFundName() { return fundName; }
 	public String getTicker() { return ticker; }
 	
-	public void setFundName(String s) {fundName = s.replaceAll("<(/?\\S+)\\s*?[^<]*?(/?)>","<$1$2>");}
-	public void setTicker(String l) { ticker = l.replaceAll("<(/?\\S+)\\s*?[^<]*?(/?)>","<$1$2>");}
+	public void setFundName(String s) {
+		
+		fundName = s.replaceAll("<(/?\\S+)\\s*?[^<]*?(/?)>","<$1$2>");
+		}
+	public void setTicker(String l) { 
+		
+		ticker = l.replaceAll("<(/?\\S+)\\s*?[^<]*?(/?)>","<$1$2>");}
 	
 	
 
@@ -31,6 +36,13 @@ public class CreateFundForm extends FormBean {
 		if (ticker.trim().length() < 1 || ticker.trim().length() > 5){
 			errors.add("Ticker length must be between 1 and 5");
 		}
+		
+		if (fundName.matches(".*[<>?*\"].*"))
+	            errors.add("Fund Name may not contain angle brackets or quotes");
+	    if (ticker.matches(".*[<>?*\"].*"))
+	            errors.add("Ticker may not contain angle brackets or quotes");
+	    
+    	
 		return errors;
 	}
 
