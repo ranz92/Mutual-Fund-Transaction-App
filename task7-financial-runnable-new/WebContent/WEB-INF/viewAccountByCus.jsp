@@ -111,10 +111,10 @@
 							${position.fund_id }
 						</td>
 						<td >
-							<fmt:formatNumber value="${position.shares }" type="currency" pattern="#,###.000" />			
+							<fmt:formatNumber value="${position.shares }" type="currency" pattern="#,##0.000" />			
 						</td >
 						<td>
-						    <fmt:formatNumber value="${price[count-1]}" type="currency" pattern="#,###.00" />
+						    <fmt:formatNumber value="${price[count-1]}" type="currency" pattern="#,##0.00" />
 						</td>
 					</tr>
 				</c:forEach>			
