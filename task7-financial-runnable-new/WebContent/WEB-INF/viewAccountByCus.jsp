@@ -78,9 +78,10 @@
 			</table>
 
           <div class="tab-pane" id="panel-305422">
-			<table class="table">
+			<table class="table" align="right">
 				<thead>
-					<tr align="right">
+					<!-- <tr align="right"> -->
+					<tr>
 						<th>
 							#
 						</th>
@@ -101,7 +102,8 @@
 				<c:set var="price" value="${ priceList }" />
 				
 				<c:set var="count" value="${count+1 }" />
-					<tr align="right">
+					<!-- <tr align="right"> -->
+					<tr>
 						<td>
 							${count}
 						</td>
@@ -111,7 +113,7 @@
 						<td >
 							<fmt:formatNumber value="${position.shares }" type="currency" pattern="#,###.000" />			
 						</td >
-						<td >
+						<td>
 						    <fmt:formatNumber value="${price[count-1]}" type="currency" pattern="#,###.00" />
 						</td>
 					</tr>
