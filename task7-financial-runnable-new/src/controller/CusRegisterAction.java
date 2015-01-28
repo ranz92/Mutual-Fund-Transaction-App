@@ -33,6 +33,8 @@ public class CusRegisterAction extends Action{
 		EmployeeBean right = (EmployeeBean) request.getSession(false).getAttribute("employee");
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		List<String> success = new ArrayList<String>();
+		request.setAttribute("success",success);
 		
 		if (right == null) {
 			errors.add("You don't have the employee right to create the account!");
@@ -70,7 +72,7 @@ public class CusRegisterAction extends Action{
 					customer.setZip(form.getZip());
 
 					cusDAO.create(customer);
-	                String success = "New customer, " + "/'"+form.getUsername() + "/'"+", has been created";
+	          //      String success = "New customer, " + "/'"+form.getUsername() + "/'"+", has been created";
 
 
 					// Attach (this copy of) the user bean to the session
@@ -78,8 +80,11 @@ public class CusRegisterAction extends Action{
 					session.setAttribute("customer", customer);
 					session.setAttribute("message", success);
                */
-	        		request.setAttribute("message", success);
-					return "success.jsp";  //return to the research page?!!
+//	        		request.setAttribute("message", success);
+//					return "success.jsp";  //return to the research page?!!
+	                success.add("New customer has been created");
+	                return "cusRegister.jsp";
+	               
 				}
 
 			} catch (RollbackException e) {
