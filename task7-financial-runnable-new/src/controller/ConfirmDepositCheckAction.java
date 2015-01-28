@@ -51,7 +51,7 @@ public class ConfirmDepositCheckAction extends Action {
 		try {
 			
 			if(request.getSession().getAttribute("employee") == null) {
-				errors.add("Please log in as an customer.");
+				errors.add("Please log in as an employee.");
 				return "login.jsp";
 			}
 			

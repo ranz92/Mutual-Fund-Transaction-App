@@ -34,7 +34,7 @@ public class EmpRegisterAction extends Action{
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		if(request.getSession().getAttribute("employee") == null) {
-			errors.add("Please log in as an customer.");
+			errors.add("Please log in as an employee.");
 			return "login.jsp";
 		}
 		

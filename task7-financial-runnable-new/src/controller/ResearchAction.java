@@ -47,7 +47,7 @@ public class ResearchAction extends Action {
 		try {
 			
 			if(request.getSession().getAttribute("customer") == null) {
-				errors.add("Please log in as a employee.");
+				errors.add("Please log in as a customer.");
 				return "login.jsp";
 			}
 			
