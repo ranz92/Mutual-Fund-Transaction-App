@@ -108,7 +108,11 @@ public class ConfirmBuyAction extends Action {
 			
 //			session.setAttribute("pendingAmount", pendingAmount);
 //			session.setAttribute("availableAmount", customer.getCash()-pendingAmount);
-			success.add("You have bought fund successfully.");
+			
+			if(errors.size() > 0) {
+				return "buyFund.jsp";
+			} else 
+				success.add("You have bought fund successfully.");
 			
 			return "buyFund.jsp";
 		} catch(FormBeanException e) {
