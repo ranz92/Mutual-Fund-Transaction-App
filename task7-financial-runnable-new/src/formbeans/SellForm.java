@@ -49,11 +49,11 @@ public class SellForm extends FormBean {
 //			errors.add("Share is required");
 //		}
 //		
-		try {
-			Long.parseLong(shares);
-		} catch (NumberFormatException e) {
-			errors.add("Share cannot be parsed");
-		}
+//		try {
+//			Long.parseLong(shares);
+//		} catch (NumberFormatException e) {
+//			errors.add("Share cannot be parsed");
+//		}
 		
 		
 		if(shares == null || shares.length() == 0) {
