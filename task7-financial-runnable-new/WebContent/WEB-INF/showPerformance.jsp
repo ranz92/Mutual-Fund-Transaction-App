@@ -35,7 +35,9 @@
 	</c:forEach>
 	
 </table>
-<table>
+<table style="
+    margin-top: -200px;
+    margin-bottom: 300px;">
 		<tr>
 <td id="box" ></td>
 
@@ -43,7 +45,7 @@
 </table>		
 </div>
 </div>
-</div>
+
 <hr>
 <div class="row clearfix">
 		<div class="col-md-12 column">
