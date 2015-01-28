@@ -78,20 +78,20 @@
 			</table>
 
           <div class="tab-pane" id="panel-305422">
-			<table class="table" align="right">
+			<table class="table">
 				<thead>
 					<!-- <tr align="right"> -->
-					<tr>
-						<th>
+					<tr style="text-align:right;">
+						<th style="text-align:right;">
 							#
 						</th>
-						<th>
+						<th style="text-align:right;">
 							Fund ID
 						</th>
-						<th>
+						<th style="text-align:right;">
 							Number of shares
 						</th>
-						<th>
+						<th style="text-align:right;">
 							Position Value ($)
 						</th>
 					</tr>
@@ -103,7 +103,7 @@
 				
 				<c:set var="count" value="${count+1 }" />
 					<!-- <tr align="right"> -->
-					<tr>
+					<tr style="text-align:right;">
 						<td>
 							${count}
 						</td>
