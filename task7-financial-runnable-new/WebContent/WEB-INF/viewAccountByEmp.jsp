@@ -1,6 +1,7 @@
 <jsp:include page="template-top.jsp" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 		
 <!-- Choose a certain customer -->	
@@ -28,7 +29,6 @@
 <!-- End of choosing -->
 			   
     <c:set var="customer" value="${user}" />
-        <c:set var="cash" value="${cash}" />
     
 			<c:choose>
                     <c:when test="${customer == null}">
@@ -79,7 +79,7 @@
 							Cash Balance ($)
 						</td>
 						<td>
-							${cash}
+						<fmt:formatNumber value="${customer.cash }" type="currency" pattern="#,###.00" />
 						</td>
 					</tr>
 					
@@ -98,17 +98,17 @@
 					<div class="tab-pane" id="panel-305422">
 						<table class="table">
 				<thead>
-					<tr>
+					<tr align="right">
 						<th>
 							#
 						</th>
 						<th>
 							Fund ID
 						</th>
-						<th>
+						<th >
 							Number of shares
 						</th>
-						<th>
+						<th >
 							Position Value ($)
 						</th>
 					</tr>
@@ -119,18 +119,19 @@
 				<c:set var="price" value="${ priceList }" />
 				
 				<c:set var="count" value="${count+1 }" />
-					<tr>
+					<tr align="right">
 						<td>
 							${count}
 						</td>
 						<td>
 							${position.fund_id }
 						</td>
-						<td align="right">
-							${position.shares }
+						<td >
+							<fmt:formatNumber value="${position.shares }" type="currency" pattern="#,###.000" />			
 						</td >
-						<td align="right">
-							${price[count-1]}
+						<td >
+						    <fmt:formatNumber value="${price[count-1]}" type="currency" pattern="#,###.00" />
+							
 						</td>
 					</tr>
 				</c:forEach>			

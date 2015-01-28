@@ -70,14 +70,15 @@ public class CusRegisterAction extends Action{
 					customer.setZip(form.getZip());
 
 					cusDAO.create(customer);
-	                String success = "New customer, " + form.getUsername() + "has been created";
+	                String success = "New customer, " + "/'"+form.getUsername() + "/'"+", has been created";
 
 
 					// Attach (this copy of) the user bean to the session
-					HttpSession session = request.getSession(false);
+				/*	HttpSession session = request.getSession(false);
 					session.setAttribute("customer", customer);
 					session.setAttribute("message", success);
-
+               */
+	        		request.setAttribute("message", success);
 					return "success.jsp";  //return to the research page?!!
 				}
 

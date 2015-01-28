@@ -64,12 +64,9 @@ public class EmpRegisterAction extends Action{
 					employee.setPassword(form.getPassword());
 
 					employeeDAO.create(employee);
-	                String success = "A new Employee" + form.getUsername() + "has been created";
-	                
-					// Attach (this copy of) the user bean to the session
-					HttpSession session = request.getSession(false);
-					session.setAttribute("employee", employee);
-					session.setAttribute("message", success);
+	                String success = "A new Employee " +"/'"+ form.getUsername() +"/'"+ "has been created";
+			
+					request.setAttribute("message", success);
 					
 					return "success.jsp";  
 				}

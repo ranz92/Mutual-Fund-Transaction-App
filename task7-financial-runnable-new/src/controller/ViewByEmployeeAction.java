@@ -56,24 +56,30 @@ public class ViewByEmployeeAction extends Action{
 				//Get the specific customer from jsp.
 				
 				CustomerForm form = formBeanFactory.create(request);
+				
+				if (!form.isPresent()) {
+					return "viewAccountByEmp.jsp";
+				}
+				
 				errors.addAll(form.getValidationErrors());
 				if (errors.size() != 0) {
 					return "viewAccountByEmp.jsp";
 				}
+				
 				String username = form.getUsername();
-				System.out.println(username);
+				//System.out.println(username);
 				if (username == null) {
 					errors.add("A customer should be specified!");
 					return "error.jsp";
 				} else {
-					DecimalFormat df = new DecimalFormat("#,###.00");
+					//DecimalFormat df = new DecimalFormat("#,###.00");
 					CustomerBean user = cusDAO.read(username);
 					int cusId = user.getCustomerId();
 					TransactionBean[] transactions = transacDAO.getTransactions(cusId);
 					
 					request.setAttribute("user", user);
-					String cash = df.format(user.getCash());
-					request.setAttribute("cash",cash);
+					//String cash = df.format(user.getCash());
+					//request.setAttribute("cash",cash);
 					
 					if(transactions.length!=0){
 						
@@ -83,13 +89,12 @@ public class ViewByEmployeeAction extends Action{
 					
 					//Return the fund information.
 					PositionBean[] positions = posDAO.getPositions(cusId);
-					List<String> priceList = new ArrayList<String>();
+					List<Double> priceList = new ArrayList<Double>();
 					for (int i = 0; i<positions.length; i++) {
 						int fund_id = positions[i].getFund_id();
 						long price = priceDAO.getLatestPrice(fund_id);
 						double totalPrice = price * positions[i].getShares();
-						
-						priceList.add(df.format(totalPrice));
+						priceList.add(totalPrice);
 					}
 					//System.out.println();
 					request.setAttribute("positions", positions);

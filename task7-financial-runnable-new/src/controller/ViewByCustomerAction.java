@@ -41,28 +41,32 @@ public class ViewByCustomerAction extends Action {
 			if(customer == null) {
 				return "login.do";
 			} else {
-				DecimalFormat df = new DecimalFormat("#,###.00");
+				//DecimalFormat df = new DecimalFormat("#,###.00");
 
 				int cusId = customer.getCustomerId();
 				TransactionBean[] transactions = transacDAO.getTransactions(cusId);
 				
 				request.setAttribute("customer", customer);
-				request.setAttribute("transaction", transactions[transactions.length-1]); //Return the last trading day.
-				String cash = df.format(customer.getCash());
-				request.setAttribute("cash",cash);
-				System.out.println(cash);
+				if(transactions.length!=0){
+					
+					request.setAttribute("transaction", transactions[transactions.length-1]); //Return the last trading day.
+
+				}
+				//String cash = df.format(customer.getCash());
+				//request.setAttribute("cash",cash);
+				//System.out.println(cash);
 				System.out.println(customer.getZip());
 
 
 				//Return the fund information.
 				PositionBean[] positions = posDAO.getPositions(cusId);
-				List<String> priceList = new ArrayList<String>();
+				List<Double> priceList = new ArrayList<Double>();
 				for (int i = 0; i<positions.length; i++) {
 					int fund_id = positions[i].getFund_id();
 					long price = priceDAO.getLatestPrice(fund_id);
 					double totalPrice = price * positions[i].getShares();
 					
-					priceList.add(df.format(totalPrice));
+					priceList.add(totalPrice);
 				}
 				request.setAttribute("positions", positions);
 				request.setAttribute("priceList", priceList);
