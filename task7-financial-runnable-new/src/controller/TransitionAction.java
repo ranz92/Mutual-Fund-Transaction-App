@@ -107,7 +107,11 @@ public class TransitionAction extends Action {
 			
 			TransactionBean[] pendingTrans = transactionDAO.getPendingTransactions();
 			for (TransactionBean tran : pendingTrans) {
+				if (tran.getFund_id() > 0){
 				execute (tran, d, (long) priceMap.get(tran.getFund_id()));
+				}
+				else 
+					execute (tran, d, 0);
 			}
 			success.add("You have successfully created prices for transaction day " + (String)request.getParameter("date"));
 			for (int i = 0; i < cfbs.length; i++) {
