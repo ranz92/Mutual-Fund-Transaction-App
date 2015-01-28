@@ -1,4 +1,5 @@
 <jsp:include page="template-top.jsp" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page import="java.util.*"%>
@@ -20,8 +21,9 @@
 		   <form action="showPerformance.do" method="POST">
          
         <tr>
-			<td>${ item.price }</td>
-			<td>${ item.price_date}</td>
+        	
+			<td><fmt:formatNumber value="${ item.price}" pattern="##.##" minFractionDigits="2" ></fmt:formatNumber></td>
+			<td><fmt:formatDate value="${ item.price_date}" type="date"/> </td>
 			
 			
 		</tr>
@@ -35,8 +37,9 @@
 	</c:forEach>
 	
 </table>
+
 <table style="
-    margin-top: -200px;
+    margin-top: 50px;
     margin-bottom: 300px;">
 		<tr>
 <td id="box" ></td>
@@ -161,7 +164,7 @@ gov.Graphic.prototype={
  setOptions: function(options) {
   this.options = {
    height:270,                 
-   maxHeight:70,             
+   maxHeight:15,             
    barDistance:70,           
    topDistance:0,             
    bottomDistance:0,       
