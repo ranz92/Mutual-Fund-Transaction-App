@@ -181,13 +181,13 @@ public class Controller extends HttpServlet {
 			return Action.perform("login.do", request);
 		}
 		
-		if(customer != null) {
-			session.setAttribute("employee",null);
-		}
-
-		if(employee != null) {
-			session.setAttribute("customer",null);
-		}
+//		if(customer != null) {
+//			session.setAttribute("employee",null);
+//		}
+//
+//		if(employee != null) {
+//			session.setAttribute("customer",null);
+//		}
 
 		// Let the logged in user run his chosen action
 		return Action.perform(action, request);

@@ -28,8 +28,6 @@ public class ResearchAction extends Action {
 		HttpSession session = request.getSession();
 
 		try {
-			//ResearchForm form  = formBeanFactory.create(request);
-			//request.setAttribute("form", form);
 			session.setAttribute("fundList", fundDAO.getFundList());
 			return "research.jsp";
 		}  catch (RollbackException e) {
