@@ -32,9 +32,9 @@
 			<%-- <td> ${item.shares } </td> --%>
 			<td style="text-align:right;"> <fmt:formatNumber value="${item.shares }" type="currency" pattern="#,##0.000" /></td>
 			 <%--  <td> ${pendingShare } </td>  --%>
-			  <td style="text-align:right;"> <fmt:formatNumber value="${(item.amount/1000) }" type="currency" pattern="#,##0.000" /></td> 
+			  <td style="text-align:right;"> <fmt:formatNumber value="${(item.amount) }" type="currency" pattern="#,##0.000" /></td> 
 			<%-- <td> ${(item.shares-pendingShare) } </td> --%>
-			<td style="text-align:right;">  <fmt:formatNumber value="${(item.shares-(item.amount/1000)) }" type="currency" pattern="#,##0.000" /></td>
+			<td style="text-align:right;">  <fmt:formatNumber value="${(item.shares-item.amount) }" type="currency" pattern="#,##0.000" /></td>
 			<td style="text-align:right;"><input type="text" name="shares" /></td>
 			<td style="text-align:right;"><input type="submit" class="btn btn-success" value="Sell" /></td>
 		</tr>
@@ -65,7 +65,7 @@
 			<%-- <td> ${(item.shares-pendingShare) } </td>  --%>
 			<%-- <td>  <fmt:formatNumber value="${item.shares }" type="currency" pattern="#,##0.000" /></td> --%>
 			<%--  <td> ${item.shares } </td>  --%>
-			 <td style="text-align:right;">  <fmt:formatNumber value="${(item.shares/1000)}" type="currency" pattern="#,##0.000" /></td>
+			 <td style="text-align:right;">  <fmt:formatNumber value="${(item.shares)}" type="currency" pattern="#,##0.000" /></td>
 			<td> </td>
 			</tr>
 			</c:forEach>

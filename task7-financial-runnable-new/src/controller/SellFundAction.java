@@ -69,7 +69,7 @@ public class SellFundAction extends Action {
 				ownList[i].setId(id);
 				ownList[i].setName(fundDAO.read(id).getName());
 				ownList[i].setSymbol(fundDAO.read(id).getSymbol());
-				ownList[i].setShares(pbs[i].getShares());
+				ownList[i].setShares(pbs[i].getShares()/1000.000);
 				ownList[i].setAmount(transactionDAO.getPendingSellEachFund(customer.getCustomerId(), pbs[i].getFund_id()));
 			}
 			session.setAttribute("ownList", ownList);
@@ -82,7 +82,7 @@ public class SellFundAction extends Action {
 				id = tran.getFund_id();
 				pou.setName(fundDAO.read(id).getName());
 				pou.setSymbol(fundDAO.read(id).getSymbol());
-				pou.setShares(tran.getShares());
+				pou.setShares(tran.getShares()/1000.000);
 				pous[i] = pou;				
 			}
 			session.setAttribute("mSellList", pous);
