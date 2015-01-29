@@ -11,11 +11,11 @@
 	<thead>
 		<tr>
 			<th>Product</th>
-			<th>Total Share</th>
-			<th>Pending Share</th>
-			<th>Available Share</th>
-			<th>Share To Sell</th>
-			<th>Operation</th>
+			<th style="text-align:right;">Total Share</th>
+			<th style="text-align:right;">Pending Share</th>
+			<th style="text-align:right;">Available Share</th>
+			<th >Share To Sell</th>
+			<th >Operation</th>
 		</tr>
 	</thead>
 	
@@ -27,13 +27,13 @@
 			
 			 <td> ${item.fund_id } </td>  
 			<%-- <td> ${item.shares } </td> --%>
-			<td> <fmt:formatNumber value="${item.shares }" type="currency" pattern="#,##0.000" /></td>
+			<td style="text-align:right;"> <fmt:formatNumber value="${item.shares }" type="currency" pattern="#,##0.000" /></td>
 			 <%--  <td> ${pendingShare } </td>  --%>
-			  <td> <fmt:formatNumber value="${pendingShare }" type="currency" pattern="#,##0.000" /></td> 
+			  <td style="text-align:right;"> <fmt:formatNumber value="${pendingShare }" type="currency" pattern="#,##0.000" /></td> 
 			<%-- <td> ${(item.shares-pendingShare) } </td> --%>
-			<td>  <fmt:formatNumber value="${(item.shares-pendingShare) }" type="currency" pattern="#,##0.000" />
+			<td style="text-align:right;">  <fmt:formatNumber value="${(item.shares-pendingShare) }" type="currency" pattern="#,##0.000" />
 			</td>
-			<td><input type="text" name="shares" /></td>
+			<td ><input type="text" name="shares" /></td>
 			<td><input type="submit" class="btn btn-success" value="Sell" /></td>
 		</tr>
 		
@@ -54,7 +54,7 @@
 <tr>
 <th> Product </th>
 			<!-- <th>Pending Share</th>  -->
-			 <th>Share To Sell</th> 
+			 <th style="text-align:right;">Share To Sell</th> 
 			</tr>
 			</thead>
 			
@@ -65,7 +65,7 @@
 			<%-- <td> ${(item.shares-pendingShare) } </td>  --%>
 			<%-- <td>  <fmt:formatNumber value="${item.shares }" type="currency" pattern="#,##0.000" /></td> --%>
 			<%--  <td> ${item.shares } </td>  --%>
-			 <td>  <fmt:formatNumber value="${(item.shares/1000)}" type="currency" pattern="#,##0.000" /></td>
+			 <td style="text-align:right;">  <fmt:formatNumber value="${(item.shares/1000)}" type="currency" pattern="#,##0.000" /></td>
 			<td> </td>
 			</tr>
 			</c:forEach>

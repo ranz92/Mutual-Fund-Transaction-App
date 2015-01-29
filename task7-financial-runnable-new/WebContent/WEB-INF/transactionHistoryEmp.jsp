@@ -1,6 +1,7 @@
 <jsp:include page="template-top.jsp" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <h2>Transaction History</h2>
 <table class="table table-striped">
@@ -24,10 +25,10 @@
 			<td><%= index %><% index++; %></td>
 			<td>${ item.customerName }</td>
 			<td>${ item.transactionType }</td>
-			<th>${ item.fundName }</th>
-			<th>${ item.numShares }</th>
-			<th>${ item.sharePrice }</th>
-			<td>${ item.amount }</td>
+			<td>${ item.fundName }</th>
+			<td>${ item.numShares }</th>
+			<td>${ item.sharePrice }</th>
+			 <td>${item.amount }</td> 
 			<td>${ item.status }</td>
 			<td>${ item.executeDate }</td>
 			</tr>

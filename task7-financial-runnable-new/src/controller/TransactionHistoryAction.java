@@ -103,7 +103,8 @@ public class TransactionHistoryAction extends Action {
 				histories[i] = new TransactionHisForm();
 				histories[i].setCustomerName(customerTemp.getFirstname()+" "+customerTemp.getLastname());
 				histories[i].setExecuteDate(allTransactions[i].getExecute_date());
-				histories[i].setAmount(dfAmount.format(allTransactions[i].getAmount()));
+			//	histories[i].setAmount(dfAmount.format(allTransactions[i].getAmount()));
+				histories[i].setAmount(dfAmount.format((allTransactions[i].getAmount())/100));
 				if(allTransactions[i].getExecute_date() == null)
 					histories[i].setStatus("Pending");
 				else

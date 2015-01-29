@@ -1,6 +1,7 @@
 <jsp:include page="template-top.jsp" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <div class="container">
 	<div class="row clearfix">
@@ -42,7 +43,7 @@
 		<tr>
 			<th>Fund</th>
 			<th>Description</th>
-			<th>Amount</th>
+			<th style="text-align:right;">Amount</th>
 			</tr>
 	</thead>
 	   <c:forEach var="item" items="${mFundList}">
@@ -50,7 +51,8 @@
         <tr>
 			<td>${ item.name }</td>
 			<td>${ item.symbol }</td>
-			<td>${ item.amount }</td>
+			<%-- <td style="text-align:right;">${ (item.amount/100) }</td> --%>
+			<td style="text-align:right;"> <fmt:formatNumber value="${(item.amount/100)}" type="currency" pattern="#,##0.00" /> </td>
 			</tr>
 	</c:forEach>
 </table>
