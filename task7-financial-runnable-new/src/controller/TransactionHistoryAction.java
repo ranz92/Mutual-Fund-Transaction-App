@@ -42,9 +42,11 @@ import model.FundDAO;
 import formbeans.BuyForm;
 import formbeans.CreateFundForm;
 import formbeans.CusRegisterForm;
+import formbeans.CustomerForm;
 import formbeans.TransactionHisForm;
 
 public class TransactionHistoryAction extends Action {
+	private FormBeanFactory<CustomerForm> formBeanFactory = FormBeanFactory.getInstance( CustomerForm.class);
 	private FundDAO fundDAO;
 	private PriceDAO priceDAO;
 	private TransactionDAO transactionDAO;
@@ -68,17 +70,22 @@ public class TransactionHistoryAction extends Action {
 //			errors.add("Please log in as a customer.");
 //			return "login.jsp";
 //		}
-		
+		List<String> errors = new ArrayList<String>();
 		EmployeeBean admin = (EmployeeBean) request.getSession(false).getAttribute("employee");
 		CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
 		DecimalFormat dfAmount = new DecimalFormat("###,###,##0.00");
 		DecimalFormat dfShare = new DecimalFormat("###,###,##0.000");
 		DecimalFormat dfPrice = new DecimalFormat("###,###,##0.00");
 		try {
+			
 			TransactionBean[] allTransactions = null;
 			
-			if(admin != null)
-				allTransactions = transactionDAO.getAllTransactions();
+			if(admin != null) {
+				CustomerForm form = formBeanFactory.create(request);
+				String username = form.getUsername();
+				int customerId = customerDAO.getCustomer(username).getCustomerId();
+				allTransactions = transactionDAO.getTransactions(customerId);
+			}
 			else if(customer != null) {
 				int userId = customer.getCustomerId();
 				allTransactions = transactionDAO.getTransactions(userId);
@@ -155,7 +162,12 @@ public class TransactionHistoryAction extends Action {
 //			System.out.println("--------------->"+allTransactions.length);
 		} catch (RollbackException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			errors.add(e.getMessage());
+			return "error.jsp";
+		} catch (FormBeanException e) {
+			// TODO Auto-generated catch block
+			errors.add(e.getMessage());
+			return "error.jsp";
 		}
 		if(admin != null) {
 			return "transactionHistoryEmp.jsp";

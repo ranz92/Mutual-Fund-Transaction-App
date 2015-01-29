@@ -28,6 +28,10 @@ public class CustomerDAO extends GenericDAO<CustomerBean> {
 		CustomerBean[] customers = match(MatchArg.equals("customerId", id));
 		return customers[0];
 	}
+	public CustomerBean getCustomer(String userName) throws RollbackException {
+		CustomerBean[] customers = match(MatchArg.equals("username", userName));
+		return customers[0];
+	}
 	public void create(CustomerBean newCustomer) throws RollbackException {
 		if (read(newCustomer.getUsername())!=null){
 			return;
