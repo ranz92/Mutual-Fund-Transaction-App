@@ -930,7 +930,18 @@ $.extend( $.validator, {
 		dateISO: { dateISO: true },
 		number: { number: true },
 		digits: { digits: true },
-		creditcard: { creditcard: true }
+		creditcard: { creditcard: true },
+		username:{required:true,username:true},
+		password:{required:true,minlength:3,password:true},
+		confirm:{required:true,password:true,minlength:3,equalTo:"#password"},
+		firstName:{required:true,firstName:true},
+		lastName:{required:true,lastName:true},
+		addrL1:{required:true,addrL1:true},
+		addrL2:{required:true,addrL2:true},
+		city:{required:true,city:true},
+		state:{required:true,state:true},
+		zip:{required:true,zip:true}
+		
 	},
 
 	addClassRules: function( className, rules ) {
@@ -1136,6 +1147,17 @@ $.extend( $.validator, {
 			// Or use custom methods to implement your own email validation
 			return this.optional( element ) || /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test( value );
 		},
+		
+		username: function(value,element) {
+			return this.optional(element) || /^[\u0391-\uFFE5\w]+$/.test(value);
+		},
+		
+		zip:function(value,amount) {
+			return this.optional(element) || /^[0-9]{6}$/.test(value);
+		},
+		
+		
+		
 
 		// http://jqueryvalidation.org/url-method/
 		url: function( value, element ) {
