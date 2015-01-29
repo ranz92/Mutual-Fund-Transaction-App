@@ -11,7 +11,7 @@
 		<tr>
 			<th>Price Date</th>
 			<th></th>
-			<th style="text-align: right">Fund Price</th>
+			<th>Fund Price</th>
 			
 		</tr>
 	</thead>
@@ -22,7 +22,7 @@
          
         <tr>
         	<td><fmt:formatDate value="${ item.price_date}" type="date"/> </td><td></td>
-			<td align = "right"><fmt:formatNumber value="${ item.price/100.00}" pattern="##.##" minFractionDigits="2" ></fmt:formatNumber></td>
+			<td align = "right"><fmt:formatNumber value="${ item.price/100}" pattern="##.##" minFractionDigits="2" ></fmt:formatNumber></td>
 			<td></td><td></td><td></td><td></td><td></td>
 			
 			
@@ -164,8 +164,7 @@ gov.Graphic.prototype={
  setOptions: function(options) {
   this.options = {
    height:270,                 
-   maxHeight:'${maxPrice}',             
-   //maxHeight:100,
+   maxHeight:15,             
    barDistance:70,           
    topDistance:0,             
    bottomDistance:0,       
