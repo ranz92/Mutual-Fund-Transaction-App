@@ -75,6 +75,9 @@ public class ConfirmDepositCheckAction extends Action {
 				errors.add("Amount should be a positive number");
 				return "requestCheck.jsp";
 			}
+			if(transaction.getAmount() > 100000000) {
+				errors.add("Amount should be less than $1,000,000,000");
+			}
 			request.setAttribute("customerList", customerDAO.getCustomer());
 			
 			transactionDAO.createDepChkTransaction(transaction);
