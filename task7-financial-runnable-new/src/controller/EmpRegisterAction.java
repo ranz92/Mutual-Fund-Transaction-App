@@ -35,6 +35,9 @@ public class EmpRegisterAction extends Action{
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		
+		List<String> success = new ArrayList<String>();
+		request.setAttribute("success", success);
+		
 		 if (session.getAttribute("customer") != null){
 		        session.setAttribute("customer",null);
 			}
@@ -71,11 +74,14 @@ public class EmpRegisterAction extends Action{
 					employee.setPassword(form.getPassword());
 
 					employeeDAO.create(employee);
-	                String success = "A new Employee " +"/'"+ form.getUsername() +"/'"+ "has been created";
+	     //           String success = "A new Employee " +"/'"+ form.getUsername() +"/'"+ "has been created";
 			
-					request.setAttribute("message", success);
+		//			request.setAttribute("message", success);
 					
-					return "success.jsp";  
+					success.add("A new employee " + form.getUsername() + " has been created.");
+					
+					return "empRegister.jsp";
+		//			return "success.jsp";  
 				}
 
 			} catch (RollbackException e) {
