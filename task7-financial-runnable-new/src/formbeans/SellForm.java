@@ -8,16 +8,17 @@ import org.mybeans.form.FormBean;
 public class SellForm extends FormBean {
 	private String fundId;
 	private String shares;
-	private String amount;
+//	private String amount;
 	
 	public String getFundId() { return fundId; }
 	public String getShares() { return shares; }
-	public String getAmount() { return amount; }
+//	public String getAmount() { return amount; }
 	
 	public void setFundId(String s) {fundId = s;}
-	public void setAmount(String l) { amount = l;}
+//	public void setAmount(String l) { amount = l;}
 	public void setShares(String l) { shares = l;}
-//	public int getIdAsInt() {
+
+	//	public int getIdAsInt() {
 //		try {
 //			return Integer.parseInt(fundId);
 //		} catch (NumberFormatException e) {
@@ -60,6 +61,9 @@ public class SellForm extends FormBean {
 			errors.add("Please enter shares to sell.");
 		}
 		
+		if (shares != null && shares.matches(".*[<>\"?~#%&].*"))
+			errors.add("Special characters are not allowed. Please enter numbers for share.");
+		
 		try {
         	double d = Double.parseDouble(shares);
         	if (d <= 0) {
@@ -68,8 +72,8 @@ public class SellForm extends FormBean {
         	 errors.add("Invalide number, please input a number for the share.");
         }
 		
-		if (shares != null && shares.matches(".*[<>\"].*"))
-			errors.add("Please enter numbers for shares.");
+//		if (shares != null && shares.matches(".*[<>\"].*"))
+//			errors.add("Please enter numbers for shares.");
 		
 		
 		return errors;

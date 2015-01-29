@@ -40,7 +40,7 @@ public class BuyForm extends FormBean {
 		
 		
 		if (amount != null && amount.matches(".*[<>\"?~#%&].*"))
-			errors.add("Special mark are not allowed. Please enter numbers for amount.");
+			errors.add("Special characters are not allowed. Please enter numbers for amount.");
 		
 //		try {
 //			Long.parseLong(amount);

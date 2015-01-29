@@ -74,7 +74,12 @@ public class ConfirmSellAction extends Action {
 			transaction.setFund_id(Integer.parseInt(form.getFundId()));
 			
 			try {
-				transaction.setShares(Long.parseLong(form.getShares()));
+		//		transaction.setShares(Long.parseLong(form.getShares()));
+				double a = Double.valueOf(form.getShares());
+				double a1 = a*1000;
+				long l = (new Double(a1)).longValue();
+				transaction.setShares(l);
+				
 			} catch(NumberFormatException e) {
 				errors.add("Please enter numbers");
 			}
@@ -82,7 +87,7 @@ public class ConfirmSellAction extends Action {
 //			transaction.setShares(form.getSharesAsLong());
 			
 
-			if (transactionDAO.checkEnoughShare(customer.getCustomerId(), transaction.getFund_id(),positionDAO.read(customer.getCustomerId(),transaction.getFund_id()).getShares(), transaction.getShares())) {
+			if (transactionDAO.checkEnoughShare(customer.getCustomerId(), transaction.getFund_id(),positionDAO.read(customer.getCustomerId(),transaction.getFund_id()).getShares(), (transaction.getShares()/1000))) {
 				transactionDAO.createSellTransaction(transaction);
 			}
 			else errors.add("No enough share");
@@ -98,7 +103,9 @@ public class ConfirmSellAction extends Action {
 			PositionBean position = new PositionBean();
 			
 			int id = 0;
-			long pendingShare = 0;
+	//		long pendingShare = 0;
+			double pendingShare = 0;
+			
 			for (int i = 0; i<pous.length; i++){
 				PositionOfUser pou = new PositionOfUser();
 			//	position = positions[i];
@@ -111,8 +118,11 @@ public class ConfirmSellAction extends Action {
 				pou.setShares(tran.getShares());
 				pou.setPrice(priceDAO.getLatestPrice(id));
 				
+				pendingShare = (double)(tran.getShares()/1000.000);
+				
 				pous[i] = pou;
-				pendingShare = tran.getShares();
+		//		pendingShare = tran.getShares();
+				
 			}
 			
 

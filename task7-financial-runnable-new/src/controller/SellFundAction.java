@@ -69,7 +69,8 @@ public class SellFundAction extends Action {
 			PositionBean position = new PositionBean();
 			
 			int id = 0;
-			long pendingShare = 0;
+		//	long pendingShare = 0;
+			double pendingShare = 0;
 			
 			
 			for (int i = 0; i<pous.length; i++){
@@ -83,7 +84,8 @@ public class SellFundAction extends Action {
 				pou.setPrice(priceDAO.getLatestPrice(id));
 				pou.setShares(tran.getShares());
 				pou.setId(id);
-				pendingShare = tran.getShares();
+		//		pendingShare = tran.getShares();
+				pendingShare = (double)(tran.getShares()/1000.00);
 				
 				pous[i] = pou;
 				

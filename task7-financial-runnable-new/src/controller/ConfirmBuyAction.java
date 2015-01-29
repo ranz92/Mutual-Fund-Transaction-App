@@ -72,8 +72,8 @@ public class ConfirmBuyAction extends Action {
 			//	transaction.setAmount((long)Double.parseDouble(form.getAmount()));
 				//System.out.println(form.getAmount());
 			//	System.out.println(Double.valueOf(form.getAmount()));
-				Double a = Double.valueOf(form.getAmount());
-				Double a1 = a*100;
+				double a = Double.valueOf(form.getAmount());
+				double a1 = a*100;
 				long l = (new Double(a1)).longValue();
 				transaction.setAmount(l);
 			//	System.out.println((long)Double.parseDouble(form.getAmount()));

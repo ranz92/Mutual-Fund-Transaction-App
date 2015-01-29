@@ -88,7 +88,7 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 		if (share < 0)
 			return false;
 		for (TransactionBean tran : transactions) {
-			share -= tran.getShares();
+			share -= (tran.getShares()/1000);
 			if (share < 0)
 				return false;
 		}

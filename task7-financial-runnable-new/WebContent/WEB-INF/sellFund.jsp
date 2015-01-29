@@ -65,7 +65,7 @@
 			<%-- <td> ${(item.shares-pendingShare) } </td>  --%>
 			<%-- <td>  <fmt:formatNumber value="${item.shares }" type="currency" pattern="#,##0.000" /></td> --%>
 			<%--  <td> ${item.shares } </td>  --%>
-			 <td>  <fmt:formatNumber value="${item.shares}" type="currency" pattern="#,##0.000" /></td>
+			 <td>  <fmt:formatNumber value="${(item.shares/1000)}" type="currency" pattern="#,##0.000" /></td>
 			<td> </td>
 			</tr>
 			</c:forEach>
