@@ -99,7 +99,7 @@ public class ViewByEmployeeAction extends Action{
 					List<Double> priceList = new ArrayList<Double>();
 					for (int i = 0; i<positions.length; i++) {
 						int fund_id = positions[i].getFund_id();
-						long price = priceDAO.getLatestPrice(fund_id);
+						double price = priceDAO.getLatestPrice(fund_id);
 						double totalPrice = price * positions[i].getShares();
 						priceList.add(totalPrice);
 					}
