@@ -56,6 +56,24 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 		return transactions;
 
 	}
+	
+	public TransactionBean[] getPendingReqChk(int customerId)
+			throws RollbackException {
+		TransactionBean[] transactions = match(
+				MatchArg.equals("customer_id", customerId),
+				MatchArg.equals("execute_date", null),
+				MatchArg.equals("transaction_type", 2));
+		return transactions;
+	}
+	
+	public TransactionBean[] getPendingDepChk(int customerId)
+			throws RollbackException {
+		TransactionBean[] transactions = match(
+				MatchArg.equals("customer_id", customerId),
+				MatchArg.equals("execute_date", null),
+				MatchArg.equals("transaction_type", 3));
+		return transactions;
+	}
 
 	public boolean checkEnoughCash(int customerId, long cash, long amount)
 			throws RollbackException {

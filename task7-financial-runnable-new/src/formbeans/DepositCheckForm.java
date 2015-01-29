@@ -7,27 +7,18 @@ import org.mybeans.form.FormBean;
 
 public class DepositCheckForm extends FormBean {
 	
-	private String userName;
-	private String fullName;
 	private String amount;
-	private String notes;
-	private String fundId;
+	private String customerId;
 	
-	public String getUserName()		{ return userName;  	}
-	public String getFullName()  	{ return fullName;  	}
 	public String getAmount()  		{ return amount;    	}
-	public String getNotes()  		{ return notes;  		}
-	public String getFundId() 		{ return fundId; }
+	public String getCustomerId() 		{ return customerId; }
 	
-	public void setUserName(String s) 	{ userName = trimAndConvert(s,"<>\"");  	}
-	public void setFullName(String s) 	{ fullName  = trimAndConvert(s,"<>\""); 	}
 	public void setAmount(String s)     { amount  = trimAndConvert(s,"<>\"");   	}
-	public void setNotes(String s)  	{ notes  = trimAndConvert(s,"<>\"");   		}
-	public void setFundId(String s) 	{ fundId = s;}
+	public void setCustomerId(String s) 	{ customerId = s;}
 
 	public int getIdAsInt() {
 		try {
-			return Integer.parseInt(fundId);
+			return Integer.parseInt(customerId);
 		} catch (NumberFormatException e) {
 			// call getValidationErrors() to detect this
 			return -1;
@@ -45,22 +36,8 @@ public class DepositCheckForm extends FormBean {
 	public List<String> getValidationErrors() {
 		List<String> errors = new ArrayList<String>();
 
-		if (userName == null || userName.length() == 0) {
-			errors.add("User name is required");
-		}
-
-		if (fullName == null || fullName.length() == 0) {
-			errors.add("User's Full name is required");
-		}
-
 		if (amount == null || amount.length() == 0) {
 			errors.add("Amount is required");
-		}
-		
-		try {
-			Integer.parseInt(amount);
-		} catch (NumberFormatException e) {
-			errors.add("Amount is not an integer");
 		}
 		
 		if (errors.size() > 0) {

@@ -103,8 +103,7 @@ public class TransactionHistoryAction extends Action {
 				histories[i] = new TransactionHisForm();
 				histories[i].setCustomerName(customerTemp.getFirstname()+" "+customerTemp.getLastname());
 				histories[i].setExecuteDate(allTransactions[i].getExecute_date());
-			//	histories[i].setAmount(dfAmount.format(allTransactions[i].getAmount()));
-				histories[i].setAmount(dfAmount.format((allTransactions[i].getAmount())/100));
+				histories[i].setAmount(dfAmount.format(allTransactions[i].getAmount()/100.0));
 				if(allTransactions[i].getExecute_date() == null)
 					histories[i].setStatus("Pending");
 				else
@@ -137,8 +136,8 @@ public class TransactionHistoryAction extends Action {
 								break;
 							}
 						}
-						histories[i].setSharePrice(dfPrice.format(thePrice));
-						histories[i].setNumShares(dfShare.format((double)allTransactions[i].getAmount()/thePrice));
+						histories[i].setSharePrice(dfPrice.format(thePrice/100.0));
+						histories[i].setNumShares(dfShare.format((double)allTransactions[i].getAmount()/100.0/thePrice/100.0));
 					}
 				} else {
 					

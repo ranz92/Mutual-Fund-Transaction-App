@@ -15,6 +15,7 @@ import org.mybeans.form.FormBeanFactory;
 import databeans.CustomerBean;
 import databeans.FundBean;
 import databeans.PositionOfUser;
+import databeans.PositionOfUser4Check;
 import databeans.TransactionBean;
 import model.CustomerDAO;
 import model.Model;
@@ -42,14 +43,10 @@ public class ConfirmRequestCheckAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
-		HttpSession session = request.getSession();
 		
 		DecimalFormat df = new DecimalFormat("###,###,##0.00");
 		
 		try {
-			if (session.getAttribute("employee") != null){
-		        session.setAttribute("employee",null);
-			}
 			if(request.getSession().getAttribute("customer") == null) {
 				errors.add("Please log in as a customer.");
 				return "login.jsp";
@@ -62,30 +59,43 @@ public class ConfirmRequestCheckAction extends Action {
 			transaction.setCustomer_id(customer.getCustomerId());
 			transaction.setFund_id(form.getIdAsInt()); //should obtain from fund table, which is not established so far. So recorded as 0 temporarily here.
 			
-			transaction.setAmount(form.getAmountAsLong());
+			// Special behavior for amount
+			try{
+				double amt = Double.parseDouble(form.getAmount());
+				amt = Math.round(amt * 100.0);
+				transaction.setAmount((long)amt);
+			} catch (NumberFormatException e) {
+				errors.add("Amount should be a valid number");
+				return "requestCheck.jsp";
+			}
+			
 			transaction.setTransaction_type(2);
 			if(transaction.getAmount() <= 0) {
 				errors.add("Amount should be a positive number");
 				return "requestCheck.jsp";
 			}
-				
-			if (transactionDAO.checkEnoughCash(customer.getCustomerId(), customer.getCash(), transaction.getAmount()))
-			transactionDAO.createReqChkTransaction(transaction);
-			else errors.add("Not enough amount");
 			
-			customer = customerDAO.read(customer.getCustomerId());
+			if (transactionDAO.checkEnoughCash(customer.getCustomerId(), customer.getCash(), transaction.getAmount()))
+				transactionDAO.createReqChkTransaction(transaction);
+			else 
+				errors.add("Not enough amount");
+			
+			HttpSession session = request.getSession();
+			// customer = customerDAO.read(customer.getCustomerId());
 			session.setAttribute("customer",customer);
 			
 			TransactionBean[] trans = transactionDAO.getPendingBuy(customer.getCustomerId());
-			PositionOfUser[] pous = new PositionOfUser[trans.length];
+			PositionOfUser4Check[] pous = new PositionOfUser4Check[trans.length];
 			TransactionBean tran = new TransactionBean();
 			int id = 0;
 			long pendingAmount = 0;
+			Date date = new Date();
 			FundBean fund = new FundBean();
 			for (int i = 0; i<pous.length; i++){
-				PositionOfUser pou = new PositionOfUser();
+				PositionOfUser4Check pou = new PositionOfUser4Check();
 				tran = trans[i];
 				id = tran.getFund_id();
+				date = tran.getExecute_date();
 				if ((fund=fundDAO.read(id))!=null){
 					pou.setName(fund.getName());
 					pou.setSymbol(fund.getSymbol());
@@ -93,11 +103,18 @@ public class ConfirmRequestCheckAction extends Action {
 				else {
 					pou.setName("Request Check");
 				}
-				pou.setAmount(tran.getAmount());
+				pou.setDate(date);
+				try{
+					pou.setAmount(df.format((double)tran.getAmount()/100.0));
+					
+				} catch (NumberFormatException e){
+					errors.add("Amount should be a valid number");
+					return "requestCheck.jsp";
+				}
 				pous[i] = pou;
 				pendingAmount += tran.getAmount();
 			}
-			String availableAmount = df.format(customer.getCash() - pendingAmount);
+			String availableAmount = df.format((double)(customer.getCash() - pendingAmount)/100.0);
 			
 			session.setAttribute("mFundList", pous);
 			session.setAttribute("availableAmount", availableAmount);

@@ -46,20 +46,19 @@ public class DepChkAction extends Action {
 
 	@Override
 	public String perform(HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-
-		//EmployeeBean right = (EmployeeBean) request.getSession(false).getAttribute("employee");
+		EmployeeBean right = (EmployeeBean) request.getSession(false).getAttribute("employee");
 		List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
         
         List<String> success = new ArrayList<String>();
         request.setAttribute("success",success);
         
-        if (session.getAttribute("customer") != null){
-	        session.setAttribute("customer",null);
+        if(request.getSession().getAttribute("employee") == null) {
+			errors.add("Please log in as an employee.");
+			return "login.jsp";
 		}
         
-		if (session.getAttribute("employee") == null) {
+		if (right == null) {
 			errors.add("You don't have the employee right to view the account!");
 			return "error.jsp";
 		} else {
