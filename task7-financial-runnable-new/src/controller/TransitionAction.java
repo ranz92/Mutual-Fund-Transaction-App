@@ -195,7 +195,7 @@ public class TransitionAction extends Action {
 				double a1 = a*100;
 				price = (new Double(a1)).longValue();
 				
-				if (price < 1 || price > 1000000) {
+				if (price < 1 || price > 100000) {
 					errors.add("Please enter a valid price for fund with id " + rpb.getFund_id() + " between 0.01 and 1000");
 				}
 			} catch (NumberFormatException e) {
