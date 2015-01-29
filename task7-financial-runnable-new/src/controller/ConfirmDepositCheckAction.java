@@ -75,6 +75,10 @@ public class ConfirmDepositCheckAction extends Action {
 				errors.add("Amount should be a positive number");
 				return "requestCheck.jsp";
 			}
+			if(transaction.getAmount() < 0.01) {
+				errors.add("Amount should be at least $0.01");
+				return "requestCheck.jsp";
+			}
 			if(transaction.getAmount() > 1000000) {
 				errors.add("Amount should be less than $1,000,000");
 				return "requestCheck.jsp";
