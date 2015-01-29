@@ -68,28 +68,28 @@ public class Controller extends HttpServlet {
 		Action.add(new TransactionHistoryAction(model));
 		Action.add(new ViewHisByEmployeeAction(model));
 		
-		CustomerDAO customerDAO = model.getCustomerDAO();
+//		CustomerDAO customerDAO = model.getCustomerDAO();
 		EmployeeDAO employeeDAO = model.getEmployeeDAO();
-		FundDAO fundDAO = model.getFundDAO();
-		PositionDAO positionDAO = model.getPositionDAO();
-		PriceDAO priceDAO = model.getPriceDAO();
-		
+//		FundDAO fundDAO = model.getFundDAO();
+//		PositionDAO positionDAO = model.getPositionDAO();
+//		PriceDAO priceDAO = model.getPriceDAO();
+//		
 		try {
 			// Create the user bean
 
-			CustomerBean customer = new CustomerBean();
-			customer.setUsername("customer");
-			customer.setPassword("abc");
-			customer.setFirstname("First");
-			customer.setLastname("Customer");
-			customer.setAddrL1("5030 Centre Ave");
-			customer.setAddrL2("APT 101");
-			customer.setCity("Pittsburgh");
-			customer.setState("PA");
-			customer.setZip("15213");
-			customer.setCash(1000);
-			customerDAO.create(customer);
-			
+//			CustomerBean customer = new CustomerBean();
+//			customer.setUsername("customer");
+//			customer.setPassword("abc");
+//			customer.setFirstname("First");
+//			customer.setLastname("Customer");
+//			customer.setAddrL1("5030 Centre Ave");
+//			customer.setAddrL2("APT 101");
+//			customer.setCity("Pittsburgh");
+//			customer.setState("PA");
+//			customer.setZip("15213");
+//			customer.setCash(1000);
+//			customerDAO.create(customer);
+//			
 			EmployeeBean employee = new EmployeeBean();
 			employee.setUsername("admin");
 			employee.setPassword("abc");
@@ -97,42 +97,42 @@ public class Controller extends HttpServlet {
 			employee.setLastname("Employee");
 			
 			employeeDAO.createEmp(employee);
-			
-			FundBean fund = new FundBean();
-			
-			for (int i=1; i<11; i++){
-			fund.setName("Fund No." + i);
-			fund.setSymbol("VODLN");
-			
-			fundDAO.create(fund);
-			}
-			Random random = new Random();
-			
-			PositionBean position = new PositionBean();
-			for (int i=0; i<10; i++){
-				position.setCustomer_id(1);;
-				position.setFund_id(i+1);
-				position.setShares(((long)random.nextInt(10)+1));
-			positionDAO.updatePosition(position);
-			}
-			
-			PriceBean price = new PriceBean();
-			
-			for (int i=0; i<10; i++){
-				price.setFund_id(i);
-				Calendar c = new GregorianCalendar();
-			    c.set(Calendar.HOUR_OF_DAY, 0); //anything 0 - 23
-			    c.set(Calendar.MINUTE, 0);
-			    c.set(Calendar.SECOND, 0);
-			    for (int j=0; j<10; j++){
-					c.add(Calendar.DAY_OF_MONTH, -1);
-					price.setPrice_date(c.getTime());
-					price.setPrice(((long)random.nextInt(10)+1));
-					priceDAO.createPrice(price);
-				}
-				
-			}
-			
+//			
+//			FundBean fund = new FundBean();
+//			
+//			for (int i=1; i<11; i++){
+//			fund.setName("Fund No." + i);
+//			fund.setSymbol("VODLN");
+//			
+//			fundDAO.create(fund);
+//			}
+//			Random random = new Random();
+//			
+//			PositionBean position = new PositionBean();
+//			for (int i=0; i<10; i++){
+//				position.setCustomer_id(1);;
+//				position.setFund_id(i+1);
+//				position.setShares(((long)random.nextInt(10)+1));
+//			positionDAO.updatePosition(position);
+//			}
+//			
+//			PriceBean price = new PriceBean();
+//			
+//			for (int i=0; i<10; i++){
+//				price.setFund_id(i);
+//				Calendar c = new GregorianCalendar();
+//			    c.set(Calendar.HOUR_OF_DAY, 0); //anything 0 - 23
+//			    c.set(Calendar.MINUTE, 0);
+//			    c.set(Calendar.SECOND, 0);
+//			    for (int j=0; j<10; j++){
+//					c.add(Calendar.DAY_OF_MONTH, -1);
+//					price.setPrice_date(c.getTime());
+//					price.setPrice(((long)random.nextInt(10)+1));
+//					priceDAO.createPrice(price);
+//				}
+//				
+//			}
+//			
 			
 		} catch (RollbackException e) {
 			e.printStackTrace();
