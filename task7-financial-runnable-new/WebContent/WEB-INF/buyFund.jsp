@@ -4,9 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
   <jsp:include page="error-list.jsp" /> 
 <h2>Buy Fund</h2>
-<h4 class="text-primary">Total Balance : $<fmt:formatNumber value="${customer.cash }" type="currency" pattern="#,##0.00" /> </h4>
-<h4 class="text-primary">Pending Balance : $${pendingAmount}</h4>
-<h4 class="text-primary">Available Balance : $${availableAmount}</h4>
+<h4 class="text-primary">Total Balance : $<fmt:formatNumber value="${customer.cash/100 }" type="currency" pattern="#,##0.00" /> </h4>
+<h4 class="text-primary">Pending Balance : $<fmt:formatNumber value="${pendingAmount }" type="currency" pattern="#,##0.00" /></h4>
+<h4 class="text-primary">Available Balance : $<fmt:formatNumber value="${customer.cash/100-pendingAmount }" type="currency" pattern="#,##0.00" /></h4>
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -51,7 +51,7 @@
         <tr>
 			<td>${ item.name }</td>
 			<td>${ item.symbol }</td>
-			<td>${ (item.amount/100) }</td>
+			<td><fmt:formatNumber value="${item.amount }" type="currency" pattern="#,##0.00" /></td>
 			</tr>
 		
 		 
