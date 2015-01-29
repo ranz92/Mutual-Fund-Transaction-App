@@ -64,25 +64,30 @@ public class ConfirmDepositCheckAction extends Action {
 			try{
 				double amt = Double.parseDouble(form.getAmount());
 				amt = Math.round(amt * 100.0);
+				
+				if(amt < 0){
+					errors.add("Amount should be a positive number");
+					return "depositCheck.jsp";
+				}
+				
+				if(amt < 1) {
+					errors.add("Amount should be at least $0.01");
+					return "depositCheck.jsp";
+				}
+				if(amt > 100000000) {
+					errors.add("Amount should be less than $1,000,000");
+					return "depositCheck.jsp";
+				}
+				
 				transaction.setAmount((long)amt);
 			} catch (NumberFormatException e) {
 				errors.add("Amount should be a valid number");
-				return "requestCheck.jsp";
+				return "depositCheck.jsp";
 			}
 			
 			transaction.setTransaction_type(3);
-			if(transaction.getAmount() <= 0) {
-				errors.add("Amount should be a positive number");
-				return "requestCheck.jsp";
-			}
-			if(transaction.getAmount() < 0.01) {
-				errors.add("Amount should be at least $0.01");
-				return "requestCheck.jsp";
-			}
-			if(transaction.getAmount() > 1000000) {
-				errors.add("Amount should be less than $1,000,000");
-				return "requestCheck.jsp";
-			}
+
+			
 			request.setAttribute("customerList", customerDAO.getCustomer());
 			
 			transactionDAO.createDepChkTransaction(transaction);
