@@ -26,13 +26,13 @@
         <tr>
 			
 			 <td> ${item.fund_id } </td>  
-			<%--  $<fmt:formatNumber value="${customer.cash }" type="currency" pattern="#,##0.00" /> --%>
 			<%-- <td> ${item.shares } </td> --%>
 			<td> <fmt:formatNumber value="${item.shares }" type="currency" pattern="#,##0.000" /></td>
 			 <%--  <td> ${pendingShare } </td>  --%>
 			  <td> <fmt:formatNumber value="${pendingShare }" type="currency" pattern="#,##0.000" /></td> 
 			<%-- <td> ${(item.shares-pendingShare) } </td> --%>
-			<td>  <fmt:formatNumber value="${(item.shares-pendingShare) }" type="currency" pattern="#,##0.000" /></td>
+			<td>  <fmt:formatNumber value="${(item.shares-pendingShare) }" type="currency" pattern="#,##0.000" />
+			</td>
 			<td><input type="text" name="shares" /></td>
 			<td><input type="submit" class="btn btn-success" value="Sell" /></td>
 		</tr>
