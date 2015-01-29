@@ -66,6 +66,8 @@ public class BuyFundAction extends Action {
 			TransactionBean tran = new TransactionBean();
 			int id = 0;
 			long pendingAmount = 0;
+		//	Double pend = null;
+			
 			FundBean fund = new FundBean();
 			for (int i = 0; i<pous.length; i++){
 				PositionOfUser pou = new PositionOfUser();
@@ -80,11 +82,17 @@ public class BuyFundAction extends Action {
 					pou.setName("N/A");
 				}
 				pou.setAmount(tran.getAmount());
+				
+		//		pend = (double)(pou.getAmount()/1000);
+				
 				pous[i] = pou;
 				pendingAmount += tran.getAmount();
 			}
 			String pendingAmountFormat = df.format(pendingAmount);
 			String availableAmountFormat = df.format(customer.getCash() - pendingAmount);
+			
+//			String pendingAmountFormat = df.format(pend);
+//			String availableAmountFormat = df.format(customer.getCash() - pend);
 			
 			session.setAttribute("mFundList", pous);
 			session.setAttribute("pendingAmount",pendingAmountFormat);

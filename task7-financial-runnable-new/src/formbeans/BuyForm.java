@@ -42,11 +42,11 @@ public class BuyForm extends FormBean {
 		if (amount != null && amount.matches(".*[<>\"].*"))
 			errors.add("Please enter numbers for amount.");
 		
-		try {
-			Long.parseLong(amount);
-		} catch (NumberFormatException e) {
-			errors.add("Amount cannot be parsed");
-		}
+//		try {
+//			Long.parseLong(amount);
+//		} catch (NumberFormatException e) {
+//			errors.add("Amount cannot be parsed");
+//		}
 		
 		try {
 
