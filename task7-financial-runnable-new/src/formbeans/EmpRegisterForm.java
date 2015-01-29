@@ -47,13 +47,13 @@ public class EmpRegisterForm extends FormBean{
 			errors.add("Confirm Password is required");
 		}
 		
-		if (username.matches(".*[<>\"?].*"))
+		if (username.matches(".*[<>*?/\"?].*"))
 			errors.add("User Name may not contain angle brackets, quotes or question mark");
-		if (firstName.matches(".*[<>\"?].*"))
+		if (firstName.matches(".*[<>*?/\"?].*"))
 			errors.add("First Name may not contain angle brackets, quotes or question mark");
-		if (lastName.matches(".*[<>\"?].*"))
+		if (lastName.matches(".*[<>*?/\"?].*"))
 			errors.add("Last Name may not contain angle brackets, quotes or question mark");
-		if (password.matches(".*[<>\"?].*"))
+		if (password.matches(".*[<>*?/\"?].*"))
 			errors.add("Password may not contain angle brackets, quotes or question mark");
 		
 		if (!password.equals(confirm)) {
