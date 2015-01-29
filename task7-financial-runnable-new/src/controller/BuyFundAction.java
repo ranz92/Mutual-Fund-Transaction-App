@@ -78,7 +78,7 @@ public class BuyFundAction extends Action {
 				}
 				pou.setAmount((double)tran.getAmount()/100.00);
 				pous[i] = pou;
-				pending = (double)(tran.getAmount()/100.00);
+				pending += (double)(tran.getAmount()/100.00);
 			}
 			session.setAttribute("mFundList", pous);
 			session.setAttribute("pendingAmount",pending);

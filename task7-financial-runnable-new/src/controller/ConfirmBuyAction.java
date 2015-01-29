@@ -46,7 +46,6 @@ public class ConfirmBuyAction extends Action {
 		List<String> success = new ArrayList<String>();
 		request.setAttribute("success",success);
 		
-		DecimalFormat df = new DecimalFormat("#,##0.00");
 		
 		try {
 			if (session.getAttribute("employee") != null){
@@ -62,105 +61,56 @@ public class ConfirmBuyAction extends Action {
 			request.setAttribute("form", form);
 			errors.addAll(form.getValidationErrors());
 			
-//			HttpSession session = request.getSession();
-//			session.setAttribute("fundList", fundDAO.getFundList());
 			TransactionBean transaction = new TransactionBean();
 			transaction.setCustomer_id(customer.getCustomerId());
 			transaction.setFund_id(Integer.parseInt(form.getFundId()));
 			try {
-			//	transaction.setAmount(Long.parseLong(form.getAmount()));
-			//	transaction.setAmount((long)Double.parseDouble(form.getAmount()));
-				//System.out.println(form.getAmount());
-			//	System.out.println(Double.valueOf(form.getAmount()));
 				double a = Double.valueOf(form.getAmount());
 				double a1 = a*100;
 				long l = (new Double(a1)).longValue();
 				transaction.setAmount(l);
-			//	System.out.println((long)Double.parseDouble(form.getAmount()));
-			//	System.out.println(l);
 			} catch(NumberFormatException e) {
-			//	System.out.println(e.getStackTrace());
 				errors.add("Please enter numbers.");
-			//	System.out.println(request.getAttribute("errors"));
 			}
-//			transaction.setFund_id(form.getIdAsInt()); //should obtain from fund table, which is not established so far. So recorded as 0 temporarily here.
-//			transaction.setAmount(form.getAmountAsLong());
 			
 			
-			if (transactionDAO.checkEnoughCash(customer.getCustomerId(), customer.getCash(), (transaction.getAmount()/100)))
+			if (transactionDAO.checkEnoughCash(customer.getCustomerId(), customer.getCash(), transaction.getAmount()))
 			transactionDAO.createBuyTransaction(transaction);
 			else errors.add("Not enough amount");
-//			
-//			customerDAO.updateCash(customer.getCustomerId(), 0-form.getAmountAsLong());
-			
-			customer = customerDAO.read(customer.getCustomerId());
-			session.setAttribute("customer",customer);
-			
-			TransactionBean[] trans = transactionDAO.getPendingBuy(customer.getCustomerId());
-			PositionOfUser[] pous = new PositionOfUser[trans.length];
-			TransactionBean tran = new TransactionBean();
-			int id = 0;
-			
-			double pending = 0;
-	//		long pendingAmount = 0;
-			
-			FundBean fund = new FundBean();
-			for (int i = 0; i<pous.length; i++){
-				PositionOfUser pou = new PositionOfUser();
-				tran = trans[i];
-				id = tran.getFund_id();
-				if ((fund=fundDAO.read(id))!=null){
-					pou.setName(fund.getName());
-					pou.setSymbol(fund.getSymbol());
-				}
-				else {
-					pou.setName("Check Request");
-					pou.setName("N/A");
-				}
-				pou.setAmount(tran.getAmount());
-
-				pending += (double)(tran.getAmount()/100.00);
-				pous[i] = pou;
-				
-		//		pendingAmount += tran.getAmount();
-		//		pend += pend;
-		//		Double pend1 = pend*1000;
-				
-		//		pendingAmount = (new Double(pend1)).longValue();
-			//	System.out.println(pendingAmount);
-//				Double avail = (double) ((customer.getCash()-tran.getAmount())/1000);
-//				System.out.println(avail);
-		//		System.out.println(pendingAmount);
-		//		System.out.println(pend);
-		//		pendingAmountD = (double)pendingAmount/1000;
-				
-			}
-		//	String pendingAmountFormat = df.format(pendingAmount);
-			String pendingAmountFormat = df.format(pending);	
-		//	System.out.println(pendingAmountD);
-		//	String availableAmountFormat = df.format(customer.getCash() - pendingAmount);
-		//	String pendingAmountFormat = df.format(pend);
-			String availableAmountFormat = df.format(customer.getCash() - pending);
-		//	System.out.println(availableAmountFormat);
-			
-//			Double avail = (double) (customer.getCash()-(tran.getAmount()/1000));
-//			System.out.println(avail);
-		//	System.out.println(pendingAmount);
-			
-			session.setAttribute("mFundList", pous);
-			session.setAttribute("pendingAmount",pendingAmountFormat);
-//			session.setAttribute("pendingAmount",pendingAmountFormat1);
-			session.setAttribute("availableAmount", availableAmountFormat);
-			
-//			session.setAttribute("pendingAmount", pendingAmount);
-//			session.setAttribute("availableAmount", customer.getCash()-pendingAmount);
-
-			
+		
 			if(errors.size() > 0) {
+				
 				return "buyFund.jsp";
-			} else 
+			} else {
+				
 				success.add("You have bought fund successfully.");
-			
+				session.setAttribute("fundList", fundDAO.getFundList());
+				TransactionBean[] trans = transactionDAO.getPendingBuy(customer.getCustomerId());
+				PositionOfUser[] pous = new PositionOfUser[trans.length];
+				TransactionBean tran = new TransactionBean();
+				int id = 0;
+				double pending = 0;
+				
+				FundBean fund = new FundBean();
+				for (int i = 0; i<pous.length; i++){
+					PositionOfUser pou = new PositionOfUser();
+					tran = trans[i];
+					id = tran.getFund_id();
+					if ((fund=fundDAO.read(id))!=null){
+						pou.setName(fund.getName());
+						pou.setSymbol(fund.getSymbol());
+					}
+					else {
+						pou.setName("Check Request");
+						pou.setName("N/A");
+					}
+					pou.setAmount((double)tran.getAmount()/100.00);
+					pous[i] = pou;
+					pending += (double)(tran.getAmount()/100.00);
+				}
+				session.setAttribute("mFundList", pous);
+				session.setAttribute("pendingAmount",pending);
+			}
 			return "buyFund.jsp";
 		} catch(FormBeanException e) {
 			errors.add(e.getMessage());

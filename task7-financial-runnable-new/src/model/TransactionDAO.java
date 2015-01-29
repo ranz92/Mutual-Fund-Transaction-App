@@ -97,10 +97,11 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 				MatchArg.or(MatchArg.equals("transaction_type", 0),
 						MatchArg.equals("transaction_type", 2))));
 		cash -= amount;
-		if (cash < 0)
+		if (cash < 0){
 			return false;
+		}
 		for (TransactionBean tran : transactions) {
-			cash -= (tran.getAmount()/100);
+			cash -= tran.getAmount();
 			if (cash < 0)
 				return false;
 		}
