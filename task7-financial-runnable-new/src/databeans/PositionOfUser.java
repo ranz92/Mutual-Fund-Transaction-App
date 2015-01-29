@@ -5,9 +5,9 @@ public class PositionOfUser {
 	int id;
 	String name;
 	String symbol;
-	long price;
-	long shares;
-	long amount;
+	double price;
+	double shares;
+	double amount;
 	public int getId() {
 		return id;
 	}
@@ -26,22 +26,22 @@ public class PositionOfUser {
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
-	public long getPrice() {
+	public double getPrice() {
 		return price;
 	}
-	public void setPrice(long price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
-	public long getShares() {
+	public double getShares() {
 		return shares;
 	}
-	public void setShares(long shares) {
+	public void setShares(double shares) {
 		this.shares = shares;
 	}
-	public long getAmount() {
+	public double getAmount() {
 		return amount;
 	}
-	public void setAmount(long amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 	
