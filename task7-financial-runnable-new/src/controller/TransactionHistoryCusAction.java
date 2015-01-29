@@ -44,14 +44,14 @@ import formbeans.CreateFundForm;
 import formbeans.CusRegisterForm;
 import formbeans.TransactionHisForm;
 
-public class TransactionHistoryAction extends Action {
+public class TransactionHistoryCusAction extends Action {
 	private FundDAO fundDAO;
 	private PriceDAO priceDAO;
 	private TransactionDAO transactionDAO;
 	private CustomerDAO customerDAO;
 	private PositionDAO positionDAO;
 
-	public TransactionHistoryAction(Model model) {
+	public TransactionHistoryCusAction(Model model) {
 		fundDAO = model.getFundDAO();
 		priceDAO = model.getPriceDAO();
 		transactionDAO = model.getTransactionDAO();
@@ -60,7 +60,7 @@ public class TransactionHistoryAction extends Action {
 	}
 
 	public String getName() {
-		return "transactionHistory.do";
+		return "transactionHistoryCus.do";
 	}
 
 	public String perform(HttpServletRequest request) {
