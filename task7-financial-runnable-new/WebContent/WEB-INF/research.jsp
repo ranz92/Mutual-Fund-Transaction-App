@@ -34,4 +34,4 @@
 	
 </table>
 
-
+<jsp:include page="template-bottom.jsp" />
