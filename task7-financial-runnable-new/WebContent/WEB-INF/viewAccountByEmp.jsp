@@ -3,7 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-		
 <!-- Choose a certain customer -->	
     <h2> Choose a Customer </h2>
     <p>Please specify a customer to view.</p>

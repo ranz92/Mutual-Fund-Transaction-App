@@ -83,18 +83,17 @@ public class ConfirmSellAction extends Action {
 			} catch(NumberFormatException e) {
 				errors.add("Please enter numbers");
 			}
-//			transaction.setFund_id(form.getIdAsInt());; //should obtain from fund table, which is not established so far. So recorded as 0 temporarily here.
-//			transaction.setShares(form.getSharesAsLong());
 			
 
-			if (transactionDAO.checkEnoughShare(customer.getCustomerId(), transaction.getFund_id(),positionDAO.read(customer.getCustomerId(),transaction.getFund_id()).getShares(), (transaction.getShares()/1000))) {
+			if (transactionDAO.checkEnoughShare(customer.getCustomerId(), transaction.getFund_id(),positionDAO.read(customer.getCustomerId(),transaction.getFund_id()).getShares(), transaction.getShares())) {
 				transactionDAO.createSellTransaction(transaction);
 			}
 			else errors.add("No enough share");
-			
-			customer = customerDAO.read(customer.getCustomerId());
-			session.setAttribute("customer",customer);
-			
+
+			if(errors.size() > 0) {
+				return "sellFund.jsp";
+			}
+			session = request.getSession();
 			PositionBean[] pbs = positionDAO.getPositions(customer.getCustomerId());
 			PositionOfUser[] ownList = new PositionOfUser[pbs.length];
 			int id = 0;
@@ -104,29 +103,23 @@ public class ConfirmSellAction extends Action {
 				ownList[i].setId(id);
 				ownList[i].setName(fundDAO.read(id).getName());
 				ownList[i].setSymbol(fundDAO.read(id).getSymbol());
-				ownList[i].setShares(pbs[i].getShares());
+				ownList[i].setShares(pbs[i].getShares()/1000.000);
 				ownList[i].setAmount(transactionDAO.getPendingSellEachFund(customer.getCustomerId(), pbs[i].getFund_id()));
 			}
 			session.setAttribute("ownList", ownList);
 			TransactionBean[] trans = transactionDAO.getPendingSell(customer.getCustomerId());
 			TransactionBean tran = new TransactionBean();
 			PositionOfUser[] pous = new PositionOfUser[trans.length];
-			
 			for (int i = 0; i<pous.length; i++){
 				PositionOfUser pou = new PositionOfUser();
 				tran = trans[i];
 				id = tran.getFund_id();
 				pou.setName(fundDAO.read(id).getName());
 				pou.setSymbol(fundDAO.read(id).getSymbol());
-				pou.setShares(tran.getShares());
+				pou.setShares(tran.getShares()/1000.000);
 				pous[i] = pou;				
 			}
 			session.setAttribute("mSellList", pous);
-
-			if(errors.size() > 0) {
-				return "sellFund.jsp";
-			}
-			
 			success.add("You have sold fund successfully."); 
 			
 			return "sellFund.jsp";

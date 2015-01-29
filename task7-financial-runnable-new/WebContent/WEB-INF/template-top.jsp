@@ -191,7 +191,7 @@
 							<a  href="transition.do">Transition Day </a>						
 						</div>
 						<div class="panel-body">
-							<a  href="transactionHistory.do">Transaction History</a>						
+							<a  href="viewHisByEmployee.do">Transaction History</a>						
 						</div>
 					</div>
 					<div class="panel-heading">
