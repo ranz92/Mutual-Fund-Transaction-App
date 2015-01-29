@@ -89,7 +89,14 @@
 						</td>
 						<c:set var="transaction" value="${transaction}" />
 						<td>
-							${transaction.execute_date }
+						    <c:choose>
+                                <c:when test="${transaction == null}">
+                                    No trading in the past
+				                </c:when>
+				                <c:otherwise> 
+							        ${transaction.execute_date }
+							    </c:otherwise>
+							</c:choose>
 						</td>
 					</tr>
 				</tbody>
@@ -119,17 +126,17 @@
 				<c:set var="price" value="${ priceList }" />
 				
 				<c:set var="count" value="${count+1 }" />
-					<tr align="right">
+					<tr >
 						<td>
 							${count}
 						</td>
 						<td>
 							${position.fund_id }
 						</td>
-						<td >
+						<td align="right">
 							<fmt:formatNumber value="${position.shares }" type="currency" pattern="#,##0.000" />			
 						</td >
-						<td >
+						<td align="right">
 						    <fmt:formatNumber value="${price[count-1]}" type="currency" pattern="#,##0.00" />
 							
 						</td>

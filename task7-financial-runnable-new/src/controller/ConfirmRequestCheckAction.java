@@ -43,7 +43,7 @@ public class ConfirmRequestCheckAction extends Action {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		
-		DecimalFormat df = new DecimalFormat("###,###,###.00");
+		DecimalFormat df = new DecimalFormat("###,###,##0.00");
 		
 		try {
 			if(request.getSession().getAttribute("customer") == null) {
@@ -57,6 +57,7 @@ public class ConfirmRequestCheckAction extends Action {
 			TransactionBean transaction = new TransactionBean();
 			transaction.setCustomer_id(customer.getCustomerId());
 			transaction.setFund_id(form.getIdAsInt()); //should obtain from fund table, which is not established so far. So recorded as 0 temporarily here.
+			
 			transaction.setAmount(form.getAmountAsLong());
 			transaction.setTransaction_type(2);
 			if(transaction.getAmount() <= 0) {

@@ -18,7 +18,7 @@ public class CustomerBean implements Comparable<CustomerBean>{
 	private String addrL2;
 	private String city;
 	private String state;
-	private int zip;
+	private String zip;
 	private long cash;
 	
 	public String getFirstname() {
@@ -81,10 +81,10 @@ public class CustomerBean implements Comparable<CustomerBean>{
 	public void setState(String state) {
 		this.state = state;
 	}
-	public int getZip() {
+	public String getZip() {
 		return zip;
 	}
-	public void setZip(int zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 	public long getCash() {

@@ -85,7 +85,7 @@ public class Controller extends HttpServlet {
 			customer.setAddrL2("APT 101");
 			customer.setCity("Pittsburgh");
 			customer.setState("PA");
-			customer.setZip(15213);
+			customer.setZip("15213");
 			customer.setCash(1000);
 			customerDAO.create(customer);
 			

@@ -57,6 +57,12 @@ public class DepositCheckForm extends FormBean {
 			errors.add("Amount is required");
 		}
 		
+		try {
+			Integer.parseInt(amount);
+		} catch (NumberFormatException e) {
+			errors.add("Amount is not an integer");
+		}
+		
 		if (errors.size() > 0) {
 			return errors;
 		}

@@ -63,9 +63,7 @@ public class EmpRegisterForm extends FormBean{
 		if (errors.size() > 0) {
 			return errors;
 		}
-		
-		
-		
+	
 		return errors;
 	}
 }

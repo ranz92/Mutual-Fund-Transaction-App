@@ -86,11 +86,11 @@ public class ViewByEmployeeAction extends Action{
 					//String cash = df.format(user.getCash());
 					//request.setAttribute("cash",cash);
 					
-					if(transactions.length!=0){
+					if(transactions.length !=0){
 						
 						request.setAttribute("transaction", transactions[transactions.length-1]); //Return the last trading day.
 	
-					}
+					} 
 					
 					//Return the fund information.
 					PositionBean[] positions = posDAO.getPositions(cusId);

@@ -38,15 +38,20 @@ public class BuyForm extends FormBean {
 			errors.add("Please enter an amount.");
 		} 
 		
-		
-		if (amount != null && amount.matches(".*[<>\"].*"))
-			errors.add("Please enter numbers for amount.");
-		
+		/*
+		if (amount != null && amount.matches(".*[<>\"?~#%&].*"))
+			errors.add("Special mark are not allowed. Please enter numbers for amount.");
+		*/
 //		try {
 //			Long.parseLong(amount);
 //		} catch (NumberFormatException e) {
 //			errors.add("Amount cannot be parsed");
 //		}
+		try {
+			Integer.parseInt(amount);
+		} catch (NumberFormatException e) {
+			errors.add("Amount is not an integer");
+		}
 		
 		try {
 

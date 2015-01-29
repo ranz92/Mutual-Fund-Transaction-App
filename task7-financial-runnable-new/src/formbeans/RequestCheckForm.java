@@ -41,9 +41,9 @@ public class RequestCheckForm extends FormBean {
 		}
 		
 		try {
-			Long.parseLong(amount);
+			Long.parseLong(fixBadChars(amount));
 		} catch (NumberFormatException e) {
-			errors.add("Amount cannot be parsed");
+			errors.add("Invalid amount. Number is expected!");
 		}
 		
 		return errors;

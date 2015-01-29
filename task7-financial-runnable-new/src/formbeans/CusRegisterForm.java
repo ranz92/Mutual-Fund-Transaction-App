@@ -21,7 +21,7 @@ public class CusRegisterForm extends FormBean {
 	private String addrL2;
 	private String city;
 	private String state;
-	private int zip;
+	private String zip;
 	private String cash;
 	
 	public String getFirstName() { return firstName; }
@@ -34,7 +34,7 @@ public class CusRegisterForm extends FormBean {
 	public String getAddrL2()     { return addrL2;  }
 	public String getCity()     { return city;  }
 	public String getState()     { return state;  }
-	public int getZip()     { return zip;  }
+	public String getZip()     { return zip;  }
 	public String getCash()     { return cash;  }
 
 	
@@ -48,7 +48,7 @@ public class CusRegisterForm extends FormBean {
 	public void setAddrL2(String s)     { addrL2   = s.trim();               }
 	public void setCity(String s)      { city   = s.trim();                     }
 	public void setState(String s)     { state   = s.trim();                    }
-	public void setZip(String s)       { zip   = Integer.parseInt(s);    }
+	public void setZip(String s)       { zip   = s.trim();    }
 	public void setCash(String s)      { confirm   = s.trim();                  }
 
 	
@@ -75,9 +75,7 @@ public class CusRegisterForm extends FormBean {
 			errors.add("Confirm Password is required");
 		}
 		
-		if ( zip == 0) {
-			errors.add("Zip code is required");
-		}
+		
 		
 		if (errors.size() > 0) {
 			return errors;
