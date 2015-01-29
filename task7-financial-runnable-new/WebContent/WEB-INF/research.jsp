@@ -21,7 +21,7 @@
 			<td>${ item.name }</td>
 			<td>${ item.symbol }</td>
 			
-			<td><input type="submit" class="btn btn-success" value="show Performance" /></td>
+			<td><input type="submit" class="btn btn-success" value="Show Performance" /></td>
 		</tr>
 		
 		<input type="hidden" name="fundId" value="${ item.id }" />
