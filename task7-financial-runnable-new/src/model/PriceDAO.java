@@ -68,7 +68,7 @@ public class PriceDAO extends GenericDAO<PriceBean> {
 		if (prices.length>0){
 		return prices[prices.length - 1].getPrice_date();
 		}
-		else return null;
+		else return (new Date());
 	}
 
 

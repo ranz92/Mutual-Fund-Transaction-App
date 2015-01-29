@@ -24,9 +24,9 @@
 			<td><%= index %><% index++; %></td>
 			<td>${ item.customerName }</td>
 			<td>${ item.transactionType }</td>
-			<th>${ item.fundName }</th>
-			<th>${ item.numShares }</th>
-			<th>${ item.sharePrice }</th>
+			<td>${ item.fundName }</td>
+			<td>${ item.numShares }</td>
+			<td>${ item.sharePrice }</td>
 			<td>${ item.amount }</td>
 			<td>${ item.status }</td>
 			<td>${ item.executeDate }</td>
