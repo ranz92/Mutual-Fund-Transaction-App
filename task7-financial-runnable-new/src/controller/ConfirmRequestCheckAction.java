@@ -126,7 +126,8 @@ public class ConfirmRequestCheckAction extends Action {
 			
 			session.setAttribute("mFundList", pous);
 			session.setAttribute("availableAmount", availableAmount);
-			
+			request.setAttribute("success", "SUCCESS");
+
 			return "requestCheck.jsp";
 		} catch(FormBeanException e) {
 			errors.add(e.getMessage());
