@@ -110,7 +110,7 @@ public class TransactionHistoryAction extends Action {
 				histories[i] = new TransactionHisForm();
 				histories[i].setCustomerName(customerTemp.getFirstname()+" "+customerTemp.getLastname());
 				histories[i].setExecuteDate(allTransactions[i].getExecute_date());
-//				histories[i].setAmount(dfAmount.format(allTransactions[i].getAmount()/100.0));
+				histories[i].setAmount(dfAmount.format(allTransactions[i].getAmount()/100.0));
 				if(allTransactions[i].getExecute_date() == null)
 					histories[i].setStatus("Pending");
 				else
@@ -133,7 +133,6 @@ public class TransactionHistoryAction extends Action {
 				FundBean fund = new FundBean();
 				int fundId = allTransactions[i].getFund_id();
 				if ((fund=fundDAO.read(fundId))!=null){
-					// fund transaction
 					histories[i].setFundName(fund.getName());
 					if(allTransactions[i].getExecute_date() != null) {
 						PriceBean[] prices = priceDAO.getPrice(fundId);
@@ -145,19 +144,13 @@ public class TransactionHistoryAction extends Action {
 							}
 						}
 						histories[i].setSharePrice(dfPrice.format(thePrice/100.0));
-//						System.out.println("price[" + i + "]=" + histories[i].getSharePrice());
-						if(histories[i].getTransactionType().equals("Buy Fund")){
-							histories[i].setAmount(dfAmount.format(allTransactions[i].getAmount()/100.0));
-							histories[i].setNumShares(dfShare.format((double)(allTransactions[i].getAmount()/100.0) / (thePrice/100.0)));
-							System.out.println(histories[i].getTransactionType() + " ; " + histories[i].getAmount() + " ; " + histories[i].getNumShares());
-						} else if (histories[i].getTransactionType().equals("Sell Fund")) {
+						if(allTransactions[i].getTransaction_type() == 0){
+							histories[i].setNumShares(dfShare.format((double)allTransactions[i].getAmount()/100.0/thePrice/100.0));
+						} else if (allTransactions[i].getTransaction_type() == 1) {
 							histories[i].setNumShares(dfShare.format((double)allTransactions[i].getShares()/100.0));
-							histories[i].setAmount(dfAmount.format((allTransactions[i].getShares()/1000.0) * (thePrice/100.0)));
-							System.out.println(histories[i].getTransactionType() + " ; " + histories[i].getAmount() + " ; " + histories[i].getNumShares());
 						}
 						else{
-							histories[i].setAmount(dfAmount.format(allTransactions[i].getAmount()/100.0));
-							System.out.println(histories[i].getTransactionType() + " ; " + histories[i].getAmount() + " ; " + histories[i].getNumShares());
+							histories[i].setNumShares(dfShare.format("0"));
 						}
 					}
 				} else {
