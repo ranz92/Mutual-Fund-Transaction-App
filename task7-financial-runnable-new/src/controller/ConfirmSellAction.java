@@ -112,7 +112,7 @@ public class ConfirmSellAction extends Action {
 				
 				tran = trans[i];
 				id = tran.getFund_id();
-				
+	
 				pou.setId(id);
 				pou.setName(fundDAO.read(id).getName());
 				pou.setShares(tran.getShares());
