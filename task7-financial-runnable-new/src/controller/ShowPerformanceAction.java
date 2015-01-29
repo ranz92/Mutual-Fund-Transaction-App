@@ -26,13 +26,13 @@ import model.FundDAO;
 import formbeans.BuyForm;
 import formbeans.ResearchForm;
 
-public class showPerformanceAction extends Action {
+public class ShowPerformanceAction extends Action {
 	private FormBeanFactory<ResearchForm> formBeanFactory = FormBeanFactory.getInstance(ResearchForm.class);
 	private CustomerDAO customerDAO;
 	private PriceDAO priceDAO;
 	private FundDAO fundDAO;
 	
-	public showPerformanceAction(Model model) {
+	public ShowPerformanceAction(Model model) {
 		customerDAO = model.getCustomerDAO();
 		priceDAO = model.getPriceDAO();
 		fundDAO = model.getFundDAO();
