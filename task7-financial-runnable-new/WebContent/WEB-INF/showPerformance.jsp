@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page import="java.util.*"%>
-<h2>Research Fund</h2>
+<h2>Research fund</h2>
 <jsp:include page="error-list.jsp" />
 
 <table class="table table-striped">
@@ -22,7 +22,7 @@
          
         <tr>
         	<td><fmt:formatDate value="${ item.price_date}" type="date"/> </td><td></td>
-			<td align = "right"><fmt:formatNumber value="${ item.price}" pattern="##.##" minFractionDigits="2" ></fmt:formatNumber></td>
+			<td align = "right"><fmt:formatNumber value="${ item.price/100}" pattern="##.##" minFractionDigits="2" ></fmt:formatNumber></td>
 			<td></td><td></td><td></td><td></td><td></td>
 			
 			
