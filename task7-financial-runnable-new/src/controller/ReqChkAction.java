@@ -76,6 +76,7 @@ public class ReqChkAction extends Action {
 					pou.setName("Check Request");
 				}
 				pou.setAmount(df.format((double)tran.getAmount()/100.0));
+		//		pou.setAmount(df.format((double)tran.getAmount()));
 				pous[i] = pou;
 				pendingAmount += tran.getAmount();
 			}

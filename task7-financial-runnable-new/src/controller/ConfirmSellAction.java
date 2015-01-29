@@ -111,6 +111,7 @@ public class ConfirmSellAction extends Action {
 			TransactionBean[] trans = transactionDAO.getPendingSell(customer.getCustomerId());
 			TransactionBean tran = new TransactionBean();
 			PositionOfUser[] pous = new PositionOfUser[trans.length];
+			
 			for (int i = 0; i<pous.length; i++){
 				PositionOfUser pou = new PositionOfUser();
 				tran = trans[i];
