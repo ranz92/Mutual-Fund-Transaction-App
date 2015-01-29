@@ -2,6 +2,12 @@
 <h2>Create a new Customer</h2>
 <jsp:include page="error-list.jsp" />
 
+<script type="text/javascript" src="js/scripts.js"></script>
+<script type="text/javascript" src="js/jquery.validate.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+
+
 <form method="post" class="form-horizontal" role="form" action="cusRegister.do">
 	<div class="form-group">
 		<label for="inputEmail3" class="col-sm-2 control-label">Username</label>
