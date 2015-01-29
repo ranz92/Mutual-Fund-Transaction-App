@@ -51,7 +51,7 @@
         <tr>
 			<td>${ item.name }</td>
 			<td>${ item.symbol }</td>
-			<td>${ item.amount }</td>
+			<td>${ (item.amount/100) }</td>
 			</tr>
 		
 		 

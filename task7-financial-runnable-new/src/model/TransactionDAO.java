@@ -69,7 +69,7 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 		if (cash < 0)
 			return false;
 		for (TransactionBean tran : transactions) {
-			cash -= tran.getAmount();
+			cash -= (tran.getAmount()/100);
 			if (cash < 0)
 				return false;
 		}

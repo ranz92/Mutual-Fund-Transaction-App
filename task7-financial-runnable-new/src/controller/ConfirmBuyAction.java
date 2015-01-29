@@ -68,14 +68,14 @@ public class ConfirmBuyAction extends Action {
 			transaction.setCustomer_id(customer.getCustomerId());
 			transaction.setFund_id(Integer.parseInt(form.getFundId()));
 			try {
-				transaction.setAmount(Long.parseLong(form.getAmount()));
+			//	transaction.setAmount(Long.parseLong(form.getAmount()));
 			//	transaction.setAmount((long)Double.parseDouble(form.getAmount()));
 				//System.out.println(form.getAmount());
 			//	System.out.println(Double.valueOf(form.getAmount()));
-//				Double a = Double.valueOf(form.getAmount());
-//				Double a1 = a*1000;
-//				long l = (new Double(a1)).longValue();
-//				transaction.setAmount(l);
+				Double a = Double.valueOf(form.getAmount());
+				Double a1 = a*100;
+				long l = (new Double(a1)).longValue();
+				transaction.setAmount(l);
 			//	System.out.println((long)Double.parseDouble(form.getAmount()));
 			//	System.out.println(l);
 			} catch(NumberFormatException e) {
@@ -87,8 +87,7 @@ public class ConfirmBuyAction extends Action {
 //			transaction.setAmount(form.getAmountAsLong());
 			
 			
-//			//åŠ ä¸€ä¸ªåˆ¤æ–­è¯­å�¥ï¼šamount<cash
-			if (transactionDAO.checkEnoughCash(customer.getCustomerId(), customer.getCash(), transaction.getAmount()))
+			if (transactionDAO.checkEnoughCash(customer.getCustomerId(), customer.getCash(), (transaction.getAmount()/100)))
 			transactionDAO.createBuyTransaction(transaction);
 			else errors.add("Not enough amount");
 //			
@@ -102,8 +101,8 @@ public class ConfirmBuyAction extends Action {
 			TransactionBean tran = new TransactionBean();
 			int id = 0;
 			
-		//	Double pend = null;
-			long pendingAmount = 0;
+			double pending = 0;
+	//		long pendingAmount = 0;
 			
 			FundBean fund = new FundBean();
 			for (int i = 0; i<pous.length; i++){
@@ -120,10 +119,10 @@ public class ConfirmBuyAction extends Action {
 				}
 				pou.setAmount(tran.getAmount());
 
-		//		pend = (double)(pou.getAmount()/1000);
+				pending += (double)(tran.getAmount()/100.00);
 				pous[i] = pou;
 				
-				pendingAmount += tran.getAmount();
+		//		pendingAmount += tran.getAmount();
 		//		pend += pend;
 		//		Double pend1 = pend*1000;
 				
@@ -136,12 +135,12 @@ public class ConfirmBuyAction extends Action {
 		//		pendingAmountD = (double)pendingAmount/1000;
 				
 			}
-			String pendingAmountFormat = df.format(pendingAmount);
-		//	String pendingAmountFormat1 = df.format(pendingAmount/1000);	
+		//	String pendingAmountFormat = df.format(pendingAmount);
+			String pendingAmountFormat = df.format(pending);	
 		//	System.out.println(pendingAmountD);
-			String availableAmountFormat = df.format(customer.getCash() - pendingAmount);
+		//	String availableAmountFormat = df.format(customer.getCash() - pendingAmount);
 		//	String pendingAmountFormat = df.format(pend);
-		//	String availableAmountFormat = df.format(customer.getCash() - pend);
+			String availableAmountFormat = df.format(customer.getCash() - pending);
 		//	System.out.println(availableAmountFormat);
 			
 //			Double avail = (double) (customer.getCash()-(tran.getAmount()/1000));

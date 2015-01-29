@@ -69,7 +69,7 @@ public class BuyFundAction extends Action {
 			TransactionBean tran = new TransactionBean();
 			int id = 0;
 			long pendingAmount = 0;
-		//	Double pend = null;
+			double pending = 0;
 			
 			FundBean fund = new FundBean();
 			for (int i = 0; i<pous.length; i++){
@@ -89,13 +89,14 @@ public class BuyFundAction extends Action {
 		//		pend = (double)(pou.getAmount()/1000);
 				
 				pous[i] = pou;
-				pendingAmount += tran.getAmount();
+			//	pendingAmount += tran.getAmount();
+				pending = (double)(tran.getAmount()/100.00);
 			}
-			String pendingAmountFormat = df.format(pendingAmount);
-			String availableAmountFormat = df.format(customer.getCash() - pendingAmount);
+		//	String pendingAmountFormat = df.format(pendingAmount);
+		//	String availableAmountFormat = df.format(customer.getCash() - pendingAmount);
 			
-//			String pendingAmountFormat = df.format(pend);
-//			String availableAmountFormat = df.format(customer.getCash() - pend);
+			String pendingAmountFormat = df.format(pending);
+			String availableAmountFormat = df.format(customer.getCash() - pending);
 			
 			session.setAttribute("mFundList", pous);
 			session.setAttribute("pendingAmount",pendingAmountFormat);
