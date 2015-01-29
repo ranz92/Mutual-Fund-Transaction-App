@@ -3,7 +3,7 @@
 <jsp:include page="error-list.jsp" />
 
 <p>
-    <a href="template-top.jsp">Back to home page</a>
+    <a href="login.do">Back to home page</a>
 </p>
 
 <jsp:include page="template-bottom.jsp" />
