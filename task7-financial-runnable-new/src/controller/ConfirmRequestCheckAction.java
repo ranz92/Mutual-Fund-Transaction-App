@@ -75,7 +75,7 @@ public class ConfirmRequestCheckAction extends Action {
 				return "requestCheck.jsp";
 			}
 			if(transaction.getAmount() > 1000000) {
-				errors.add("Amount should be less than $10,00,000");
+				errors.add("Amount should be less than $1,000,000");
 				return "requestCheck.jsp";
 			}
 			
