@@ -71,9 +71,9 @@ public class TransactionHistoryAction extends Action {
 		
 		EmployeeBean admin = (EmployeeBean) request.getSession(false).getAttribute("employee");
 		CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
-		DecimalFormat dfAmount = new DecimalFormat("###,###,###.00");
-		DecimalFormat dfShare = new DecimalFormat("###,###,###.000");
-		DecimalFormat dfPrice = new DecimalFormat("###,###,###.00");
+		DecimalFormat dfAmount = new DecimalFormat("###,###,##0.00");
+		DecimalFormat dfShare = new DecimalFormat("###,###,##0.000");
+		DecimalFormat dfPrice = new DecimalFormat("###,###,##0.00");
 		try {
 			TransactionBean[] allTransactions = null;
 			

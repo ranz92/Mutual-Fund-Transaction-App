@@ -41,10 +41,15 @@ public class BuyFundAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		HttpSession session = request.getSession();
 		
 		DecimalFormat df = new DecimalFormat("#,##0.00");
 		
 		try {
+			if (session.getAttribute("employee") != null){
+		        session.setAttribute("employee",null);
+			}
+			
 			if(request.getSession().getAttribute("customer") == null) {
 				errors.add("Please log in as a customer.");
 				return "login.jsp";
@@ -53,13 +58,11 @@ public class BuyFundAction extends Action {
 			CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
 //			BuyForm form  = formBeanFactory.create(request);
 //			request.setAttribute("form", form);
-			HttpSession session = request.getSession();
 			session.setAttribute("fundList", fundDAO.getFundList());
 //			TransactionBean transaction = new TransactionBean();
 //			transaction.setCustomer_id(customer.getCustomerId());
 //			transaction.setFund_id(Integer.parseInt(form.getFundId()));; //should obtain from fund table, which is not established so far. So recorded as 0 temporarily here.
 //			transaction.setAmount(form.getAmount());
-//			//加一个判断语句：amount<cash
 //			transactionDAO.createBuyTransaction(transaction);
 			TransactionBean[] trans = transactionDAO.getPendingBuy(customer.getCustomerId());
 			PositionOfUser[] pous = new PositionOfUser[trans.length];

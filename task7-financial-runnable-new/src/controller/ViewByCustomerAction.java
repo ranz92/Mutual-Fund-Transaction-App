@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.genericdao.RollbackException;
 
@@ -38,10 +39,13 @@ public class ViewByCustomerAction extends Action {
 		CustomerBean customer = (CustomerBean)request.getSession(false).getAttribute("customer");
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
-		
+		HttpSession session = request.getSession(false);
+
 		try {
-			
-			if(request.getSession().getAttribute("customer") == null) {
+			if (session.getAttribute("employee") != null){
+		        session.setAttribute("employee",null);
+			}
+			if(session.getAttribute("customer") == null) {
 				errors.add("Please log in as a customer.");
 				return "login.jsp";
 			}

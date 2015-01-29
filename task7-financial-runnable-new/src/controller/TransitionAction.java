@@ -59,18 +59,20 @@ public class TransitionAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		HttpSession session = request.getSession(false);
 
 		List<String> success = new ArrayList<String>();
 		request.setAttribute("success", success);
 
 		try {
-			
+			if (session.getAttribute("customer") != null){
+		        session.setAttribute("customer",null);
+			}
 			if(request.getSession().getAttribute("employee") == null) {
 				errors.add("Please log in as an employee.");
 				return "login.jsp";
 			}
 			
-			HttpSession session = request.getSession(false);
 			FundBean[] funds = fundDAO.getFundList();
 			CustomFundBean[] cfbs = new CustomFundBean[funds.length];
 			for (int i = 0; i < cfbs.length; i++) {

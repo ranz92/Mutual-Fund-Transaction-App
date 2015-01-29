@@ -44,20 +44,23 @@ public class showPerformanceAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		HttpSession session = request.getSession(false);
 		
 		try {
-			if(request.getSession().getAttribute("customer") == null) {
+			if (session.getAttribute("employee") != null){
+		        session.setAttribute("employee",null);
+			}
+			if(session.getAttribute("customer") == null) {
 				errors.add("Please log in as a customer.");
 				return "login.jsp";
 			}
 			
-			CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
+			CustomerBean customer = (CustomerBean) session.getAttribute("customer");
 			ResearchForm form  = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 //			HttpSession session = request.getSession();
 //			session.setAttribute("fundList", fundDAO.getFundList());
 		
-			HttpSession session = request.getSession();
 			PriceBean[] prices = priceDAO.getPrice(form.getIdAsInt());
 			List<String> d = new ArrayList<String>();
 			List<String> in = new ArrayList<String>();

@@ -42,10 +42,14 @@ public class ConfirmRequestCheckAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		HttpSession session = request.getSession();
 		
 		DecimalFormat df = new DecimalFormat("###,###,##0.00");
 		
 		try {
+			if (session.getAttribute("employee") != null){
+		        session.setAttribute("employee",null);
+			}
 			if(request.getSession().getAttribute("customer") == null) {
 				errors.add("Please log in as a customer.");
 				return "login.jsp";
@@ -69,7 +73,6 @@ public class ConfirmRequestCheckAction extends Action {
 			transactionDAO.createReqChkTransaction(transaction);
 			else errors.add("Not enough amount");
 			
-			HttpSession session = request.getSession();
 			customer = customerDAO.read(customer.getCustomerId());
 			session.setAttribute("customer",customer);
 			

@@ -47,10 +47,14 @@ public class ConfirmDepositCheckAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		HttpSession session = request.getSession();
+
 		
 		try {
-			
-			if(request.getSession().getAttribute("employee") == null) {
+			if (session.getAttribute("customer") != null){
+		        session.setAttribute("customer",null);
+			}
+			if(session.getAttribute("employee") == null) {
 				errors.add("Please log in as an employee.");
 				return "login.jsp";
 			}

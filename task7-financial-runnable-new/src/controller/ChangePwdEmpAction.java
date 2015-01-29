@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import model.EmployeeDAO;
 import model.Model;
@@ -30,13 +31,17 @@ public class ChangePwdEmpAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		HttpSession session = request.getSession();
+
 		
 		List<String> success = new ArrayList<String>();
 		request.setAttribute("success", success);
 		
 		try {
-			
-			if(request.getSession().getAttribute("employee") == null) {
+			if (session.getAttribute("customer") != null){
+		        session.setAttribute("customer",null);
+			}
+			if(session.getAttribute("employee") == null) {
 				errors.add("Please log in as an employee.");
 				return "login.jsp";
 			}

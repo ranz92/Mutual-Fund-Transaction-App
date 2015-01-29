@@ -40,6 +40,8 @@ public class ConfirmBuyAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		HttpSession session = request.getSession();
+
 		
 		List<String> success = new ArrayList<String>();
 		request.setAttribute("success",success);
@@ -47,7 +49,10 @@ public class ConfirmBuyAction extends Action {
 		DecimalFormat df = new DecimalFormat("#,##0.00");
 		
 		try {
-			if(request.getSession().getAttribute("customer") == null) {
+			if (session.getAttribute("employee") != null){
+		        session.setAttribute("employee",null);
+			}
+			if(session.getAttribute("customer") == null) {
 				errors.add("Please log in as a customer.");
 				return "login.jsp";
 			}
@@ -82,14 +87,13 @@ public class ConfirmBuyAction extends Action {
 //			transaction.setAmount(form.getAmountAsLong());
 			
 			
-//			//加一个判断语句：amount<cash
+//			//åŠ ä¸€ä¸ªåˆ¤æ–­è¯­å�¥ï¼šamount<cash
 			if (transactionDAO.checkEnoughCash(customer.getCustomerId(), customer.getCash(), transaction.getAmount()))
 			transactionDAO.createBuyTransaction(transaction);
 			else errors.add("Not enough amount");
 //			
 //			customerDAO.updateCash(customer.getCustomerId(), 0-form.getAmountAsLong());
 			
-			HttpSession session = request.getSession();
 			customer = customerDAO.read(customer.getCustomerId());
 			session.setAttribute("customer",customer);
 			

@@ -46,14 +46,18 @@ public class ConfirmSellAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
+		HttpSession session = request.getSession();
 		
 		List<String> success = new ArrayList<String>();
 		request.setAttribute("success",success);
 		
-		DecimalFormat df = new DecimalFormat("#,##0.00");
+		//DecimalFormat df = new DecimalFormat("#,##0.00");
 		
 		
 		try {
+			if (session.getAttribute("employee") != null){
+		        session.setAttribute("employee",null);
+			}
 			if(request.getSession().getAttribute("customer") == null) {
 				errors.add("Please log in as a customer.");
 				return "login.jsp";
@@ -83,7 +87,6 @@ public class ConfirmSellAction extends Action {
 			}
 			else errors.add("No enough share");
 			
-			HttpSession session = request.getSession();
 			customer = customerDAO.read(customer.getCustomerId());
 			session.setAttribute("customer",customer);
 			

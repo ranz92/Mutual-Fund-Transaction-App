@@ -30,15 +30,16 @@ public class EmpRegisterAction extends Action{
 	}
 
 	public String perform(HttpServletRequest request) {
-		EmployeeBean right = (EmployeeBean) request.getSession(false).getAttribute("employee");
+		HttpSession session = request.getSession(false);
+		//EmployeeBean right = (EmployeeBean) request.getSession(false).getAttribute("employee");
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
-		if(request.getSession().getAttribute("employee") == null) {
-			errors.add("Please log in as an employee.");
-			return "login.jsp";
-		}
 		
-		if (right == null) {
+		 if (session.getAttribute("customer") != null){
+		        session.setAttribute("customer",null);
+			}
+	        
+			if (session.getAttribute("employee") == null) {
 			
 			errors.add("You don't have the employee right to create the account!");
 			return "error.jsp";

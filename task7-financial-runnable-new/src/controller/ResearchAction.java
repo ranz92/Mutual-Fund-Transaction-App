@@ -43,10 +43,13 @@ public class ResearchAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
-		
+		HttpSession session = request.getSession();
+
 		try {
-			
-			if(request.getSession().getAttribute("customer") == null) {
+			if (session.getAttribute("employee") != null){
+		        session.setAttribute("employee",null);
+			}
+			if(session.getAttribute("customer") == null) {
 				errors.add("Please log in as a customer.");
 				return "login.jsp";
 			}
@@ -54,7 +57,6 @@ public class ResearchAction extends Action {
 			//CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
 			ResearchForm form  = formBeanFactory.create(request);
 			request.setAttribute("form", form);
-			HttpSession session = request.getSession();
 			
 			
 			session.setAttribute("fundList", fundDAO.getFundList());
@@ -74,7 +76,7 @@ public class ResearchAction extends Action {
 //			transaction.setCustomer_id(customer.getCustomerId());
 //			transaction.setFund_id(Integer.parseInt(form.getFundId()));; //should obtain from fund table, which is not established so far. So recorded as 0 temporarily here.
 //			transaction.setAmount(form.getAmount());
-//			//加一个判断语句：amount<cash
+//			//åŠ ä¸€ä¸ªåˆ¤æ–­è¯­å�¥ï¼šamount<cash
 //			transactionDAO.createBuyTransaction(transaction);
 
 			return "research.jsp";

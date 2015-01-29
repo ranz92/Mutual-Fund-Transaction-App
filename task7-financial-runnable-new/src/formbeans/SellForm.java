@@ -63,10 +63,9 @@ public class SellForm extends FormBean {
 		try {
         	double d = Double.parseDouble(shares);
         	if (d <= 0) {
-        		throw new Exception();
-        	}
-        } catch (Exception e) {
-        	 errors.add("Shares should be a non-negative number");
+        		errors.add("Shares should be a non-negative number");        	}
+        } catch (NumberFormatException e) {
+        	 errors.add("Invalide number, please input a number for the share.");
         }
 		
 		if (shares != null && shares.matches(".*[<>\"].*"))

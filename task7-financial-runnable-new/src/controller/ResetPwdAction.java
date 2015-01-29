@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import model.CustomerDAO;
 import model.Model;
@@ -54,17 +55,17 @@ public class ResetPwdAction extends Action{
 		 }
 	
 	public String perform(HttpServletRequest request) {
-		EmployeeBean employee = (EmployeeBean) request.getSession(false).getAttribute("employee");
+		HttpSession session = request.getSession();
+		//EmployeeBean employee = (EmployeeBean) request.getSession(false).getAttribute("employee");
 
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
 		
-		if(request.getSession().getAttribute("employee") == null) {
-			errors.add("Please log in as an employee.");
-			return "login.jsp";
+		if (session.getAttribute("customer") != null){
+	        session.setAttribute("customer",null);
 		}
 		
-		if (employee == null) {
+		if (session.getAttribute("employee") == null) {
 			errors.add("You don't have the employee right to view the account!");
 			return "error.jsp";
 		} else {
