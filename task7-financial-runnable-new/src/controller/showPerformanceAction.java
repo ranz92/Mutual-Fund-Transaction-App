@@ -3,6 +3,7 @@ package controller;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -54,21 +55,28 @@ public class showPerformanceAction extends Action {
 		
 			HttpSession session = request.getSession();
 			PriceBean[] prices = priceDAO.getPrice(form.getIdAsInt());
-			String id = form.getFundId();
+			
 			List<String> d = new ArrayList<String>();
 			List<String> in = new ArrayList<String>();
+			//List<Long> priceList = new ArrayList<Long>();
 			SimpleDateFormat time=new SimpleDateFormat("MM/dd"); 
-			DecimalFormat df1 = new DecimalFormat("####.00");
-			
+			DecimalFormat df1 = new DecimalFormat("###0.00");
+			double max = 0;
+			double tmpP = 0;
 			for(PriceBean p:prices) {
-				
+				//priceList.add(p.getPrice()/100);
+				tmpP = p.getPrice()/100.00;
 				d.add(time.format(p.getPrice_date()));
-				in.add(df1.format(p.getPrice()/100));
+				in.add(df1.format(tmpP));
+				if(tmpP>max) {
+					max = tmpP;
+				}
 			}
+			
 			session.setAttribute("priceList",prices);
 			session.setAttribute("dateList",d);
 			session.setAttribute("costList",in);
-			session.setAttribute("fund_name", id);
+			session.setAttribute("maxPrice",max);
 			return "showPerformance.jsp";
 		} catch(FormBeanException e) {
 			errors.add(e.getMessage());
