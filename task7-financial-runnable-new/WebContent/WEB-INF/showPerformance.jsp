@@ -11,7 +11,7 @@
 		<tr>
 			<th>Price Date</th>
 			<th></th>
-			<th>Fund Price</th>
+			<th  style=" text-align:right">Fund Price</th>
 			
 		</tr>
 	</thead>
@@ -164,7 +164,7 @@ gov.Graphic.prototype={
  setOptions: function(options) {
   this.options = {
    height:270,                 
-   maxHeight:15,             
+   maxHeight:'${maxPrice}',             
    barDistance:70,           
    topDistance:0,             
    bottomDistance:0,       
