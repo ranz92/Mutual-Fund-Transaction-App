@@ -134,7 +134,7 @@
 							${position.fund_id }
 						</td>
 						<td align="right">
-							<fmt:formatNumber value="${(position.shares/1000) }" type="currency" pattern="#,##0.000" />			
+							<fmt:formatNumber value="${position.shares }" type="currency" pattern="#,##0.000" />			
 						</td >
 						<td align="right">
 						    <fmt:formatNumber value="${price[count-1]}" type="currency" pattern="#,##0.00" />
