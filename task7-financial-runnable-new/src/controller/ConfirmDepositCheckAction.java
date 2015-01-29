@@ -47,14 +47,10 @@ public class ConfirmDepositCheckAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
-		HttpSession session = request.getSession();
-
 		
 		try {
-			if (session.getAttribute("customer") != null){
-		        session.setAttribute("customer",null);
-			}
-			if(session.getAttribute("employee") == null) {
+			
+			if(request.getSession().getAttribute("employee") == null) {
 				errors.add("Please log in as an employee.");
 				return "login.jsp";
 			}
@@ -65,7 +61,7 @@ public class ConfirmDepositCheckAction extends Action {
 			transaction.setCustomer_id(form.getIdAsInt());
 			transaction.setTransaction_type(3);
 			transaction.setFund_id(-1);
-			long amount = form.getAmountAsLong();
+			long amount = Math.round(Double.parseDouble(form.getAmount())*100);
 			request.setAttribute("customerList", customerDAO.getCustomer());
 			if(amount <= 0) {
 				errors.add("Amount should be a positive number");

@@ -16,6 +16,7 @@ import org.mybeans.form.FormBeanFactory;
 import databeans.CustomerBean;
 import databeans.FundBean;
 import databeans.PositionOfUser;
+import databeans.PositionOfUser4Check;
 import databeans.TransactionBean;
 import model.CustomerDAO;
 import model.FundDAO;
@@ -42,8 +43,6 @@ public class ReqChkAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
         request.setAttribute("errors",errors);
-		HttpSession session = request.getSession();
-
         
         List<String> success = new ArrayList<String>();
         request.setAttribute("success",success);
@@ -51,23 +50,22 @@ public class ReqChkAction extends Action {
         DecimalFormat df = new DecimalFormat("###,###,##0.00");
 		
 		try {
-			if (session.getAttribute("employee") != null){
-		        session.setAttribute("employee",null);
-			}
+			
 			if(request.getSession().getAttribute("customer") == null) {
 				errors.add("Please log in as a customer.");
 				return "login.jsp";
 			}
 			
 			CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
+			HttpSession session = request.getSession();
 	
 			TransactionBean[] trans = transactionDAO.getPendingBuy(customer.getCustomerId());
 	        TransactionBean tran = new TransactionBean();
-	        PositionOfUser[] pous = new PositionOfUser[trans.length];
+	        PositionOfUser4Check[] pous = new PositionOfUser4Check[trans.length];
 	        int id = 0;
 			long pendingAmount = 0;
 			for (int i = 0; i<pous.length; i++){
-				PositionOfUser pou = new PositionOfUser();
+				PositionOfUser4Check pou = new PositionOfUser4Check();
 				tran = trans[i];
 				id = tran.getFund_id();
 				FundBean fund = new FundBean();
@@ -77,12 +75,12 @@ public class ReqChkAction extends Action {
 				else {
 					pou.setName("Check Request");
 				}
-				pou.setAmount(tran.getAmount());
+				pou.setAmount(df.format((double)tran.getAmount()/100.0));
 				pous[i] = pou;
 				pendingAmount += tran.getAmount();
 			}
 			session.setAttribute("mFundList", pous);
-			String availableAmount = df.format(customer.getCash() - pendingAmount);
+			String availableAmount = df.format((double)(customer.getCash() - pendingAmount)/100.0);
 			
 	        if (errors.size() > 0) return "error.jsp";
 			
