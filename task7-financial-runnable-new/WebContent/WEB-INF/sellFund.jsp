@@ -8,14 +8,16 @@
 <h2>Sell Fund</h2>
 
 <table class="table table-striped">
-	<thead>
+	
+		<thead>
 		<tr>
 			<th>Product</th>
+			<th>Ticker</th>
 			<th style="text-align:right;">Total Share</th>
 			<th style="text-align:right;">Pending Share</th>
 			<th style="text-align:right;">Available Share</th>
-			<th >Share To Sell</th>
-			<th >Operation</th>
+			<th style="text-align:right;">Share To Sell</th>
+			<th>Operation</th>
 		</tr>
 	</thead>
 	
@@ -24,22 +26,20 @@
 		   <form action="confirmsell.do" method="POST">
          
         <tr>
-			
-			 <td> ${item.fund_id } </td>  
+			 <td> ${item.name } </td>  
+			 <td> ${item.symbol } </td>  
+			<%--  $<fmt:formatNumber value="${customer.cash }" type="currency" pattern="#,##0.00" /> --%>
 			<%-- <td> ${item.shares } </td> --%>
 			<td style="text-align:right;"> <fmt:formatNumber value="${item.shares }" type="currency" pattern="#,##0.000" /></td>
 			 <%--  <td> ${pendingShare } </td>  --%>
-			  <td style="text-align:right;"> <fmt:formatNumber value="${pendingShare }" type="currency" pattern="#,##0.000" /></td> 
+			  <td style="text-align:right;"> <fmt:formatNumber value="${(item.amount/1000) }" type="currency" pattern="#,##0.000" /></td> 
 			<%-- <td> ${(item.shares-pendingShare) } </td> --%>
-			<td style="text-align:right;">  <fmt:formatNumber value="${(item.shares-pendingShare) }" type="currency" pattern="#,##0.000" />
-			</td>
-			<td ><input type="text" name="shares" /></td>
-			<td><input type="submit" class="btn btn-success" value="Sell" /></td>
+			<td style="text-align:right;">  <fmt:formatNumber value="${(item.shares-(item.amount/1000)) }" type="currency" pattern="#,##0.000" /></td>
+			<td style="text-align:right;"><input type="text" name="shares" /></td>
+			<td style="text-align:right;"><input type="submit" class="btn btn-success" value="Sell" /></td>
 		</tr>
 		
-		<input type="hidden" name="fundId" value="${ item.fund_id }" />
-        
-		
+		<input type="hidden" name="fundId" value="${ item.id }" />
 		        			
         </form>
 		

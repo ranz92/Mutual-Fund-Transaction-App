@@ -52,12 +52,12 @@ public class PriceDAO extends GenericDAO<PriceBean> {
 		Arrays.sort(prices);
 		return prices;
 	}
-	public long getLatestPrice(int fund_id) throws RollbackException {
+	public double getLatestPrice(int fund_id) throws RollbackException {
 
 		PriceBean[] prices = match(MatchArg.equals("fund_id", fund_id));
 		Arrays.sort(prices);
 		if (prices.length>0){
-		return prices[prices.length - 1].getPrice();
+		return (double)prices[prices.length - 1].getPrice()/100.00;
 		}
 		else return 0;
 	}
@@ -68,7 +68,7 @@ public class PriceDAO extends GenericDAO<PriceBean> {
 		if (prices.length>0){
 		return prices[prices.length - 1].getPrice_date();
 		}
-		else return null;
+		else return (new Date());
 	}
 
 

@@ -106,11 +106,14 @@ public class TransitionAction extends Action {
 			int count = Integer.parseInt((String) request.getParameter("count"));
 			PriceBean price;
 			Map<Integer, Long> priceMap = new HashMap<Integer, Long>();
-
+			long priceL;
 			for (int i=0; i<count; i++){
-				price = new PriceBean(rawPrices[i].getFund_id(), d, Long.parseLong(rawPrices[i].getPrice()));
+				double a = Double.valueOf(rawPrices[i].getPrice());
+				double a1 = a*100;
+				priceL = (new Double(a1)).longValue();
+				price = new PriceBean(rawPrices[i].getFund_id(), d, priceL);
 				priceDAO.create(price);
-				priceMap.put(rawPrices[i].getFund_id(), Long.parseLong(rawPrices[i].getPrice()));
+				priceMap.put(rawPrices[i].getFund_id(), priceL);
 			}
 			
 			TransactionBean[] pendingTrans = transactionDAO.getPendingTransactions();
@@ -188,8 +191,11 @@ public class TransitionAction extends Action {
 				continue;
 			}
 			try {
-				price = Long.parseLong(rpb.getPrice());
-				if (price < 0.01 || price > 1000) {
+				double a = Double.valueOf(rpb.getPrice());
+				double a1 = a*100;
+				price = (new Double(a1)).longValue();
+				
+				if (price < 1 || price > 1000000) {
 					errors.add("Please enter a valid price for fund with id " + rpb.getFund_id() + " between 0.01 and 1000");
 				}
 			} catch (NumberFormatException e) {

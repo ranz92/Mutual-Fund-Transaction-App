@@ -5,7 +5,8 @@ public class CustomFundBean extends FundBean{
 	private int    id;
 	private String name;
 	private String symbol;
-	private long lastPrice;
+	private double lastPrice;
+	
 	public CustomFundBean (FundBean fund){
 		id = fund.getId();
 		name = fund.getName();
@@ -30,12 +31,11 @@ public class CustomFundBean extends FundBean{
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
-	public long getLastPrice() {
+	
+	public double getLastPrice() {
 		return lastPrice;
 	}
-	public void setLastPrice(long lastPrice) {
+	public void setLastPrice(double lastPrice) {
 		this.lastPrice = lastPrice;
 	}
-	
-	
 }

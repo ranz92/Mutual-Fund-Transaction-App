@@ -59,41 +59,33 @@ public class SellFundAction extends Action {
 			
 			CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
 			
-			session.setAttribute("ownList", positionDAO.getPositions());
-			
-			PositionBean[] positions = positionDAO.getPositions();
-			
+			session = request.getSession();
+			PositionBean[] pbs = positionDAO.getPositions(customer.getCustomerId());
+			PositionOfUser[] ownList = new PositionOfUser[pbs.length];
+			int id = 0;
+			for (int i=0; i<ownList.length; i++){
+				id = pbs[i].getFund_id();
+				ownList[i] = new PositionOfUser();
+				ownList[i].setId(id);
+				ownList[i].setName(fundDAO.read(id).getName());
+				ownList[i].setSymbol(fundDAO.read(id).getSymbol());
+				ownList[i].setShares(pbs[i].getShares());
+				ownList[i].setAmount(transactionDAO.getPendingSellEachFund(customer.getCustomerId(), pbs[i].getFund_id()));
+			}
+			session.setAttribute("ownList", ownList);
 			TransactionBean[] trans = transactionDAO.getPendingSell(customer.getCustomerId());
 			TransactionBean tran = new TransactionBean();
 			PositionOfUser[] pous = new PositionOfUser[trans.length];
-			PositionBean position = new PositionBean();
-			
-			int id = 0;
-		//	long pendingShare = 0;
-			double pendingShare = 0;
-			
-			
 			for (int i = 0; i<pous.length; i++){
 				PositionOfUser pou = new PositionOfUser();
-		//		position = positions[i];
-				
 				tran = trans[i];
 				id = tran.getFund_id();
-				
 				pou.setName(fundDAO.read(id).getName());
-				pou.setPrice(priceDAO.getLatestPrice(id));
+				pou.setSymbol(fundDAO.read(id).getSymbol());
 				pou.setShares(tran.getShares());
-				pou.setId(id);
-		//		pendingShare = tran.getShares();
-				pendingShare = (double)(tran.getShares()/1000.00);
-				
-				pous[i] = pou;
-				
+				pous[i] = pou;				
 			}
-
-			
 			session.setAttribute("mSellList", pous);
-			session.setAttribute("pendingShare", pendingShare);
 
 			return "sellFund.jsp";
 		} catch (RollbackException e) {

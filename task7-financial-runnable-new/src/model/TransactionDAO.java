@@ -41,6 +41,19 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 		return transactions;
 
 	}	
+	public long getPendingSellEachFund(int customerId, int fundId)
+			throws RollbackException {
+		long pendingShare = 0L;
+		TransactionBean[] transactions = match(
+				MatchArg.equals("customer_id", customerId),
+				MatchArg.equals("fund_id", fundId),
+				MatchArg.equals("execute_date", null),
+				MatchArg.equals("transaction_type", 1));
+		for (TransactionBean tran : transactions) {
+			pendingShare +=tran.getShares();
+		}
+		return pendingShare;
+	}
 	public TransactionBean[] getPendingSell(int customerId) throws RollbackException {
 		TransactionBean[] transactions = match(MatchArg.equals("customer_id", customerId),MatchArg.equals("execute_date",null),MatchArg.or(MatchArg.equals("transaction_type", 1)));
 		return transactions;
