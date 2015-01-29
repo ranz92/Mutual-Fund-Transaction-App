@@ -73,14 +73,16 @@ public class ViewByCustomerAction extends Action {
 				//Return the fund information.
 				PositionBean[] positions = posDAO.getPositions(cusId);
 				List<Double> priceList = new ArrayList<Double>();
+				List<Double> fundPriceList = new ArrayList<Double>();
 				for (int i = 0; i<positions.length; i++) {
 					int fund_id = positions[i].getFund_id();
 					double price = priceDAO.getLatestPrice(fund_id);
 					double totalPrice = price * positions[i].getShares();
-					
+					fundPriceList.add(price);
 					priceList.add(totalPrice);
 				}
 				request.setAttribute("positions", positions);
+				request.setAttribute("fundPriceList", fundPriceList);           
 				request.setAttribute("priceList", priceList);
 	            return "viewAccountByCus.jsp";	
 	            

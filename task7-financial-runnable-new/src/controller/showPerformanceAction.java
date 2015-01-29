@@ -44,24 +44,17 @@ public class showPerformanceAction extends Action {
 	public String perform(HttpServletRequest request) {
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors", errors);
-		HttpSession session = request.getSession(false);
 		
 		try {
-			if (session.getAttribute("employee") != null){
-		        session.setAttribute("employee",null);
-			}
-			if(session.getAttribute("customer") == null) {
-				errors.add("Please log in as a customer.");
-				return "login.jsp";
-			}
 			
-			CustomerBean customer = (CustomerBean) session.getAttribute("customer");
 			ResearchForm form  = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 //			HttpSession session = request.getSession();
 //			session.setAttribute("fundList", fundDAO.getFundList());
 		
+			HttpSession session = request.getSession();
 			PriceBean[] prices = priceDAO.getPrice(form.getIdAsInt());
+			String id = form.getFundId();
 			List<String> d = new ArrayList<String>();
 			List<String> in = new ArrayList<String>();
 			SimpleDateFormat time=new SimpleDateFormat("MM/dd"); 
@@ -70,11 +63,12 @@ public class showPerformanceAction extends Action {
 			for(PriceBean p:prices) {
 				
 				d.add(time.format(p.getPrice_date()));
-				in.add(df1.format(p.getPrice()));
+				in.add(df1.format(p.getPrice()/100));
 			}
 			session.setAttribute("priceList",prices);
 			session.setAttribute("dateList",d);
 			session.setAttribute("costList",in);
+			session.setAttribute("fund_name", id);
 			return "showPerformance.jsp";
 		} catch(FormBeanException e) {
 			errors.add(e.getMessage());

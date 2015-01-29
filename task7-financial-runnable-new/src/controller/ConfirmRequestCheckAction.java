@@ -74,6 +74,10 @@ public class ConfirmRequestCheckAction extends Action {
 				errors.add("Amount should be a positive number");
 				return "requestCheck.jsp";
 			}
+			if(transaction.getAmount() > 1000000) {
+				errors.add("Amount should be less than $1,000,000");
+				return "requestCheck.jsp";
+			}
 			
 			if (transactionDAO.checkEnoughCash(customer.getCustomerId(), customer.getCash(), transaction.getAmount()))
 				transactionDAO.createReqChkTransaction(transaction);

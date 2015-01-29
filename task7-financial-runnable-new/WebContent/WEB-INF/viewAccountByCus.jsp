@@ -92,6 +92,9 @@
 							Number of shares
 						</th>
 						<th style="text-align:right;">
+							Latest Price  ($)
+						</th>
+						<th style="text-align:right;">
 							Position Value ($)
 						</th>
 					</tr>
@@ -100,6 +103,7 @@
 				<c:set var="count" value="0" />
 				<c:forEach var="position" items="${positions}" >
 				<c:set var="price" value="${ priceList }" />
+				<c:set var="fundPrice" value="${ fundPriceList }" />
 				
 				<c:set var="count" value="${count+1 }" />
 					<!-- <tr align="right"> -->
@@ -113,8 +117,11 @@
 						<td >
 							<fmt:formatNumber value="${position.shares/1000 }" type="currency" pattern="#,##0.000" />			
 						</td >
+						<td >
+							<fmt:formatNumber value="${fundPrice[count-1] }" type="currency" pattern="#,##0.000" />			
+						</td >
 						<td>
-						    <fmt:formatNumber value="${price[count-1]}" type="currency" pattern="#,##0.00" />
+						    <fmt:formatNumber value="${price[count-1]/1000}" type="currency" pattern="#,##0.00" />
 						</td>
 					</tr>
 				</c:forEach>			
