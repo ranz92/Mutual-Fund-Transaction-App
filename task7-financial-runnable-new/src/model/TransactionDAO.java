@@ -207,8 +207,9 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 			if (tran == null) {
 				throw new RollbackException("Transaction "+transaction_id+" no longer exists");
 			}	
-			tran.setExecute_date(d);;
+			tran.setExecute_date(d);
 			tran.setShares(tran.getAmount()/price);
+			System.out.print(tran.getTransaction_id()+" "+tran.getAmount()+" "+tran.getShares()+" "+price);
 			update(tran);
 			Transaction.commit();
 		} finally {
