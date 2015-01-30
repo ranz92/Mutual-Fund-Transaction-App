@@ -1,5 +1,6 @@
 package controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +25,7 @@ import model.TransactionDAO;
 import model.FundDAO;
 import formbeans.DepositCheckForm;
 import formbeans.SellForm;
+import formbeans.TransactionHisForm;
 
 public class ConfirmDepositCheckAction extends Action {
 	private FormBeanFactory<DepositCheckForm> formBeanFactory = FormBeanFactory.getInstance(DepositCheckForm.class);
@@ -90,6 +92,18 @@ public class ConfirmDepositCheckAction extends Action {
 			
 			transaction.setTransaction_type(3);
      		transactionDAO.createDepChkTransaction(transaction);
+     		
+     		DecimalFormat df = new DecimalFormat("###,###,##0.00");
+     		TransactionBean[] trans = transactionDAO.getAllPendingDepChk();
+			TransactionHisForm[] allPendingDeposits = new TransactionHisForm[trans.length];
+			for(int i=0; i<allPendingDeposits.length; i++) 
+				allPendingDeposits[i] = new TransactionHisForm();
+			for(int i=0; i<allPendingDeposits.length; i++) {
+				CustomerBean customer = customerDAO.getCustomer(trans[i].getCustomer_id());
+				allPendingDeposits[i].setCustomerName(customer.getFirstname()+" "+customer.getLastname());
+				allPendingDeposits[i].setAmount(df.format((double)trans[i].getAmount()/100.0));
+			}
+			request.setAttribute("mFundList", allPendingDeposits);
 
 			request.setAttribute("success", "Your check is pending for execution");
 			form.setAmount("");
