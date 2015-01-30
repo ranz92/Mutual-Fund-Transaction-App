@@ -293,10 +293,8 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 				throw new RollbackException("Transaction "+transaction_id+" no longer exists");
 			}	
 			tran.setExecute_date(d);
-			long amount =new Double(new Double(tran.getShares())*new Double(price)/1000).longValue();
-			System.out.println(amount);
-			System.out.print(new Double(tran.getShares())*new Double(price)/1000);
-			tran.setAmount(amount);
+			double amount = new Double(tran.getShares())/1000.000*new Double (price);
+			tran.setAmount((long)amount);
 			update(tran);
 			Transaction.commit();
 		} finally {

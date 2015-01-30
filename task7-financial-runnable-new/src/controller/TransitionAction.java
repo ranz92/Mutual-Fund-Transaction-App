@@ -175,8 +175,12 @@ public class TransitionAction extends Action {
 		case 1:{
 			positionDAO.updatePosition(new PositionBean(tran.getCustomer_id(), tran.getFund_id(), 0-tran.getShares()));
 			transactionDAO.executeSell(tran.getTransaction_id(), d, price);
-			double amount = new Double(tran.getShares())*new Double(price);
-			customerDAO.updateCash(tran.getCustomer_id(), (long)(amount/1000));
+			double amount = new Double(tran.getShares())/1000.000*new Double (price);
+			System.out.println(new Double(tran.getShares()));
+			System.out.println(new Double(tran.getShares())/1000.000);
+			System.out.println(new Double (price));
+			System.out.println(new Double(tran.getShares())/1000.000*new Double (price));
+			customerDAO.updateCash(tran.getCustomer_id(), (long)amount);
 			break;
 			}
 		case 2:{

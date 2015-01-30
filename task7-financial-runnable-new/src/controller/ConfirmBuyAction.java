@@ -86,7 +86,7 @@ public class ConfirmBuyAction extends Action {
 			if(!transactionDAO.checkEnoughCash(customer.getCustomerId(), customer.getCash(), transaction.getAmount()))
 				errors.add("Not enough amount");
 			long maxBuy = transactionDAO.getMaxBuy(customer.getCustomerId(), customer.getCash(), positionDAO.getPositionsValue(customer.getCustomerId()));
-			long maxBuyByShare = (Long.MAX_VALUE-positionDAO.read(customer.getCustomerId(), transaction.getFund_id()).getShares())/100000;
+			long maxBuyByShare = (Long.MAX_VALUE-positionDAO.getShareValue(customer.getCustomerId(), transaction.getFund_id()))/100000;
 			if (Math.min(maxBuy, maxBuyByShare) == 0){
 				errors.add("You can't buy any fund now");
 			}

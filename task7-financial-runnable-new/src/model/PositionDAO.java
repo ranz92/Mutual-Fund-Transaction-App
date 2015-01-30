@@ -77,4 +77,12 @@ public class PositionDAO extends GenericDAO<PositionBean>{
 		}
 	}
 
+	public long getShareValue(int customerId, int fund_id) throws RollbackException {
+		// TODO Auto-generated method stub
+		if (read(customerId, fund_id)==null){
+			return 0;
+		}
+		else return read(customerId, fund_id).getShares();
+	}
+
 }
