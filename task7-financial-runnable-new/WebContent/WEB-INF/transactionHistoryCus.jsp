@@ -1,7 +1,6 @@
 <jsp:include page="template-top.jsp" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <h2>Transaction History</h2>
 <table class="table table-striped">
@@ -21,14 +20,14 @@
 	   <c:forEach var="item" items="${transactions}">
 		  
         <tr>
-			<td align="left"><%= index %><% index++; %></td>
-			<td align="left">${ item.transactionType }</td>
-			<td align="left">${ item.fundName }</td>
-			<td align="right"><fmt:formatNumber value="${ item.numShares }" type="number" pattern="#,##0.000" /></td>
-			<td align="right"><fmt:formatNumber value="${ item.sharePrice }" type="currency" pattern="#,##0.00" /></td>
-			<td align="right"><fmt:formatNumber value="${ item.amount }" type="currency" pattern="#,##0.00" /></td>
-			<td align="left">${ item.status }</td>
-			<td align="left"><fmt:formatDate value="${ item.executeDate }" type="date" /></td>
+			<td><%= index %><% index++; %></td>
+			<td>${ item.transactionType }</td>
+			<td>${ item.fundName }</td>
+			<td>${ item.numShares }</td>
+			<td>${ item.sharePrice }</td>
+			<td>${ item.amount }</td>
+			<td>${ item.status }</td>
+			<td>${ item.executeDate }</td>
 			</tr>
 	</c:forEach>
 </table>

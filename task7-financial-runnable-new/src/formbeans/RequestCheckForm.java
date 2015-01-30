@@ -36,13 +36,10 @@ public class RequestCheckForm extends FormBean {
 		List<String> errors = new ArrayList<String>();
 		
 		
-		if(amount == null || amount.length() == 0) {
+		if(amount == null) {
 			errors.add("Amount is required");
 		}
 		
-		if(amount.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*")) {
-			errors.add("Amount should not contain special characters.");
-		}
 		try {
 			Long.parseLong(amount);
 		} catch (NumberFormatException e) {
