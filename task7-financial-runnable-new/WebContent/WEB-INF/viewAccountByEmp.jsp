@@ -5,7 +5,7 @@
 
 <!-- Choose a certain customer -->	
     <h2> Choose a Customer </h2>
-    <p>Please specify a customer to view.</p>
+    <p>Please specify a customer to view the Transaction History.</p>
             <table class="table"">
 				<thead>
 				    <tr>
