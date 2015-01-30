@@ -56,6 +56,8 @@ public class BuyFundAction extends Action {
 			}
 			
 			CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
+			customer = customerDAO.getCustomer(customer.getCustomerId());
+			session.setAttribute("customer", customer);
 			session.setAttribute("fundList", fundDAO.getFundList());
 			TransactionBean[] trans = transactionDAO.getPendingBuy(customer.getCustomerId());
 			PositionOfUser[] pous = new PositionOfUser[trans.length];
