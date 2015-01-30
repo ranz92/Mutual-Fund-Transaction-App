@@ -45,7 +45,7 @@
 
 		<tr>
 			<td align="left"><%=index%><%index++;%></td>
-			<td align="left">>${ item.customerName }</td>
+			<td align="left">${ item.customerName }</td>
 			<td align="right">${ item.amount }</td>
 		</tr>
 	</c:forEach>
