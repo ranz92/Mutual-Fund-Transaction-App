@@ -26,7 +26,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit"
-					name="button" class="btn btn-default" value="Request Check" /></td>
+					name="button" class="btn btn-success" value="Request Check" /></td>
 			</tr>
 	</table>
 </form>
