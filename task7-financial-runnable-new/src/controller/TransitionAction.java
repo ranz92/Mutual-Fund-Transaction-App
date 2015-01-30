@@ -112,7 +112,7 @@ public class TransitionAction extends Action {
 				double a1 = a*100;
 				priceL = (new Double(a1)).longValue();
 				price = new PriceBean(rawPrices[i].getFund_id(), d, priceL);
-				priceDAO.create(price);
+				priceDAO.createPrice(price);
 				priceMap.put(rawPrices[i].getFund_id(), priceL);
 			}
 			
@@ -179,11 +179,18 @@ public class TransitionAction extends Action {
 		}
 	}
 
-	private List<String> getValidationErrors(HttpServletRequest request) {
+	private List<String> getValidationErrors(HttpServletRequest request) throws ParseException, RollbackException {
 		// TODO Auto-generated method stub
 		List<String> errors = new ArrayList<String>();
 		if (request.getParameter("date") == null || request.getParameter("date").length() == 0) {
 			errors.add("Please choose a transition day!");
+		}
+		else {
+		DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+		Date d = format.parse(request.getParameter("date"));
+		if (!d.after(priceDAO.getLastTransactionDay())){
+			errors.add("Please enter a transition day after " + format.format(priceDAO.getLastTransactionDay()));
+		}
 		}
 		long price;
 		RawPriceBean[] rawPrices = getPrices(request);

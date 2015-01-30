@@ -26,15 +26,7 @@ public class PriceDAO extends GenericDAO<PriceBean> {
 					price.getPrice_date()+" already exists");
 		}
 		if (price.getPrice_date() == null) {
-			
-			System.out.println("No date");
-			System.out.println(price.getPrice_date());
-
-		}
-
-		if (price.getPrice_date().after(getLastTransactionDay())){
-			throw new RollbackException("Please enter date after "+
-					price.getPrice_date()+" for transition day");
+			throw new RollbackException("No date specified");
 		}
 		try {
 			Transaction.begin();
