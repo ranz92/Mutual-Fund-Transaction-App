@@ -9,19 +9,19 @@
 	<table class="table table-striped table-condensed">
 		<thead>
 			<tr>
-				<td>User Name:</td>
+				<td>User Name</td>
 				<td>${customer.username}</td>
 			</tr>
 			<tr>
-				<td>Full Name:</td>
-				<td>${customer.firstname}${customer.lastname}</td>
+				<td>Full Name</td>
+				<td>${customer.firstname} ${customer.lastname}</td>
 			</tr>
 			<tr>
-				<td>Available Balance:</td>
+				<td>Available Balance ($)</td>
 				<td>${availableAmount}</td>
 			</tr>
 			<tr>
-				<td>Amount:</td>
+				<td>Amount</td>
 				<td><input type="text" name="amount"></td>
 			</tr>
 			<tr>

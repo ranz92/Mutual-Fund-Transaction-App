@@ -55,6 +55,9 @@ public class ConfirmRequestCheckAction extends Action {
 			CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
 			RequestCheckForm form  = formBeanFactory.create(request);
 			request.setAttribute("form", form);
+			if (errors.size() != 0) {
+				return "requestCheck.jsp";
+			}
 			TransactionBean transaction = new TransactionBean();
 			transaction.setCustomer_id(customer.getCustomerId());
 			transaction.setFund_id(form.getIdAsInt()); //should obtain from fund table, which is not established so far. So recorded as 0 temporarily here.
@@ -78,6 +81,7 @@ public class ConfirmRequestCheckAction extends Action {
 				errors.add("Amount should be at least $0.01");
 				return "requestCheck.jsp";
 			}
+			System.out.println(transaction.getAmount());
 			if(transaction.getAmount() > 1000000) {
 				errors.add("Amount should be less than $1,000,000");
 				return "requestCheck.jsp";

@@ -14,7 +14,7 @@
 							Name:
 						</td>
 						<td>
-							${customer.firstname},   ${customer.lastname}
+							${customer.firstname}   ${customer.lastname}
 						</td>
 						
 					</tr>
