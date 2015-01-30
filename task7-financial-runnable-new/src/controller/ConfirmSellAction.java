@@ -93,11 +93,12 @@ public class ConfirmSellAction extends Action {
 			if(!transactionDAO.checkEnoughShare(customer.getCustomerId(), transaction.getFund_id(),positionDAO.read(customer.getCustomerId(),transaction.getFund_id()).getShares(), transaction.getShares()))
 				errors.add("No enough share");
 			
-			transactionDAO.createSellTransaction(transaction);
-
 			if(errors.size() > 0) {
 				return "sellFund.jsp";
 			}
+
+			transactionDAO.createSellTransaction(transaction);
+
 			session = request.getSession();
 			PositionBean[] pbs = positionDAO.getPositions(customer.getCustomerId());
 			PositionOfUser[] ownList = new PositionOfUser[pbs.length];

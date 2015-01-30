@@ -17,11 +17,11 @@ public class FundDAO extends GenericDAO<FundBean> {
 	}
 //Jiayi changed to autoincrement
 	public void create(FundBean Fund) throws RollbackException {
-		FundBean[] funds = match(MatchArg.equals("name", Fund.getName()));
+		FundBean[] funds = match(MatchArg.equals("symbol", Fund.getSymbol()));
 		if (funds.length > 0) {
-			throw new RollbackException("Fund name \" "+
-		Fund.getName()+" \"already exists");
-		}
+				throw new RollbackException("Ticker name \""+
+			Fund.getSymbol()+"\" already exists");
+		 		}
 		try {
 			Transaction.begin();
 

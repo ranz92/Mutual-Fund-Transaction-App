@@ -81,12 +81,13 @@ public class ConfirmBuyAction extends Action {
 			if(!transactionDAO.checkEnoughCash(customer.getCustomerId(), customer.getCash(), transaction.getAmount()))
 				errors.add("Not enough amount");
 			
-			transactionDAO.createBuyTransaction(transaction);
-		
+			
 			if(errors.size() > 0) {
 				
 				return "buyFund.jsp";
 			} else {
+				transactionDAO.createBuyTransaction(transaction);
+				
 				
 				success.add("You have bought fund successfully.");
 				form.setAmount("");
