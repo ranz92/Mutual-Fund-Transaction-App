@@ -136,7 +136,6 @@ public class ConfirmRequestCheckAction extends Action {
 //			return "requestCheck.jsp";
 		} catch(FormBeanException e) {
 			errors.add(e.getMessage());
-			return "requestCheck.jsp";
 		} catch (RollbackException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

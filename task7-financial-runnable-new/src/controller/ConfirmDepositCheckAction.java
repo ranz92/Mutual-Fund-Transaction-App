@@ -71,15 +71,66 @@ public class ConfirmDepositCheckAction extends Action {
 				
 				if(amt < 0){
 					errors.add("Amount should be a positive number");
+					try {
+						DecimalFormat df = new DecimalFormat("###,###,##0.00");
+				 		TransactionBean[] trans;
+						trans = transactionDAO.getAllPendingDepChk();
+						TransactionHisForm[] allPendingDeposits = new TransactionHisForm[trans.length];
+						for(int i=0; i<allPendingDeposits.length; i++) 
+							allPendingDeposits[i] = new TransactionHisForm();
+						for(int i=0; i<allPendingDeposits.length; i++) {
+							CustomerBean customer = customerDAO.getCustomer(trans[i].getCustomer_id());
+							allPendingDeposits[i].setCustomerName(customer.getFirstname()+" "+customer.getLastname());
+							allPendingDeposits[i].setAmount(df.format((double)trans[i].getAmount()/100.0));
+						}
+						request.setAttribute("mFundList", allPendingDeposits);
+					} catch (RollbackException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					return "depositCheck.jsp";
 				}
 				
 				if(amt < 1) {
 					errors.add("Amount should be at least $0.01");
+					try {
+						DecimalFormat df = new DecimalFormat("###,###,##0.00");
+				 		TransactionBean[] trans;
+						trans = transactionDAO.getAllPendingDepChk();
+						TransactionHisForm[] allPendingDeposits = new TransactionHisForm[trans.length];
+						for(int i=0; i<allPendingDeposits.length; i++) 
+							allPendingDeposits[i] = new TransactionHisForm();
+						for(int i=0; i<allPendingDeposits.length; i++) {
+							CustomerBean customer = customerDAO.getCustomer(trans[i].getCustomer_id());
+							allPendingDeposits[i].setCustomerName(customer.getFirstname()+" "+customer.getLastname());
+							allPendingDeposits[i].setAmount(df.format((double)trans[i].getAmount()/100.0));
+						}
+						request.setAttribute("mFundList", allPendingDeposits);
+					} catch (RollbackException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					return "depositCheck.jsp";
 				}
 				if(amt /100> 1000000000) {
 					errors.add("Amount should be less than $1,000,000,000.00");
+					try {
+						DecimalFormat df = new DecimalFormat("###,###,##0.00");
+				 		TransactionBean[] trans;
+						trans = transactionDAO.getAllPendingDepChk();
+						TransactionHisForm[] allPendingDeposits = new TransactionHisForm[trans.length];
+						for(int i=0; i<allPendingDeposits.length; i++) 
+							allPendingDeposits[i] = new TransactionHisForm();
+						for(int i=0; i<allPendingDeposits.length; i++) {
+							CustomerBean customer = customerDAO.getCustomer(trans[i].getCustomer_id());
+							allPendingDeposits[i].setCustomerName(customer.getFirstname()+" "+customer.getLastname());
+							allPendingDeposits[i].setAmount(df.format((double)trans[i].getAmount()/100.0));
+						}
+						request.setAttribute("mFundList", allPendingDeposits);
+					} catch (RollbackException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					return "depositCheck.jsp";
 				}
 				
@@ -87,23 +138,30 @@ public class ConfirmDepositCheckAction extends Action {
 				request.setAttribute("customerList", customerDAO.getCustomer());
 			} catch (NumberFormatException e) {
 				errors.add("Amount should be a valid number");
+				try {
+					DecimalFormat df = new DecimalFormat("###,###,##0.00");
+			 		TransactionBean[] trans;
+					trans = transactionDAO.getAllPendingDepChk();
+					TransactionHisForm[] allPendingDeposits = new TransactionHisForm[trans.length];
+					for(int i=0; i<allPendingDeposits.length; i++) 
+						allPendingDeposits[i] = new TransactionHisForm();
+					for(int i=0; i<allPendingDeposits.length; i++) {
+						CustomerBean customer = customerDAO.getCustomer(trans[i].getCustomer_id());
+						allPendingDeposits[i].setCustomerName(customer.getFirstname()+" "+customer.getLastname());
+						allPendingDeposits[i].setAmount(df.format((double)trans[i].getAmount()/100.0));
+					}
+					request.setAttribute("mFundList", allPendingDeposits);
+				} catch (RollbackException ee) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				return "depositCheck.jsp";
 			}
 			
 			transaction.setTransaction_type(3);
      		transactionDAO.createDepChkTransaction(transaction);
      		
-     		DecimalFormat df = new DecimalFormat("###,###,##0.00");
-     		TransactionBean[] trans = transactionDAO.getAllPendingDepChk();
-			TransactionHisForm[] allPendingDeposits = new TransactionHisForm[trans.length];
-			for(int i=0; i<allPendingDeposits.length; i++) 
-				allPendingDeposits[i] = new TransactionHisForm();
-			for(int i=0; i<allPendingDeposits.length; i++) {
-				CustomerBean customer = customerDAO.getCustomer(trans[i].getCustomer_id());
-				allPendingDeposits[i].setCustomerName(customer.getFirstname()+" "+customer.getLastname());
-				allPendingDeposits[i].setAmount(df.format((double)trans[i].getAmount()/100.0));
-			}
-			request.setAttribute("mFundList", allPendingDeposits);
+     		
 
 			request.setAttribute("success", "Your check is pending for execution");
 			form.setAmount("");
@@ -113,6 +171,26 @@ public class ConfirmDepositCheckAction extends Action {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		try {
+			DecimalFormat df = new DecimalFormat("###,###,##0.00");
+	 		TransactionBean[] trans;
+			trans = transactionDAO.getAllPendingDepChk();
+			TransactionHisForm[] allPendingDeposits = new TransactionHisForm[trans.length];
+			for(int i=0; i<allPendingDeposits.length; i++) 
+				allPendingDeposits[i] = new TransactionHisForm();
+			for(int i=0; i<allPendingDeposits.length; i++) {
+				CustomerBean customer = customerDAO.getCustomer(trans[i].getCustomer_id());
+				allPendingDeposits[i].setCustomerName(customer.getFirstname()+" "+customer.getLastname());
+				allPendingDeposits[i].setAmount(df.format((double)trans[i].getAmount()/100.0));
+			}
+			request.setAttribute("mFundList", allPendingDeposits);
+		} catch (RollbackException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		return "depositCheck.jsp";
 		
 	}
