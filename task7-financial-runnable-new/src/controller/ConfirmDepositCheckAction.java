@@ -82,7 +82,6 @@ public class ConfirmDepositCheckAction extends Action {
 				}
 				
 				transaction.setAmount((long)amt);
-				request.setAttribute("success", "Your check deposit of $" + transaction.getAmount()/100.0 + " is pending for execution");
 				request.setAttribute("customerList", customerDAO.getCustomer());
 			} catch (NumberFormatException e) {
 				errors.add("Amount should be a valid number");
