@@ -27,6 +27,7 @@ import model.TransactionDAO;
 import formbeans.CustomerForm;
 import formbeans.DepositCheckForm;
 import formbeans.RequestCheckForm;
+import formbeans.TransactionHisForm;
 
 public class DepChkAction extends Action {
 	private FormBeanFactory<DepositCheckForm> formBeanFactory = FormBeanFactory
@@ -53,6 +54,8 @@ public class DepChkAction extends Action {
         List<String> success = new ArrayList<String>();
         request.setAttribute("success",success);
         
+        DecimalFormat df = new DecimalFormat("###,###,##0.00");
+        
         if(request.getSession().getAttribute("employee") == null) {
 			errors.add("Please log in as an employee.");
 			return "login.jsp";
@@ -65,6 +68,16 @@ public class DepChkAction extends Action {
 			try {
 				//List the all the customer in the dropdown menu.
 				request.setAttribute("customerList", cusDAO.getCustomer());
+				TransactionBean[] trans = transactionDAO.getAllPendingDepChk();
+				TransactionHisForm[] allPendingDeposits = new TransactionHisForm[trans.length];
+				for(int i=0; i<allPendingDeposits.length; i++) 
+					allPendingDeposits[i] = new TransactionHisForm();
+				for(int i=0; i<allPendingDeposits.length; i++) {
+					CustomerBean customer = cusDAO.getCustomer(trans[i].getCustomer_id());
+					allPendingDeposits[i].setCustomerName(customer.getFirstname()+" "+customer.getLastname());
+					allPendingDeposits[i].setAmount(df.format((double)trans[i].getAmount()/100.0));
+				}
+				request.setAttribute("mFundList", allPendingDeposits);
 				return "depositCheck.jsp";
 			} catch (RollbackException e) {
 				errors.add(e.getMessage());
