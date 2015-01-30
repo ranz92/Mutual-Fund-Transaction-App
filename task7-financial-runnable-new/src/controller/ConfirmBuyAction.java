@@ -74,9 +74,14 @@ public class ConfirmBuyAction extends Action {
 			}
 			
 			
-			if (transactionDAO.checkEnoughCash(customer.getCustomerId(), customer.getCash(), transaction.getAmount()))
+//			if (transactionDAO.checkEnoughCash(customer.getCustomerId(), customer.getCash(), transaction.getAmount()))
+//			transactionDAO.createBuyTransaction(transaction);
+//			else errors.add("Not enough amount");
+			
+			if(!transactionDAO.checkEnoughCash(customer.getCustomerId(), customer.getCash(), transaction.getAmount()))
+				errors.add("Not enough amount");
+			
 			transactionDAO.createBuyTransaction(transaction);
-			else errors.add("Not enough amount");
 		
 			if(errors.size() > 0) {
 				
