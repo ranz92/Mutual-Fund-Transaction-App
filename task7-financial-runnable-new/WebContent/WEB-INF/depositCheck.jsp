@@ -29,7 +29,6 @@
 	</c:forEach>
 </table>
 
-<jsp:include page="template-bottom.jsp" />
 <h2>Pending Check Deposit</h2>
 <table class="table table-striped">
 	<thead>
