@@ -1,7 +1,9 @@
 package model;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.genericdao.ConnectionPool;
 import org.genericdao.DAOException;
@@ -60,7 +62,9 @@ public class PriceDAO extends GenericDAO<PriceBean> {
 		if (prices.length>0){
 		return prices[prices.length - 1].getPrice_date();
 		}
-		else return (new Date());
+		else {
+			return null;
+		}
 	}
 
 

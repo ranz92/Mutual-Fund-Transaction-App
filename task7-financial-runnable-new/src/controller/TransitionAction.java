@@ -84,13 +84,20 @@ public class TransitionAction extends Action {
 			DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
 			Date d = priceDAO.getLastTransactionDay();
 			Calendar c = new GregorianCalendar();
-			c.setTime(d);
-			c.set(Calendar.HOUR_OF_DAY, 0); //anything 0 - 23
-		    c.set(Calendar.MINUTE, 0);
-		    c.set(Calendar.SECOND, 0);
-		    c.add(Calendar.DATE, 1);
+			c.set(1900, 01, 01);
 		    session.setAttribute("count", cfbs.length);
-			session.setAttribute("lastTranDay", format.format(d));
+		    if (d == null){
+		    	session.setAttribute("lastTranDay", "No transition day occurred");
+		    }
+		    else {
+		    	
+				c.setTime(d);
+				c.set(Calendar.HOUR_OF_DAY, 0); //anything 0 - 23
+			    c.set(Calendar.MINUTE, 0);
+			    c.set(Calendar.SECOND, 0);
+			    c.add(Calendar.DATE, 1);
+		    	session.setAttribute("lastTranDay", format.format(d));
+		    }
 			session.setAttribute("nextTranDay", format.format(c.getTime()));
 		    if (request.getParameter("count") == null) {
 				return "transition.jsp";
@@ -132,14 +139,19 @@ public class TransitionAction extends Action {
 			}
 			session.setAttribute("fundList", cfbs);
 			d = priceDAO.getLastTransactionDay();
-			c.setTime(d);
-			c.set(Calendar.HOUR_OF_DAY, 0); //anything 0 - 23
-		    c.set(Calendar.MINUTE, 0);
-		    c.set(Calendar.SECOND, 0);
-		    c.add(Calendar.DATE, 1);
+			
 		    session.setAttribute("count", cfbs.length);
-			session.setAttribute("lastTranDay", format.format(d));
-			session.setAttribute("nextTranDay", format.format(c.getTime()));
+		    if (d == null){
+		    	session.setAttribute("lastTranDay", "No transition day occurred");
+		    }
+		    else {
+		    	c.setTime(d);
+				c.set(Calendar.HOUR_OF_DAY, 0); //anything 0 - 23
+			    c.set(Calendar.MINUTE, 0);
+			    c.set(Calendar.SECOND, 0);
+			    c.add(Calendar.DATE, 1);
+		    	session.setAttribute("lastTranDay", format.format(d));
+		    }session.setAttribute("nextTranDay", format.format(c.getTime()));
 			return "transition.jsp";
 		} catch (RollbackException e) {
 			errors.add(e.getMessage());
@@ -188,7 +200,7 @@ public class TransitionAction extends Action {
 		else {
 		DateFormat format = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
 		Date d = format.parse(request.getParameter("date"));
-		if (!d.after(priceDAO.getLastTransactionDay())){
+		if (priceDAO.getLastTransactionDay()!=null && !d.after(priceDAO.getLastTransactionDay())){
 			errors.add("Please enter a transition day after " + format.format(priceDAO.getLastTransactionDay()));
 		}
 		}
