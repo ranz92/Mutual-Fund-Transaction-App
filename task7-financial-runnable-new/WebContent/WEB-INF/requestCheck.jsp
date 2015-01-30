@@ -35,10 +35,10 @@
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th>#</th>
+			<th align="left">>#</th>
 <!-- 			<th>Date</th> -->
-			<th>Transaction</th>
-			<th>Amount</th>
+			<th align="left">>Transaction</th>
+			<th align="right">Amount</th>
 		</tr>
 	</thead>
 	<%
@@ -47,10 +47,10 @@
 	<c:forEach var="item" items="${mFundList}">
 
 		<tr>
-			<td><%=index%><%index++;%></td>
+			<td align="left">><%=index%><%index++;%></td>
 <%-- 			<td>${ item.date }</td> --%>
-			<td>${ item.name }</td>
-			<td>${ item.amount }</td>
+			<td align="left">>${ item.name }</td>
+			<td align="right">${ item.amount }</td>
 		</tr>
 	</c:forEach>
 </table>

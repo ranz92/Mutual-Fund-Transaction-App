@@ -30,7 +30,7 @@
 			<td align="right">${ item.sharePrice }</td>
 			<td align="right">${ item.amount }</td>
 			<td align="left">${ item.status }</td>
-			<td align="left">${ item.executeDate }</td>
+			<td align="left"><fmt:formatDate value="${ item.executeDate }" type="date"/></td>
 			</tr>
 	</c:forEach>
 </table>
