@@ -37,10 +37,10 @@ public class CreateFundForm extends FormBean {
 			errors.add("Ticker length must be between 1 and 5");
 		}
 		
-		if (fundName.matches(".*[<>?*\"].*"))
-	            errors.add("Fund Name may not contain angle brackets or quotes");
-	    if (ticker.matches(".*[<>?*\"].*"))
-	            errors.add("Ticker may not contain angle brackets or quotes");
+		if (fundName.matches(".*[<>&?*\"].*"))
+	            errors.add("Fund Name may not contain special characters");
+	    if (ticker.matches(".*[<>?&*\"].*"))
+	            errors.add("Ticker may not contain special characters");
 	    
     	
 		return errors;
