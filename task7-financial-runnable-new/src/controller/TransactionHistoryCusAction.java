@@ -116,11 +116,11 @@ public class TransactionHistoryCusAction extends Action {
 							}
 						}
 						histories[i].setSharePrice(dfPrice.format(thePrice / 100.0));
-						if (histories[i].getTransactionType()
-								.equals("Buy Fund")) {
+						if (histories[i].getTransactionType().equals("Buy Fund")) {
 							histories[i].setNumShares(dfShare.format((double) (allTransactions[i].getAmount()/100.0)/(thePrice/100.0)));
 						} else if (histories[i].getTransactionType().equals("Sell Fund")) {
-							histories[i].setNumShares(dfShare.format((double) allTransactions[i].getShares()/1000.0));
+//							histories[i].setNumShares(dfShare.format((double) allTransactions[i].getShares()/1000.0));
+							histories[i].setNumShares(dfShare.format((double) allTransactions[i].getShares()));
 						} else {
 							histories[i].setNumShares("");
 						}

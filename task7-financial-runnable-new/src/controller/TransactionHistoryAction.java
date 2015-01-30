@@ -145,7 +145,7 @@ public class TransactionHistoryAction extends Action {
 						}
 						histories[i].setSharePrice(dfPrice.format(thePrice/100.0));
 						if(allTransactions[i].getTransaction_type() == 0){
-							histories[i].setNumShares(dfShare.format((double)allTransactions[i].getAmount()/100.0/thePrice/100.0));
+							histories[i].setNumShares(dfShare.format((double)(allTransactions[i].getAmount()/100.0)/(thePrice/100.0)));
 						} else if (allTransactions[i].getTransaction_type() == 1) {
 							histories[i].setNumShares(dfShare.format((double)allTransactions[i].getShares()/100.0));
 						}
