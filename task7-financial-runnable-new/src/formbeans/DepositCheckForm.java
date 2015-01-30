@@ -40,6 +40,10 @@ public class DepositCheckForm extends FormBean {
 			errors.add("Amount is required");
 		}
 		
+		if(amount.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*")) {
+			errors.add("Amount should not contain special characters.");
+		}
+		
 		if (errors.size() > 0) {
 			return errors;
 		}

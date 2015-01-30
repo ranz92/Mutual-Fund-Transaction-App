@@ -82,21 +82,21 @@ public class CusRegisterForm extends FormBean {
 		}
 		
 		if (username.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
-			errors.add("User Name may not contain angle brackets or quotes");
+			errors.add("User Name may not contain special characters");
 		if (firstName.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
-			errors.add("First Name may not contain angle brackets or quotes");
+			errors.add("First Name may not contain special characters");
 		if (lastName.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
-			errors.add("Last Name may not contain angle brackets or quotes");
+			errors.add("Last Name may not contain special characters");
 		if (password.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
-			errors.add("Password may not contain angle brackets or quotes");
+			errors.add("Password may not contain special characters");
 		if ((addrL1 != null && addrL1.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*")) || (addrL2 != null && addrL2.matches(".*[<>\"?].*"))  )
-			errors.add("Address may not contain angle brackets or quotes");
+			errors.add("Address may not contain special characters");
 		if (city != null && city.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
-			errors.add("City may not contain angle brackets or quotes");
+			errors.add("City may not contain special characters");
 		if (state != null && state.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
-			errors.add("State may not contain angle brackets or quotes");
+			errors.add("State may not contain special characters");
 		if (zip != null && zip.matches(".*[<>!@#$%^&*()+=_<>,/?`~\"?~#%&].*"))
-			errors.add("Zip Code may not contain angle brackets or quotes");
+			errors.add("Zip Code may not contain special characters");
 		
 		if (!password.equals(confirm)) {
 			errors.add("Passwords are not the same");
