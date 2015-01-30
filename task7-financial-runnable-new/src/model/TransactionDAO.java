@@ -129,19 +129,30 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 		}
 		return true;
 	}
-	public long getMaxBuy(int customerId, long cash, long amount)
+	public long getMaxBuy(int customerId, long cash)
 			throws RollbackException {
 		long max = Long.MAX_VALUE;
+		max -= cash;
 		TransactionBean[] transactions = match(MatchArg.and(
 				MatchArg.equals("customer_id", customerId),
 				MatchArg.equals("execute_date", null),
-				MatchArg.or(MatchArg.equals("transaction_type", 0),
-						MatchArg.equals("transaction_type", 2))));
-		max = (max-cash)/9999;
+				MatchArg.equals("transaction_type", 2)));
 		for (TransactionBean tran : transactions) {
 			max -= tran.getAmount();
-			if (max < 0)
+			if (max < 0){
 				return 0;
+			}
+		}
+		max /= 9999;
+		TransactionBean[] transactionsBuy = match(MatchArg.and(
+				MatchArg.equals("customer_id", customerId),
+				MatchArg.equals("execute_date", null),
+				MatchArg.equals("transaction_type", 0)));
+		for (TransactionBean tran : transactionsBuy) {
+			max -= tran.getAmount();
+			if (max < 0){
+				return 0;
+			}
 		}
 		return max;
 	}
@@ -278,8 +289,10 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 				throw new RollbackException("Transaction "+transaction_id+" no longer exists");
 			}	
 			tran.setExecute_date(d);
-			double amount = new Double(tran.getShares())*new Double(price);
-			tran.setAmount((long)(amount/1000));
+			long amount =new Double(new Double(tran.getShares())*new Double(price)/1000).longValue();
+			System.out.println(amount);
+			System.out.print(new Double(tran.getShares())*new Double(price)/1000);
+			tran.setAmount(amount);
 			update(tran);
 			Transaction.commit();
 		} finally {

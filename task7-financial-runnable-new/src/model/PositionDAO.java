@@ -51,6 +51,15 @@ public class PositionDAO extends GenericDAO<PositionBean>{
 		PositionBean[] positions = match(MatchArg.notEquals("shares", 0L), MatchArg.equals("customer_id", cusId));
 		return positions;
 	}
+	
+	public long getPositionsValue(int cusId) throws RollbackException {
+		long value=0L;
+		PositionBean[] positions = match(MatchArg.notEquals("shares", 0L), MatchArg.equals("customer_id", cusId));
+		for (PositionBean position : positions){
+			value += position.getShares()*100;
+		}
+		return value;
+	}
 
 	public void delete(int customerId, int fundId) throws RollbackException {
 		try {
@@ -67,4 +76,5 @@ public class PositionDAO extends GenericDAO<PositionBean>{
 			if (Transaction.isActive()) Transaction.rollback();
 		}
 	}
+
 }

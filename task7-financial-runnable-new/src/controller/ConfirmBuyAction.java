@@ -17,6 +17,7 @@ import databeans.PositionOfUser;
 import databeans.TransactionBean;
 import model.CustomerDAO;
 import model.Model;
+import model.PositionDAO;
 import model.TransactionDAO;
 import model.FundDAO;
 import formbeans.BuyForm;
@@ -26,11 +27,13 @@ public class ConfirmBuyAction extends Action {
 	private CustomerDAO customerDAO;
 	private TransactionDAO transactionDAO;
 	private FundDAO fundDAO;
+	private PositionDAO positionDAO;
 	
 	public ConfirmBuyAction(Model model) {
 		customerDAO = model.getCustomerDAO();
 		transactionDAO = model.getTransactionDAO();
 		fundDAO = model.getFundDAO();
+		positionDAO = model.getPositionDAO();
 	}
 	
 	public String getName() {
@@ -82,9 +85,13 @@ public class ConfirmBuyAction extends Action {
 			
 			if(!transactionDAO.checkEnoughCash(customer.getCustomerId(), customer.getCash(), transaction.getAmount()))
 				errors.add("Not enough amount");
+			long maxBuy = transactionDAO.getMaxBuy(customer.getCustomerId(), customer.getCash()+positionDAO.getPositionsValue(customer.getCustomerId()));
+			long maxBuyByShare = (Long.MAX_VALUE-positionDAO.read(customer.getCustomerId(), transaction.getFund_id()).getShares())/100000;
+			System.out.println(maxBuy);
+			System.out.println(maxBuyByShare);
+			if (transaction.getAmount()> Math.min(maxBuy, maxBuyByShare))
+			errors.add("Please enter amount less than "+Math.min(maxBuy, maxBuyByShare));
 			
-			if (transaction.getAmount()>transactionDAO.getMaxBuy(customer.getCustomerId(), customer.getCash(), transaction.getAmount()))
-				errors.add("Please enter amount less than "+transactionDAO.getMaxBuy(customer.getCustomerId(), customer.getCash(), transaction.getAmount()));
 			if(errors.size() > 0) {
 				
 				return "buyFund.jsp";
