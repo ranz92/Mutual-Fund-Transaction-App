@@ -76,12 +76,13 @@ public class ConfirmDepositCheckAction extends Action {
 					errors.add("Amount should be at least $0.01");
 					return "depositCheck.jsp";
 				}
-				if(amt > 1000000000) {
+				if(amt /100> 1000000000) {
 					errors.add("Amount should be less than $1,000,000,000.00");
 					return "depositCheck.jsp";
 				}
 				
 				transaction.setAmount((long)amt);
+				request.setAttribute("success", "Your check deposit of $" + transaction.getAmount()/100.0 + " is pending for execution");
 				request.setAttribute("customerList", customerDAO.getCustomer());
 			} catch (NumberFormatException e) {
 				errors.add("Amount should be a valid number");
