@@ -107,7 +107,7 @@
 					<div class="panel-heading">
 						 <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-872653" href="#panel-element-236921">Financial Operation</a>
 					</div>
-					<div id="panel-element-236921" class="panel-collapse collapse">
+					<div id="panel-element-236921" class="panel-collapse ">
 						<div class="panel-body">
 							<a  href="depositCheck.do">Deposit Check  </a>						
 						</div>
@@ -124,7 +124,7 @@
 					<div class="panel-heading">
 						 <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-872653" href="#panel-element-236922">Account Operation</a>
 					</div>
-					<div id="panel-element-236922" class="panel-collapse collapse">
+					<div id="panel-element-236922" class="panel-collapse">
 						<div class="panel-body">
 							<a  href="empRegister.do">Create Employee Account </a>						
 						</div>
