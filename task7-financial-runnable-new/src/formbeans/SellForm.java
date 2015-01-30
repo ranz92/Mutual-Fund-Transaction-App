@@ -61,7 +61,7 @@ public class SellForm extends FormBean {
 			errors.add("Please enter shares to sell.");
 		}
 		
-		if (shares != null && shares.matches(".*[<>\"?~#%&].*"))
+		if (shares != null && shares.matches(".*[<>@=!#$%^&*()-=_+\"?~#%&].*"))
 			errors.add("Special characters are not allowed. Please enter numbers for share.");
 		
 		try {
