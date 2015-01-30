@@ -209,7 +209,6 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 			}	
 			tran.setExecute_date(d);
 			tran.setShares(tran.getAmount()/price);
-			System.out.print(tran.getTransaction_id()+" "+tran.getAmount()+" "+tran.getShares()+" "+price);
 			update(tran);
 			Transaction.commit();
 		} finally {
