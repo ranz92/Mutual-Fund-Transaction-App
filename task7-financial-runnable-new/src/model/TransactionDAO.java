@@ -223,7 +223,7 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 			if (tran == null) {
 				throw new RollbackException("Transaction "+transaction_id+" no longer exists");
 			}	
-			tran.setExecute_date(d);;
+			tran.setExecute_date(d);
 			update(tran);
 			Transaction.commit();
 		} finally {
@@ -238,7 +238,7 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 			if (tran == null) {
 				throw new RollbackException("Transaction "+transaction_id+" no longer exists");
 			}	
-			tran.setExecute_date(d);;
+			tran.setExecute_date(d);
 			tran.setAmount(tran.getShares()*price/1000);
 			update(tran);
 			Transaction.commit();
