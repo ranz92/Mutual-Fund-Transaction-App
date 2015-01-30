@@ -62,6 +62,8 @@ public class ConfirmDepositCheckAction extends Action {
 			transaction.setTransaction_type(3);
 			transaction.setFund_id(-1);
 			try{
+				request.setAttribute("customerList", customerDAO.getCustomer());
+
 				double amt = Double.parseDouble(form.getAmount());
 				amt = Math.round(amt * 100.0);
 				
@@ -88,7 +90,6 @@ public class ConfirmDepositCheckAction extends Action {
 			transaction.setTransaction_type(3);
 
 			
-			request.setAttribute("customerList", customerDAO.getCustomer());
 			
 			transactionDAO.createDepChkTransaction(transaction);
 			request.setAttribute("success", "SUCCESS");

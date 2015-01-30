@@ -77,7 +77,7 @@ public class ViewByEmployeeAction extends Action{
 				//System.out.println(username);
 				if (username == null) {
 					errors.add("A customer should be specified!");
-					return "error.jsp";
+					return "viewAccountByEmp.jsp";
 				} else {
 					//DecimalFormat df = new DecimalFormat("#,###.00");
 					CustomerBean user = cusDAO.read(username);

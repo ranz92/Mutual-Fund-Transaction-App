@@ -10,7 +10,7 @@
 				
 				<tbody>
 					<tr>
-						<td>
+						<td class="active">
 							Name:
 						</td>
 						<td>
@@ -28,7 +28,7 @@
 						
 					</tr>
 					<tr>
-						<td>
+						<td class="active">
 							Address (line 2):
 						</td>
 						<td>
@@ -46,7 +46,7 @@
 						
 					</tr>
 					<tr>
-						<td>
+						<td class="active">
 							State
 						</td>
 						<td>
@@ -65,7 +65,7 @@
 					</tr>
 					
 					<tr>
-						<td>
+						<td class="active">
 							Cash Balance:
 						</td>
 						<td>
@@ -74,7 +74,7 @@
 						
 					</tr>
 					
-				<tr class="active">
+				<tr >
 					    <td>
 							Last Trading Day
 						</td>
