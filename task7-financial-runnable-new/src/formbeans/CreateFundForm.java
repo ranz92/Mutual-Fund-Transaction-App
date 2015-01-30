@@ -37,9 +37,9 @@ public class CreateFundForm extends FormBean {
 			errors.add("Ticker length must be between 1 and 5");
 		}
 		
-		if (fundName.matches(".*[<>&?*\"].*"))
+		if (fundName.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
 	            errors.add("Fund Name may not contain special characters");
-	    if (ticker.matches(".*[<>?&*\"].*"))
+	    if (ticker.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
 	            errors.add("Ticker may not contain special characters");
 	    
     	

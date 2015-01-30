@@ -91,6 +91,17 @@ public class CusRegisterAction extends Action{
 //	                return "cusRegister.jsp";
 					
 					success.add("A new customer "+form.getUsername()+" has been created.");
+					form.setAddrL1("");
+					form.setAddrL2("");
+					form.setCash("");
+					form.setCity("");
+					form.setConfirm("");
+					form.setFirstName("");
+					form.setLastName("");
+					form.setPassword("");
+					form.setUsername("");
+					form.setZip("");
+					
 					return "cusRegister.jsp";
 	               
 				}

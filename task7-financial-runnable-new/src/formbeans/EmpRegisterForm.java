@@ -47,14 +47,14 @@ public class EmpRegisterForm extends FormBean{
 			errors.add("Confirm Password is required");
 		}
 		
-		if (username.matches(".*[<>*?/\"?].*"))
-			errors.add("User Name may not contain angle brackets, quotes or question mark");
-		if (firstName.matches(".*[<>*?/\"?].*"))
-			errors.add("First Name may not contain angle brackets, quotes or question mark");
-		if (lastName.matches(".*[<>*?/\"?].*"))
-			errors.add("Last Name may not contain angle brackets, quotes or question mark");
-		if (password.matches(".*[<>*?/\"?].*"))
-			errors.add("Password may not contain angle brackets, quotes or question mark");
+		if (username.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
+			errors.add("User Name may not contain special characters");
+		if (firstName.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
+			errors.add("First Name may not contain special characters");
+		if (lastName.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
+			errors.add("Last Name may not contain special characters");
+		if (password.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
+			errors.add("Password may not contain special characters");
 		
 		if (!password.equals(confirm)) {
 			errors.add("Passwords are not the same");
