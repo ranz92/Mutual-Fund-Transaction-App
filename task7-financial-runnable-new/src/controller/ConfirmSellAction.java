@@ -125,7 +125,7 @@ public class ConfirmSellAction extends Action {
 				pous[i] = pou;				
 			}
 			session.setAttribute("mSellList", pous);
-			success.add("You have sold fund " + form.getFundId() + " successfully."); 
+			success.add("You have sold fund successfully."); 
 			form.setShares("");
 			
 			return "sellFund.jsp";
