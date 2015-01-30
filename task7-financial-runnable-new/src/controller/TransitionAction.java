@@ -168,7 +168,7 @@ public class TransitionAction extends Action {
 		case 0:{
 			customerDAO.updateCash(tran.getCustomer_id(), 0-tran.getAmount());
 			transactionDAO.executeBuy(tran.getTransaction_id(), d, price);
-			positionDAO.updatePosition(new PositionBean(tran.getCustomer_id(), tran.getFund_id(), tran.getAmount()/price));
+			positionDAO.updatePosition(new PositionBean(tran.getCustomer_id(), tran.getFund_id(), tran.getAmount()/price*100));
 			break;
 		}
 		case 1:{

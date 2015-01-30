@@ -216,7 +216,7 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 				throw new RollbackException("Transaction "+transaction_id+" no longer exists");
 			}	
 			tran.setExecute_date(d);
-			tran.setShares(tran.getAmount()/price);
+			tran.setShares(tran.getAmount()/price*100);
 			update(tran);
 			Transaction.commit();
 		} finally {
