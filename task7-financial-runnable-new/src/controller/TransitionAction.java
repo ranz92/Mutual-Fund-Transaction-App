@@ -167,14 +167,16 @@ public class TransitionAction extends Action {
 		switch (tran.getTransaction_type()){
 		case 0:{
 			customerDAO.updateCash(tran.getCustomer_id(), 0-tran.getAmount());
-			transactionDAO.executeBuy(tran.getTransaction_id(), d, price);
-			positionDAO.updatePosition(new PositionBean(tran.getCustomer_id(), tran.getFund_id(), tran.getAmount()/price*100));
+			transactionDAO.executeBuy(tran.getTransaction_id(), d, price);		
+			double share = new Double(tran.getAmount())/new Double(price);
+			tran.setShares((long)(share*1000));positionDAO.updatePosition(new PositionBean(tran.getCustomer_id(), tran.getFund_id(), (long)(share*1000)));
 			break;
 		}
 		case 1:{
 			positionDAO.updatePosition(new PositionBean(tran.getCustomer_id(), tran.getFund_id(), 0-tran.getShares()));
 			transactionDAO.executeSell(tran.getTransaction_id(), d, price);
-			customerDAO.updateCash(tran.getCustomer_id(), tran.getShares()*price/1000);
+			double amount = new Double(tran.getShares())*new Double(price);
+			customerDAO.updateCash(tran.getCustomer_id(), (long)(amount/1000));
 			break;
 			}
 		case 2:{

@@ -69,6 +69,20 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 		return transactions;
 
 	}
+	public double getPendingBuyAmount(int customerId)
+			throws RollbackException {
+		double pendingAmount = 0;
+		TransactionBean[] transactions = match(
+				MatchArg.equals("customer_id", customerId),
+				MatchArg.equals("execute_date", null),
+				MatchArg.or(MatchArg.equals("transaction_type", 0),
+						MatchArg.equals("transaction_type", 2)));
+		for (TransactionBean tran : transactions) {
+			pendingAmount +=(tran.getAmount());
+		}
+		return pendingAmount;
+
+	}
 	
 	public TransactionBean[] getPendingReqChk(int customerId)
 			throws RollbackException {
@@ -114,6 +128,22 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 				return false;
 		}
 		return true;
+	}
+	public long getMaxBuy(int customerId, long cash, long amount)
+			throws RollbackException {
+		long max = Long.MAX_VALUE;
+		TransactionBean[] transactions = match(MatchArg.and(
+				MatchArg.equals("customer_id", customerId),
+				MatchArg.equals("execute_date", null),
+				MatchArg.or(MatchArg.equals("transaction_type", 0),
+						MatchArg.equals("transaction_type", 2))));
+		max = (max-cash)/9999;
+		for (TransactionBean tran : transactions) {
+			max -= tran.getAmount();
+			if (max < 0)
+				return 0;
+		}
+		return max;
 	}
 
 	public boolean checkEnoughShare(int customerId, int fundId, long share, long amount)
@@ -216,7 +246,8 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 				throw new RollbackException("Transaction "+transaction_id+" no longer exists");
 			}	
 			tran.setExecute_date(d);
-			tran.setShares(tran.getAmount()/price*100);
+			double share = new Double(tran.getAmount())/new Double(price);
+			tran.setShares((long)(share*1000));
 			update(tran);
 			Transaction.commit();
 		} finally {
@@ -247,7 +278,8 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 				throw new RollbackException("Transaction "+transaction_id+" no longer exists");
 			}	
 			tran.setExecute_date(d);
-			tran.setAmount(tran.getShares()*price/1000);
+			double amount = new Double(tran.getShares())*new Double(price);
+			tran.setAmount((long)(amount/1000));
 			update(tran);
 			Transaction.commit();
 		} finally {

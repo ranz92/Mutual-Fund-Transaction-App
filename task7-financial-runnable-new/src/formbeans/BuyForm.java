@@ -63,7 +63,7 @@ public class BuyForm extends FormBean {
 				errors.add("Amount should be a non-negative number.");
 			}
 			else if(amt < 0.01) {
-				errors.add("Please enter a larger amount.");
+				errors.add("Please enter amount larger than 0.01.");
 			}
 //			if (amt > 1000000000) {
 //				errors.add("Please enter an amount that is less than $1000000000");

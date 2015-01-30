@@ -57,6 +57,8 @@ public class ConfirmBuyAction extends Action {
 			}
 			
 			CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
+			customer = customerDAO.getCustomer(customer.getCustomerId());
+			session.setAttribute("customer", customer);
 			BuyForm form  = formBeanFactory.create(request);
 			request.setAttribute("form", form);
 			errors.addAll(form.getValidationErrors());
@@ -81,7 +83,8 @@ public class ConfirmBuyAction extends Action {
 			if(!transactionDAO.checkEnoughCash(customer.getCustomerId(), customer.getCash(), transaction.getAmount()))
 				errors.add("Not enough amount");
 			
-			
+			if (transaction.getAmount()>transactionDAO.getMaxBuy(customer.getCustomerId(), customer.getCash(), transaction.getAmount()))
+				errors.add("Please enter amount less than "+transactionDAO.getMaxBuy(customer.getCustomerId(), customer.getCash(), transaction.getAmount()));
 			if(errors.size() > 0) {
 				
 				return "buyFund.jsp";
