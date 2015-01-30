@@ -5,7 +5,6 @@
 
 <h2>Transition Day</h2>
 <jsp:include page="error-list.jsp" />
-
 <div class="col-md-2 column">
 	<p>Date of Transition</p>
 </div>
@@ -24,6 +23,8 @@
 	<div class="col-md-3 column">
 	<p>${lastTranDay}</p></div>
 	<div class="col-md-1 column"></div>
+	 <c:if test="${not empty fundList}">
+	
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -45,10 +46,16 @@
 			</tr>
 		</c:forEach>
 		
+		
 	</table>
+	</c:if>
+	
 	<input type="hidden" name="count" value="${count}" />
 	<input type="submit" class="btn btn-success" value="Submit" />
+	
+	 
 </form>
+
 
 </div>
 </div>

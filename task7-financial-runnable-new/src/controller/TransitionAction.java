@@ -124,7 +124,7 @@ public class TransitionAction extends Action {
 				else 
 					execute (tran, d, 0);
 			}
-			success.add("You have successfully created prices for transaction day " + (String)request.getParameter("date"));
+			success.add("You have successfully ended a transaction day " + (String)request.getParameter("date"));
 			for (int i = 0; i < cfbs.length; i++) {
 				CustomFundBean cfb = new CustomFundBean(funds[i]);
 				cfb.setLastPrice(priceDAO.getLatestPrice(funds[i].getId()));
