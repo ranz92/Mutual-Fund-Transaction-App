@@ -91,7 +91,7 @@ public class ConfirmDepositCheckAction extends Action {
 			transaction.setTransaction_type(3);
      		transactionDAO.createDepChkTransaction(transaction);
 
-			request.setAttribute("success", "You have deposited check successfully!");
+			request.setAttribute("success", "Your check is pending for execution");
 			form.setAmount("");
 		} catch(FormBeanException e) {
 			errors.add(e.getMessage());
