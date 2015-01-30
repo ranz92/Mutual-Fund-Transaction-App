@@ -74,7 +74,7 @@ public class CreateFundAction extends Action {
 	        fund.setSymbol(form.getTicker());
 	       
         	fundDAO.create(fund);
-        	success.add("You have successfully created fund\"" + form.getFundName() + "\"");
+        	success.add("You have successfully created fund \"" + form.getFundName() + "\"");
         	form.setFundName("");
         	form.setTicker("");
         	request.setAttribute("form",form);
