@@ -34,7 +34,7 @@
 	<thead>
 		<tr>
 			<th align="left">#</th>
-			<th align="left">Transaction</th>
+			<th align="left">Customer Name</th>
 			<th align="right">Amount</th>
 		</tr>
 	</thead>
