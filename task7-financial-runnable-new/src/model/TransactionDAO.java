@@ -129,10 +129,14 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 		}
 		return true;
 	}
-	public long getMaxBuy(int customerId, long cash)
+	public long getMaxBuy(int customerId, long cash, long amount)
 			throws RollbackException {
 		long max = Long.MAX_VALUE;
 		max -= cash;
+		max -= amount;
+		if (max < 0){
+			return 0;
+		}
 		TransactionBean[] transactions = match(MatchArg.and(
 				MatchArg.equals("customer_id", customerId),
 				MatchArg.equals("execute_date", null),
@@ -143,7 +147,7 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 				return 0;
 			}
 		}
-		max /= 9999;
+		max /= 99999;
 		TransactionBean[] transactionsBuy = match(MatchArg.and(
 				MatchArg.equals("customer_id", customerId),
 				MatchArg.equals("execute_date", null),
