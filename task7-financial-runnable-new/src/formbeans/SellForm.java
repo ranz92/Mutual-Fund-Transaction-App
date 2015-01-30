@@ -69,7 +69,7 @@ public class SellForm extends FormBean {
         	if (d <= 0) {
         		errors.add("Shares should be a non-negative number");        	}
         } catch (NumberFormatException e) {
-        	 errors.add("Invalide number, please input a number for the share.");
+        	// errors.add("Invalide number, please input a number for the share.");
         }
 		
 //		if (shares != null && shares.matches(".*[<>\"].*"))
