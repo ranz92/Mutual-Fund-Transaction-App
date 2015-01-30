@@ -35,9 +35,9 @@
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th align="left">>#</th>
+			<th align="left">#</th>
 <!-- 			<th>Date</th> -->
-			<th align="left">>Transaction</th>
+			<th align="left">Transaction</th>
 			<th align="right">Amount</th>
 		</tr>
 	</thead>
@@ -47,9 +47,9 @@
 	<c:forEach var="item" items="${mFundList}">
 
 		<tr>
-			<td align="left">><%=index%><%index++;%></td>
+			<td align="left"><%=index%><%index++;%></td>
 <%-- 			<td>${ item.date }</td> --%>
-			<td align="left">>${ item.name }</td>
+			<td align="left">${ item.name }</td>
 			<td align="right">${ item.amount }</td>
 		</tr>
 	</c:forEach>
