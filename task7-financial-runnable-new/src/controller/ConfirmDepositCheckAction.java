@@ -82,6 +82,7 @@ public class ConfirmDepositCheckAction extends Action {
 				}
 				
 				transaction.setAmount((long)amt);
+				request.setAttribute("customerList", customerDAO.getCustomer());
 			} catch (NumberFormatException e) {
 				errors.add("Amount should be a valid number");
 				return "depositCheck.jsp";

@@ -7,7 +7,7 @@
 <!-- Choose a certain customer -->
 <h2>Choose a Customer</h2>
 <p>Please specify a customer to view.</p>
-<table class="table"">
+<table class="table">
 	<thead>
 		<tr>
 			<td>Username</td>
@@ -32,9 +32,6 @@
 </c:when>
 <h2>${customer.username}</h2>
 <br />
-<div class="tabbable" id="tabs-813699">
-	<div class="tab-content">
-		<div class="tab-pane active" id="panel-179879">
 			<table class="table">
 				<tbody>
 				<thead>
