@@ -39,7 +39,7 @@ public class BuyForm extends FormBean {
 		} 
 		
 		
-		if (amount != null && amount.matches(".*[<>!@#$%^&*()-+=_<>,./?`~\"?~#%&].*"))
+		if (amount != null && amount.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
 			errors.add("Special characters are not allowed. Please enter numbers for amount.");
 		
 //		try {
