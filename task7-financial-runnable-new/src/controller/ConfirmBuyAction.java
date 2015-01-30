@@ -89,6 +89,7 @@ public class ConfirmBuyAction extends Action {
 			} else {
 				
 				success.add("You have bought fund successfully.");
+				form.setAmount("");
 				session.setAttribute("fundList", fundDAO.getFundList());
 				TransactionBean[] trans = transactionDAO.getPendingBuy(customer.getCustomerId());
 				PositionOfUser[] pous = new PositionOfUser[trans.length];
