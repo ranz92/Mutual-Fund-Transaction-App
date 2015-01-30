@@ -85,10 +85,15 @@ public class ConfirmSellAction extends Action {
 			}
 			
 
-			if (transactionDAO.checkEnoughShare(customer.getCustomerId(), transaction.getFund_id(),positionDAO.read(customer.getCustomerId(),transaction.getFund_id()).getShares(), transaction.getShares())) {
-				transactionDAO.createSellTransaction(transaction);
-			}
-			else errors.add("No enough share");
+//			if (transactionDAO.checkEnoughShare(customer.getCustomerId(), transaction.getFund_id(),positionDAO.read(customer.getCustomerId(),transaction.getFund_id()).getShares(), transaction.getShares())) {
+//				transactionDAO.createSellTransaction(transaction);
+//			}
+//			else errors.add("No enough share");
+			
+			if(!transactionDAO.checkEnoughShare(customer.getCustomerId(), transaction.getFund_id(),positionDAO.read(customer.getCustomerId(),transaction.getFund_id()).getShares(), transaction.getShares()))
+				errors.add("No enough share");
+			
+			transactionDAO.createSellTransaction(transaction);
 
 			if(errors.size() > 0) {
 				return "sellFund.jsp";
