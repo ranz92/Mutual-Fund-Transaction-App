@@ -93,6 +93,7 @@ public class ConfirmDepositCheckAction extends Action {
      		transactionDAO.createDepChkTransaction(transaction);
 
 			request.setAttribute("success", "You have deposited check successfully!");
+			form.setAmount("");
 		} catch(FormBeanException e) {
 			errors.add(e.getMessage());
 		} catch (RollbackException e) {

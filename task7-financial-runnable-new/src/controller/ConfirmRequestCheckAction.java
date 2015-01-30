@@ -81,7 +81,7 @@ public class ConfirmRequestCheckAction extends Action {
 				errors.add("Amount should be at least $0.01");
 				return "requestCheck.jsp";
 			}
-			System.out.println(transaction.getAmount());
+		//	System.out.println(transaction.getAmount());
 			if(transaction.getAmount()/100.0 > 1000000000) {
 				errors.add("Amount should be less than $1,000,000,000.00");
 				return "requestCheck.jsp";
@@ -131,8 +131,9 @@ public class ConfirmRequestCheckAction extends Action {
 			session.setAttribute("mFundList", pous);
 			session.setAttribute("availableAmount", availableAmount);
 			request.setAttribute("success", "Your check request is pending for execution");
+			form.setAmount("");
 
-			return "requestCheck.jsp";
+//			return "requestCheck.jsp";
 		} catch(FormBeanException e) {
 			errors.add(e.getMessage());
 			return "requestCheck.jsp";

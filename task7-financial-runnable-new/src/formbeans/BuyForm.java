@@ -57,14 +57,17 @@ public class BuyForm extends FormBean {
 
 			double amt = Double.parseDouble(amount);
 			amt = Math.round(amt * 100);
-			amt = amt / 100;
+			amt = amt / 100.00;
 
-			if(amt <= 0) {
+			if(amt < 0) {
 				errors.add("Amount should be a non-negative number.");
 			}
-			if (amt > 1000000000) {
-				errors.add("Please enter an amount that is less than $1000000000");
+			else if(amt < 0.01) {
+				errors.add("Please enter a larger amount.");
 			}
+//			if (amt > 1000000000) {
+//				errors.add("Please enter an amount that is less than $1000000000");
+//			}
 		} catch (NumberFormatException nfe) {
 			errors.add("Please enter numbers for amount.");
 		}

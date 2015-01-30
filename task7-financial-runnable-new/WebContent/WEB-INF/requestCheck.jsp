@@ -22,7 +22,7 @@
 			</tr>
 			<tr>
 				<td>Amount</td>
-				<td><input type="text" name="amount"></td>
+				<td><input type="text" name="amount" value="${form.amount }"></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit"

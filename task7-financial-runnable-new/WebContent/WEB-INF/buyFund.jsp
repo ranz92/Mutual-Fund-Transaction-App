@@ -24,7 +24,7 @@
         <tr>
 			<td>${ item.name }</td>
 			<td>${ item.symbol }</td>
-			<td><input type="text" name="amount" value="${form.amount }"/></td>
+			<td><input type="text" name="amount"/></td>
 			<td><input type="submit" class="btn btn-success" value="Buy" /></td>
 		</tr>
 		
