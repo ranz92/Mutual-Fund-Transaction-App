@@ -24,9 +24,9 @@
 			<td align="left"><%= index %><% index++; %></td>
 			<td align="left">${ item.transactionType }</td>
 			<td align="left">${ item.fundName }</td>
-			<td align="right"><fmt:formatNumber value="${ item.numShares }" type="currency" pattern="#,##0.000" /></td>
-			<td align="right"><fmt:formatNumber value="${ item.sharePrice }" type="currency" pattern="#,##0.00" /></td>
-			<td align="right"><fmt:formatNumber value="${ item.amount }" type="currency" pattern="#,##0.00" /></td>
+			<td align="right">${ item.numShares }</td>
+			<td align="right">${ item.sharePrice }</td>
+			<td align="right">${ item.amount }</td>
 			<td align="left">${ item.status }</td>
 			<td align="left">${ item.executeDate }</td>
 			</tr>
