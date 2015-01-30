@@ -81,22 +81,22 @@ public class CusRegisterForm extends FormBean {
 			return errors;
 		}
 		
-		if (username.matches(".*[<>\"?].*"))
+		if (username.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
 			errors.add("User Name may not contain angle brackets or quotes");
-		if (firstName.matches(".*[<>\"?].*"))
+		if (firstName.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
 			errors.add("First Name may not contain angle brackets or quotes");
-		if (lastName.matches(".*[<>\"?].*"))
+		if (lastName.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
 			errors.add("Last Name may not contain angle brackets or quotes");
-		if (password.matches(".*[<>\"?].*"))
+		if (password.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
 			errors.add("Password may not contain angle brackets or quotes");
-		if ((addrL1 != null && addrL1.matches(".*[<>\"?].*")) || (addrL2 != null && addrL2.matches(".*[<>\"?].*"))  )
+		if ((addrL1 != null && addrL1.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*")) || (addrL2 != null && addrL2.matches(".*[<>\"?].*"))  )
 			errors.add("Address may not contain angle brackets or quotes");
-		if (city != null && city.matches(".*[<>\"?].*"))
+		if (city != null && city.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
 			errors.add("City may not contain angle brackets or quotes");
-		if (state != null && state.matches(".*[<>\"?].*"))
+		if (state != null && state.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
 			errors.add("State may not contain angle brackets or quotes");
-//		if (zip != 0 && zip.matches(".*[<>\"].*"))
-//			errors.add("Zip Code may not contain angle brackets or quotes");
+		if (zip != null && zip.matches(".*[<>!@#$%^&*()+=_<>,/?`~\"?~#%&].*"))
+			errors.add("Zip Code may not contain angle brackets or quotes");
 		
 		if (!password.equals(confirm)) {
 			errors.add("Passwords are not the same");
