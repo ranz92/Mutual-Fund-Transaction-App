@@ -10,34 +10,34 @@
 
 <form method="post" class="form-horizontal" role="form" action="cusRegister.do">
 	<div class="form-group">
-		<label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+		<label for="inputEmail3" class="col-sm-2 control-label">Username *</label>
 		<div class="col-sm-10">
 			<input type="username" class="form-control" id="inputEmail3" name="username" value="${form.username }" style="width:12em">
 		</div>
     </div>
     
     <div class="form-group">
-		<label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+		<label for="inputPassword3" class="col-sm-2 control-label">Password *</label>
 			<div class="col-sm-10">
 				<input type="password" class="form-control" id="inputPassword3" name="password" value="${form.password }" style="width:12em">
 			</div>
 	</div>
 	<div class="form-group">
-		 <label for="inputPassword3" class="col-sm-2 control-label">Confirm Password</label>
+		 <label for="inputPassword3" class="col-sm-2 control-label">Confirm Password *</label>
 			<div class="col-sm-10">
 				<input type="password" class="form-control" id="inputPassword3" name="confirm" value="${form.confirm }" style="width:12em">
 			</div>
 	</div>
     
     <div class="form-group">
-     	<label for="inputEmail3" class="col-sm-2 control-label">First Name</label>
+     	<label for="inputEmail3" class="col-sm-2 control-label">First Name *</label>
 		<div class="col-sm-10">
 			<input type="firstName" class="form-control" id="inputEmail3" name="firstName" value="${form.firstName }" style="width:12em">
 		</div>
     </div>
     
     <div class="form-group">
-		<label for="inputEmail3" class="col-sm-2 control-label">Last Name</label>
+		<label for="inputEmail3" class="col-sm-2 control-label">Last Name *</label>
 		<div class="col-sm-10">
 			<input type="lastName" class="form-control" id="inputEmail3" name="lastName" value="${form.lastName }" style="width:12em">
 		</div>
