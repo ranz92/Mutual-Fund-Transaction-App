@@ -31,7 +31,7 @@ public class ChangePwdForm extends FormBean {
 			errors.add("Confirm Password is required");
 		}
 		
-		if (newPassword.matches(".*[<>\"].*"))
+		if (newPassword.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
 			errors.add("Password may not contain angle brackets or quotes");
 		
 		if (errors.size() > 0) {
