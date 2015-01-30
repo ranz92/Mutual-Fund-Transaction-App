@@ -76,8 +76,8 @@ public class ConfirmDepositCheckAction extends Action {
 					errors.add("Amount should be at least $0.01");
 					return "depositCheck.jsp";
 				}
-				if(amt > 100000000) {
-					errors.add("Amount should be less than $1,000,000");
+				if(amt > 1000000000) {
+					errors.add("Amount should be less than $1,000,000,000.00");
 					return "depositCheck.jsp";
 				}
 				
