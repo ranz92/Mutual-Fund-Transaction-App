@@ -73,7 +73,23 @@
 						</td>
 						
 					</tr>
-				
+					
+				<tr class="active">
+					    <td>
+							Last Trading Day
+						</td>
+						<c:set var="transaction" value="${transaction}" />
+						<td>
+						    <c:choose>
+                                <c:when test="${transaction == null}">
+                                    No trading in the past
+				                </c:when>
+				                <c:otherwise> 
+							       <fmt:formatDate value="${transaction.execute_date }" type="date"/> 
+							    </c:otherwise>
+							</c:choose>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 
