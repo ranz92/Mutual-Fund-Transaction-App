@@ -73,6 +73,31 @@
 							${customer.addrL1} ${user.addrL2}  
 						</td>
 					</tr>
+					<tr>
+						<td>
+							City
+						</td>
+						<td>
+							${customer.city}  
+						</td>
+						
+					</tr>
+					<tr>
+						<td>
+							State
+						</td>
+						<td>
+							${customer.state}  
+						</td>
+						
+					</tr>
+					<tr>
+						<td>
+							Zipcode
+						</td>
+						<td>
+							${customer.zip}  
+						</td>
 					<tr >
 						<td>
 							Cash Balance ($)
@@ -93,7 +118,7 @@
                                     No trading in the past
 				                </c:when>
 				                <c:otherwise> 
-							        ${transaction.execute_date }
+							       <fmt:formatDate value="${transaction.execute_date }" type="date"/> 
 							    </c:otherwise>
 							</c:choose>
 						</td>
