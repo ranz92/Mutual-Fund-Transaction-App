@@ -6,48 +6,42 @@
 			<div class="row">
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<img alt="300x200" src="http://lorempixel.com/600/200/people">
+						<img alt="300x200" width="300" height="180" src="http://saratechnologies.com/webfile/images/finance.png">
 						<div class="caption">
 							<h3>
-								Thumbnail label
+								View More!
 							</h3>
+							
 							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-							<p>
-								<a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
+							<!-- <a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a> -->	
 							</p>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<img alt="300x200" src="http://lorempixel.com/600/200/city">
+						<img alt="300x200" width="300" height="300"src="http://img.ehowcdn.com/615x200/ds-photo/getty/article/97/164/89792872_XS.jpg">
 						<div class="caption">
 							<h3>
-								Thumbnail label
+								Talk More!
 							</h3>
+							
 							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-							<p>
-								<a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
+							<!-- <a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a> -->	
 							</p>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="thumbnail">
-						<img alt="300x200" src="http://lorempixel.com/600/200/sports">
+						<img alt="300x200" width="300" height="200" src="http://thumb7.shutterstock.com/display_pic_with_logo/730744/132157745/stock-photo-euro-coin-on-a-graph-financial-up-and-down-trend-pincushion-lens-use-132157745.jpg">
 						<div class="caption">
 							<h3>
-								Thumbnail label
+								Win More!
 							</h3>
+							
 							<p>
-								Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-							</p>
-							<p>
-								<a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a>
+							<!-- <a class="btn btn-primary" href="#">Action</a> <a class="btn" href="#">Action</a> -->	
 							</p>
 						</div>
 					</div>
