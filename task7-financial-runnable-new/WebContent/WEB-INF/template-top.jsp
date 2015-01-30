@@ -55,6 +55,7 @@
 						 <a class="panel-title" data-toggle="collapse" data-parent="#panel-872653" href="#panel-element-236921">My Account</a>
 					</div>
 					<div id="panel-element-236921" class="panel-collapse">
+					
 						<div class="panel-body">
 							<a  href="viewCustomer.do">View Account</a>						
 						</div>
@@ -68,7 +69,8 @@
 					<div class="panel-heading">
 						 <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-872653" href="#panel-element-236921">Financial Operation</a>
 					</div>
-					<div id="panel-element-236921" class="panel-collapse collapse">
+					<div id="panel-element-236921" class="panel-collapse ">
+					
 						<div class="panel-body">
 							<a  href="buyfund.do">Buy Fund</a>						
 						</div>
