@@ -50,7 +50,7 @@
 				
 				<tbody>
 					<tr>
-						<td>
+						<td class="active">
 							First Name
 						</td>
 						<td>
@@ -74,7 +74,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td>
+						<td class="active">
 							City
 						</td>
 						<td>
@@ -92,7 +92,7 @@
 						
 					</tr>
 					<tr>
-						<td>
+						<td class="active">
 							Zipcode
 						</td>
 						<td>
