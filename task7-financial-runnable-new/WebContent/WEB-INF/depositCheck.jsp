@@ -19,7 +19,7 @@
 		<form action="confirmDepositCheck.do" method="POST">
 			<tr>
 				<td>${ item.username }</td>
-				<td><input type="text" name="amount"></td>
+				<td><input type="text" name="amount" value="${form.amount }"></td>
 				<td><input type="submit" class="btn btn-success"
 					value="Deposit" /></td>
 			</tr>

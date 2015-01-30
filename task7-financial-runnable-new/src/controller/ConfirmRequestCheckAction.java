@@ -131,6 +131,7 @@ public class ConfirmRequestCheckAction extends Action {
 			session.setAttribute("mFundList", pous);
 			session.setAttribute("availableAmount", availableAmount);
 			request.setAttribute("success", "Your check request is pending for execution");
+			form.setAmount("");
 
 			return "requestCheck.jsp";
 		} catch(FormBeanException e) {
