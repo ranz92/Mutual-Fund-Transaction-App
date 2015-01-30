@@ -56,7 +56,7 @@ public class ConfirmDepositCheckAction extends Action {
 			}
 			
 			DepositCheckForm form  = formBeanFactory.create(request);
-			request.setAttribute("form", form);
+//			request.setAttribute("form", form);
 			TransactionBean transaction = new TransactionBean();
 			transaction.setCustomer_id(form.getIdAsInt());
 			transaction.setTransaction_type(3);
