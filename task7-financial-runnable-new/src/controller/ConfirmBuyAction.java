@@ -94,9 +94,9 @@ public class ConfirmBuyAction extends Action {
 			if (Math.min(maxBuy, maxBuyByShare) == 0){
 				errors.add("You can't buy any fund now");
 			}
-			else if  (transaction.getAmount()> Math.min(maxBuy, maxBuyByShare)/100)
+			else if  (transaction.getAmount()> Math.min(maxBuy, maxBuyByShare))
 	//		errors.add("Please enter amount less than "+Math.min(maxBuy, maxBuyByShare));
-				errors.add("Please enter amount less than "+df.format((new Double(Math.min(maxBuy, maxBuyByShare)/100))/100.00));
+				errors.add("Please enter amount less than "+df.format((new Double(Math.min(maxBuy, maxBuyByShare)))/100.00));
 			}
 			if(errors.size() > 0) {
 				
