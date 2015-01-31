@@ -1,6 +1,5 @@
 package controller;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,6 @@ import org.mybeans.form.FormBeanException;
 import org.mybeans.form.FormBeanFactory;
 
 import databeans.CustomerBean;
-import databeans.EmployeeBean;
 import databeans.PositionBean;
 import databeans.TransactionBean;
 import formbeans.CustomerForm;
@@ -81,32 +79,38 @@ public class ViewByEmployeeAction extends Action{
 				} else {
 					//DecimalFormat df = new DecimalFormat("#,###.00");
 					CustomerBean user = cusDAO.read(username);
-					int cusId = user.getCustomerId();
-					TransactionBean[] transactions = transacDAO.getTransactions(cusId);
-					
-					request.setAttribute("user", user);
-					//String cash = df.format(user.getCash());
-					//request.setAttribute("cash",cash);
-					
-					if(transactions.length !=0){
+					if (user == null) {
+						errors.add("Cannot find the user" + username);
+						return "viewAccountByEmp.jsp";
+					}else {
+						int cusId = user.getCustomerId();
+						TransactionBean[] transactions = transacDAO.getTransactions(cusId);
 						
-						request.setAttribute("transaction", transactions[transactions.length-1]); //Return the last trading day.
-	
-					} 
-					
-					//Return the fund information.
-					PositionBean[] positions = posDAO.getPositions(cusId);
-					List<Double> priceList = new ArrayList<Double>();
-					for (int i = 0; i<positions.length; i++) {
-						int fund_id = positions[i].getFund_id();
-						double price = priceDAO.getLatestPrice(fund_id);
-						double totalPrice = price * positions[i].getShares();
-						priceList.add(totalPrice);
+						request.setAttribute("user", user);
+						//String cash = df.format(user.getCash());
+						//request.setAttribute("cash",cash);
+						
+						if(transactions.length !=0){
+							
+							request.setAttribute("transaction", transactions[transactions.length-1]); //Return the last trading day.
+		
+						} 
+						
+						//Return the fund information.
+						PositionBean[] positions = posDAO.getPositions(cusId);
+						List<Double> priceList = new ArrayList<Double>();
+						for (int i = 0; i<positions.length; i++) {
+							int fund_id = positions[i].getFund_id();
+							double price = priceDAO.getLatestPrice(fund_id);
+							double totalPrice = price * positions[i].getShares();
+							priceList.add(totalPrice);
+						}
+						//System.out.println();
+						request.setAttribute("positions", positions);
+						request.setAttribute("priceList", priceList);
+	                    return "viewAccountByEmp.jsp";
 					}
-					//System.out.println();
-					request.setAttribute("positions", positions);
-					request.setAttribute("priceList", priceList);
-                    return "viewAccountByEmp.jsp";
+					
 				}
 			} catch (RollbackException e) {
 				errors.add(e.getMessage());

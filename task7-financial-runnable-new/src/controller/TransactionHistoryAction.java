@@ -83,6 +83,10 @@ public class TransactionHistoryAction extends Action {
 			if(admin != null) {
 				CustomerForm form = formBeanFactory.create(request);
 				String username = form.getUsername();
+				if (username == null) {
+					errors.add("A customer should be specified!");
+					return "viewAccountByEmp.jsp";
+				}
 				int customerId = customerDAO.getCustomer(username).getCustomerId();
 				allTransactions = transactionDAO.getTransactions(customerId);
 			}
