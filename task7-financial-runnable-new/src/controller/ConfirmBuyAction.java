@@ -77,7 +77,7 @@ public class ConfirmBuyAction extends Action {
 				long l = (new Double(a1)).longValue();
 				transaction.setAmount(l);
 			} catch(NumberFormatException e) {
-		//		errors.add("Please enter numbers.");
+				errors.add("Please enter numbers.");
 				e.printStackTrace();
 			}
 			
