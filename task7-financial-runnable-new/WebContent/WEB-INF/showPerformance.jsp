@@ -164,7 +164,8 @@ gov.Graphic.prototype={
  setOptions: function(options) {
   this.options = {
    height:270,                 
-   maxHeight:'${maxPrice}',             
+ //  maxHeight:'${maxPrice}',      
+   maxHeight:1000,
    barDistance:70,           
    topDistance:0,             
    bottomDistance:0,       
