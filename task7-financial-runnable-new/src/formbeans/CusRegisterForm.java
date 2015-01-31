@@ -81,7 +81,7 @@ public class CusRegisterForm extends FormBean {
 			return errors;
 		}
 		
-		if (username.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
+		if (username.matches(".*[<>!@#$%^&*()-+=<>,/?`~\"?~#%&].*"))
 			errors.add("User Name may not contain special characters");
 		if (firstName.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
 			errors.add("First Name may not contain special characters");

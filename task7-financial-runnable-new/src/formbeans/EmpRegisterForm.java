@@ -47,7 +47,7 @@ public class EmpRegisterForm extends FormBean{
 			errors.add("Confirm Password is required");
 		}
 		
-		if (username.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
+		if (username.matches(".*[<>!@#$%^&*()-+=<>,/?`~\"?~#%&].*"))
 			errors.add("User Name may not contain special characters");
 		if (firstName.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
 			errors.add("First Name may not contain special characters");

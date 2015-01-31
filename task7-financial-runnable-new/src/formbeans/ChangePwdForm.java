@@ -32,7 +32,7 @@ public class ChangePwdForm extends FormBean {
 		}
 		
 		if (newPassword.matches(".*[<>!@#$%^&*()-+=_<>,/?`~\"?~#%&].*"))
-			errors.add("Password may not contain angle brackets or quotes");
+			errors.add("Password may not special character(s)");
 		
 		if (errors.size() > 0) {
 			return errors;

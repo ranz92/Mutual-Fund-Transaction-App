@@ -13,7 +13,7 @@ public class DepositCheckForm extends FormBean {
 	public String getAmount()  		{ return amount;    	}
 	public String getCustomerId() 		{ return customerId; }
 	
-	public void setAmount(String s)     { amount  = trimAndConvert(s,"<>\"");   	}
+	public void setAmount(String s)     { amount  = trimAndConvert(s,"<>\"");   }
 	public void setCustomerId(String s) 	{ customerId = s;}
 
 	public int getIdAsInt() {
