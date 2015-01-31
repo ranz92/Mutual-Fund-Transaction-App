@@ -33,6 +33,11 @@
 			<td align="left"><fmt:formatDate value="${ item.executeDate }" type="date"/></td>
 			</tr>
 	</c:forEach>
+	
 </table>
+    <div class="col-sm-offset-2 col-sm-12">
+		 <button type="button" class="btn btn-success" onclick="location='viewHisByEmployee.do'">Go Back to Customer List</button> 
+	</div>
+
 
 <jsp:include page="template-bottom.jsp" />
