@@ -87,6 +87,7 @@ public class ConfirmBuyAction extends Action {
 			
 			if(!transactionDAO.checkEnoughCash(customer.getCustomerId(), customer.getCash(), transaction.getAmount()))
 				errors.add("Not enough amount");
+			else {
 			long maxBuy = transactionDAO.getMaxBuy(customer.getCustomerId(), customer.getCash(), positionDAO.getPositionsValue(customer.getCustomerId()));
 			long maxBuyByShare = (Long.MAX_VALUE-positionDAO.getShareValue(customer.getCustomerId(), transaction.getFund_id()))/100000;
 			if (Math.min(maxBuy, maxBuyByShare) == 0){
@@ -95,7 +96,7 @@ public class ConfirmBuyAction extends Action {
 			else if  (transaction.getAmount()> Math.min(maxBuy, maxBuyByShare))
 	//		errors.add("Please enter amount less than "+Math.min(maxBuy, maxBuyByShare));
 				errors.add("Please enter amount less than "+df.format((new Double(Math.min(maxBuy, maxBuyByShare)))/100.00));
-			
+			}
 			if(errors.size() > 0) {
 				
 				return "buyFund.jsp";
