@@ -132,7 +132,7 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 	}
 	public long getMaxBuy(int customerId, long cash, long amount)
 			throws RollbackException {
-		long max = Long.MAX_VALUE;
+		long max = Long.MAX_VALUE/100;
 		max -= cash;
 		max -= amount;
 		if (max < 0){
