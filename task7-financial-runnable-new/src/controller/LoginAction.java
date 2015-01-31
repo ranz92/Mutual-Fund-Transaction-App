@@ -35,6 +35,9 @@ public class LoginAction extends Action {
 	
 	public String perform(HttpServletRequest request) {
 		HttpSession session = request.getSession();
+		session.setAttribute("employee", null);
+		session.setAttribute("customer", null);
+
 		List<String> errors = new ArrayList<String>();
 		request.setAttribute("errors",errors);
 		
