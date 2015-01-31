@@ -80,15 +80,24 @@ public class TransactionHistoryAction extends Action {
 			
 			TransactionBean[] allTransactions = null;
 			
-			if(admin != null) {
+			if(admin != null) { //Employee page.
 				CustomerForm form = formBeanFactory.create(request);
 				String username = form.getUsername();
 				if (username == null) {
+					System.out.println("No customer");
+
 					errors.add("A customer should be specified!");
-					return "viewAccountByEmp.jsp";
+					//return "viewAccountByEmp.jsp";
+				}else {
+					CustomerBean user = customerDAO.read(username);
+					if (user == null) {
+						errors.add("Cannot find the user \'" + username + "\'!");
+						//return "viewAccountByEmp.jsp";
+					} else {
+						int customerId = customerDAO.getCustomer(username).getCustomerId();
+						allTransactions = transactionDAO.getTransactions(customerId);
+					}
 				}
-				int customerId = customerDAO.getCustomer(username).getCustomerId();
-				allTransactions = transactionDAO.getTransactions(customerId);
 			}
 			else if(customer != null) {
 				int userId = customer.getCustomerId();

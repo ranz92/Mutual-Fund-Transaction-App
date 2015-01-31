@@ -74,13 +74,15 @@ public class ViewByEmployeeAction extends Action{
 				String username = form.getUsername();
 				//System.out.println(username);
 				if (username == null) {
+					System.out.println("No customer");
 					errors.add("A customer should be specified!");
 					return "viewAccountByEmp.jsp";
 				} else {
 					//DecimalFormat df = new DecimalFormat("#,###.00");
 					CustomerBean user = cusDAO.read(username);
 					if (user == null) {
-						errors.add("Cannot find the user" + username);
+
+						errors.add("Cannot find the user \'" + username + "\'!");
 						return "viewAccountByEmp.jsp";
 					}else {
 						int cusId = user.getCustomerId();
@@ -91,10 +93,13 @@ public class ViewByEmployeeAction extends Action{
 						//request.setAttribute("cash",cash);
 						
 						if(transactions.length !=0){
-							
+
 							request.setAttribute("transaction", transactions[transactions.length-1]); //Return the last trading day.
 		
-						} 
+						} else {
+							//System.out.println("No trading in the past");
+							request.setAttribute("transaction",null);
+						}
 						
 						//Return the fund information.
 						PositionBean[] positions = posDAO.getPositions(cusId);

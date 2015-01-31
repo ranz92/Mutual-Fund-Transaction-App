@@ -3,14 +3,15 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+<jsp:include page="error-list.jsp" /> 
 		
 		
 		<h2> Account Information </h2>
             <table class="table table-striped ">
 				
 				<tbody>
-					<tr>
-						<td class="active">
+					<tr class="active">
+						<td >
 							Name:
 						</td>
 						<td>
@@ -27,8 +28,8 @@
 						</td>
 						
 					</tr>
-					<tr>
-						<td class="active">
+					<tr class="active">
+						<td >
 							Address (line 2):
 						</td>
 						<td>
@@ -45,8 +46,8 @@
 						</td>
 						
 					</tr>
-					<tr>
-						<td class="active">
+					<tr class="active">
+						<td >
 							State
 						</td>
 						<td>
@@ -64,8 +65,8 @@
 						
 					</tr>
 					
-					<tr>
-						<td class="active">
+					<tr class="active">
+						<td >
 							Cash Balance:
 						</td>
 						<td>

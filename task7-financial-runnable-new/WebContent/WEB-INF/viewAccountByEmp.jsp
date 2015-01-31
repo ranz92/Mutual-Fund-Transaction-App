@@ -3,6 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+  <jsp:include page="error-list.jsp" /> 
+
 <!-- Choose a certain customer -->	
     <h2> Choose a Customer </h2>
     <p>Please specify a customer to view the Transaction History.</p>
@@ -49,8 +51,8 @@
 						<table class="table">
 				
 				<tbody>
-					<tr>
-						<td class="active">
+					<tr class="active">
+						<td >
 							First Name
 						</td>
 						<td>
@@ -74,7 +76,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td class="active">
+						<td >
 							City
 						</td>
 						<td>
@@ -82,7 +84,7 @@
 						</td>
 						
 					</tr>
-					<tr>
+					<tr class="active">
 						<td>
 							State
 						</td>
@@ -92,13 +94,13 @@
 						
 					</tr>
 					<tr>
-						<td class="active">
+						<td >
 							Zipcode
 						</td>
 						<td>
 							${customer.zip}  
 						</td>
-					<tr >
+					<tr class="active">
 						<td>
 							Cash Balance ($)
 						</td>
@@ -107,7 +109,7 @@
 						</td>
 					</tr>
 					
-					<tr class="active">
+					<tr >
 					    <td>
 							Last Trading Day
 						</td>

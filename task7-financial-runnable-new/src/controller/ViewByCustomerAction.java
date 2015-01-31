@@ -63,6 +63,8 @@ public class ViewByCustomerAction extends Action {
 					
 					request.setAttribute("transaction", transactions[transactions.length-1]); //Return the last trading day.
 
+				} else {
+					request.setAttribute("transaction", null);
 				}
 				//String cash = df.format(customer.getCash());
 				//request.setAttribute("cash",cash);
