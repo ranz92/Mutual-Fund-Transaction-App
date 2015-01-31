@@ -6,8 +6,8 @@
 		
 <!-- Choose a certain customer -->	
     <h2> Choose a Customer </h2>
-    <p>Please specify a customer to view.</p>
-            <table class="table"">
+    <p>Please specify a customer to view <strong>transaction history.</strong></p>
+            <table class="table">
 				<thead>
 				    <tr>
 				        <td> Username </td>

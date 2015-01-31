@@ -3,12 +3,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<h2>Transaction History</h2>
+<h2>Transaction History of customer: {param.customerId}</h2>
 <table class="table table-striped">
 	<thead>
 		<tr>
 			<th align="left">#</th>
-			<th align="left">Customer Name</th>
+<!-- 			<th align="left">Customer Name</th> -->
 			<th align="left">Transaction Type</th>
 			<th align="left">Fund Name</th>
 			<th align="right"># of Shares</th>
@@ -23,7 +23,7 @@
 		  
         <tr>
 			<td align="left"><%= index %><% index++; %></td>
-			<td align="left">${ item.customerName }</td>
+<%-- 			<td align="left">${ item.customerName }</td> --%>
 			<td align="left">${ item.transactionType }</td>
 			<td align="left">${ item.fundName }</td>
 			<td align="right">${ item.numShares }</td>
