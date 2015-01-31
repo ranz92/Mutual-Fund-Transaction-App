@@ -96,7 +96,8 @@ public class ConfirmRequestCheckAction extends Action {
 			// customer = customerDAO.read(customer.getCustomerId());
 			session.setAttribute("customer",customer);
 			
-			TransactionBean[] trans = transactionDAO.getPendingBuy(customer.getCustomerId());
+	//		TransactionBean[] trans = transactionDAO.getPendingBuy(customer.getCustomerId());
+			TransactionBean[] trans = transactionDAO.getPendingReqChk(customer.getCustomerId());
 			PositionOfUser4Check[] pous = new PositionOfUser4Check[trans.length];
 			TransactionBean tran = new TransactionBean();
 			int id = 0;
@@ -130,8 +131,15 @@ public class ConfirmRequestCheckAction extends Action {
 			
 			session.setAttribute("mFundList", pous);
 			session.setAttribute("availableAmount", availableAmount);
-			request.setAttribute("success", "Your check request is pending for execution");
-			form.setAmount("");
+			
+			if(errors.size() > 0) {
+				return "requestCheck.jsp";
+			}
+			else{
+				request.setAttribute("success", "Your check request is pending for execution");
+				form.setAmount("");
+			}
+			
 
 //			return "requestCheck.jsp";
 		} catch(FormBeanException e) {

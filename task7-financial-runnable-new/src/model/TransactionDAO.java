@@ -64,8 +64,9 @@ public class TransactionDAO extends GenericDAO<TransactionBean> {
 		TransactionBean[] transactions = match(
 				MatchArg.equals("customer_id", customerId),
 				MatchArg.equals("execute_date", null),
-				MatchArg.or(MatchArg.equals("transaction_type", 0),
-						MatchArg.equals("transaction_type", 2)));
+//				MatchArg.or(MatchArg.equals("transaction_type", 0),
+//						MatchArg.equals("transaction_type", 2)));
+				MatchArg.equals("transaction_type", 0));
 		return transactions;
 
 	}

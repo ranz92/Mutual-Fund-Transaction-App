@@ -49,6 +49,8 @@ public class ConfirmBuyAction extends Action {
 		List<String> success = new ArrayList<String>();
 		request.setAttribute("success",success);
 		
+		DecimalFormat df = new DecimalFormat("#,##0.00");
+		
 		
 		try {
 			if (session.getAttribute("employee") != null){
@@ -91,7 +93,8 @@ public class ConfirmBuyAction extends Action {
 				errors.add("You can't buy any fund now");
 			}
 			else if  (transaction.getAmount()> Math.min(maxBuy, maxBuyByShare))
-			errors.add("Please enter amount less than "+Math.min(maxBuy, maxBuyByShare));
+	//		errors.add("Please enter amount less than "+Math.min(maxBuy, maxBuyByShare));
+				errors.add("Please enter amount less than "+df.format((Math.min(maxBuy, maxBuyByShare))/100));
 			
 			if(errors.size() > 0) {
 				
@@ -120,7 +123,7 @@ public class ConfirmBuyAction extends Action {
 					}
 					else {
 						pou.setName("Check Request");
-						pou.setName("N/A");
+						pou.setSymbol("N/A");
 					}
 					pou.setAmount((double)tran.getAmount()/100.00);
 					pous[i] = pou;

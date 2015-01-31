@@ -59,7 +59,8 @@ public class ReqChkAction extends Action {
 			CustomerBean customer = (CustomerBean) request.getSession(false).getAttribute("customer");
 			HttpSession session = request.getSession();
 	
-			TransactionBean[] trans = transactionDAO.getPendingBuy(customer.getCustomerId());
+	//		TransactionBean[] trans = transactionDAO.getPendingBuy(customer.getCustomerId());
+			TransactionBean[] trans = transactionDAO.getPendingReqChk(customer.getCustomerId());
 	        TransactionBean tran = new TransactionBean();
 	        PositionOfUser4Check[] pous = new PositionOfUser4Check[trans.length];
 	        int id = 0;

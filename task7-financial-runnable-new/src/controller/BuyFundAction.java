@@ -76,7 +76,7 @@ public class BuyFundAction extends Action {
 				}
 				else {
 					pou.setName("Check Request");
-					pou.setName("N/A");
+					pou.setSymbol("N/A");
 				}
 				pou.setAmount((double)tran.getAmount()/100.00);
 				pous[i] = pou;
