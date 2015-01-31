@@ -135,7 +135,7 @@
 							<fmt:formatNumber value="${position.shares/1000 }" type="currency" pattern="#,##0.000" />			
 						</td >
 						<td >
-							<fmt:formatNumber value="${fundPrice[count-1] }" type="currency" pattern="#,##0.000" />			
+							<fmt:formatNumber value="${fundPrice[count-1] }" type="currency" pattern="#,##0.00" />			
 						</td >
 						<td>
 						    <fmt:formatNumber value="${price[count-1]/1000}" type="currency" pattern="#,##0.00" />
