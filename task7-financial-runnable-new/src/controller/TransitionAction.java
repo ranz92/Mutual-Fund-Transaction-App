@@ -111,6 +111,10 @@ public class TransitionAction extends Action {
 			}
 			d = format.parse((String)request.getParameter("date"));
 			int count = Integer.parseInt((String) request.getParameter("count"));
+			if (count != fundDAO.getCount()){
+				errors.add("You haven't processed all the funds");
+				return "transition.jsp";
+			}
 			PriceBean price;
 			Map<Integer, Long> priceMap = new HashMap<Integer, Long>();
 			long priceL;
