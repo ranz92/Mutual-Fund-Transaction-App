@@ -69,7 +69,8 @@ public class BuyForm extends FormBean {
 //				errors.add("Please enter an amount that is less than $1000000000");
 //			}
 		} catch (NumberFormatException nfe) {
-			errors.add("Please enter numbers for amount.");
+		//	errors.add("Please enter numbers for amount.");
+			nfe.printStackTrace();
 		}
 		
 		return errors;

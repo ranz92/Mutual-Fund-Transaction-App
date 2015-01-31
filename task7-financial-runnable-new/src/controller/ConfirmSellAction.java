@@ -81,7 +81,8 @@ public class ConfirmSellAction extends Action {
 				transaction.setShares(l);
 				
 			} catch(NumberFormatException e) {
-				errors.add("Please enter numbers");
+	//			errors.add("Please enter numbers");
+				e.printStackTrace();
 			}
 			
 
